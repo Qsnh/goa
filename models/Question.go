@@ -1,12 +1,22 @@
 package models
 
-struct User {
-    id int
-    category_id int
-    title string
-    description string
-    view_num int
-    is_ban int8
-    created_at int
-    updated_at int
+import (
+    "github.com/astaxie/beego/orm"
+)
+
+type Question struct {
+    Id int
+    User_id int
+    Category_id int
+    Title string
+    Description string
+    View_num int
+    Is_ban int8
+    Created_at int
+    Updated_at int
+    Category *Category `orm:"rel(fk)"`
+}
+
+func init() {
+    orm.RegisterModel(new(Question))
 }

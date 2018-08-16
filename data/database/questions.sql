@@ -21,6 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `questions`;
 CREATE TABLE `questions` (
   `id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL COMMENT '用户ID',
   `category_id` int(11) unsigned NOT NULL COMMENT '分类ID',
   `title` varchar(255) NOT NULL COMMENT '问题标题',
   `description` text NOT NULL COMMENT '问题描述',

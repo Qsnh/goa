@@ -7,6 +7,9 @@
 # 框架
 go get github.com/astaxie/beego
 
+# MySQL Driver
+go get github.com/go-sql-driver/mysql
+
 # Model
 go get github.com/astaxie/beego/orm
 

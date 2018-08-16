@@ -4,7 +4,6 @@ import (
     "github.com/astaxie/beego"
     "github.com/astaxie/beego/validation"
     "goa/validations"
-    "fmt"
 )
 
 type UserController struct {
@@ -62,7 +61,6 @@ func (this *UserController) RegisterHandler() {
         this.Redirect("/register", 302)
         return
     }
-    fmt.Print("---------------------------------------")
 
     flash.Notice("注册成功")
     flash.Store(&this.Controller)

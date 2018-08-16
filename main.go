@@ -11,13 +11,13 @@ import (
 func init() {
     orm.RegisterDriver("mysql", orm.DRMySQL)
 
-    db_host := beego.AppConfig.String("database_host")
-    db_port := beego.AppConfig.String("database_port")
-    db_user := beego.AppConfig.String("database_user")
-    db_pass := beego.AppConfig.String("database_pass")
-    db_db := beego.AppConfig.String("database_db")
+    dbHost := beego.AppConfig.String("database_host")
+    dbPort := beego.AppConfig.String("database_port")
+    dbUser := beego.AppConfig.String("database_user")
+    dbPass := beego.AppConfig.String("database_pass")
+    dbDb := beego.AppConfig.String("database_db")
 
-    orm.RegisterDataBase(db_db, "mysql", db_user + ":" + db_pass + "@tcp(" + db_host + ":" + db_port + ")/?charset=utf8")
+    orm.RegisterDataBase(dbDb, "mysql", dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/?charset=utf8")
     orm.RegisterModel(new(models.Category), new(models.User), new(models.Question))
 }
 

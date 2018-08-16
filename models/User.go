@@ -1,12 +1,12 @@
 package models
 
 type User struct {
-    Id int `form:"-"`
-    Nickname string `form:"nickname"`
-    Email string `form:"email"`
-    Password string `form:"password"`
-    Is_lock int8 `form:"-"`
-    Created_at int `form:"-"`
-    Updated_at int `form:"-"`
+    Id int
+    Nickname string
+    Email string
+    Password string
+    IsLock int8
+    CreatedAt int
+    UpdatedAt int
     Questions []*Question `orm:"reverse(many)"`
 }

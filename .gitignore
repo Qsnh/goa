@@ -1,3 +1,4 @@
 *.pprof
-routes/commentsRouter_controllers.go
-goa.exe
+routers/commentsRouter_controllers.go
+goa.exe~
+lastupdate.tmp

@@ -4,6 +4,7 @@ import (
     "github.com/astaxie/beego"
     "github.com/astaxie/beego/validation"
     "goa/validations"
+    "fmt"
 )
 
 type UserController struct {
@@ -27,6 +28,7 @@ func (this *UserController) Logout() {
 
 // @router /register [get]
 func (this *UserController) Register() {
+    beego.ReadFromRequest(&this.Controller)
     this.Layout = "layout/app.tpl"
 }
 
@@ -53,13 +55,14 @@ func (this *UserController) RegisterHandler() {
 
     if !isValid {
         for _, err := range validate.Errors {
-            flash.Error(err.Message)
+            flash.Error(err.Key + err.Message)
             break
         }
         flash.Store(&this.Controller)
         this.Redirect("/register", 302)
         return
     }
+    fmt.Print("---------------------------------------")
 
     flash.Notice("注册成功")
     flash.Store(&this.Controller)

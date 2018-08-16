@@ -9,6 +9,10 @@
                     <div class="col-sm-12">
                         <form action="" method="post" class="form-horizontal">
                             <div class="form-group">
+                                <label>昵称</label>
+                                <input type="text" name="nickname" class="form-control" placeholder="昵称" >
+                            </div>
+                            <div class="form-group">
                                 <label>邮箱</label>
                                 <input type="text" name="username" class="form-control" placeholder="邮箱" >
                             </div>

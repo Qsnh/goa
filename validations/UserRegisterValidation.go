@@ -1,7 +1,7 @@
 package validations
 
 type UserRegisterValidation struct {
-    Nickname string `form:"nickname";valid:"Required;Min(2);Max(16)"`
-    Email string `form:"email";valid:"Required;Max(64)"`
-    Password string `form:"password";valid:"Required;Email;Min(6);Max(16)"`
+    Nickname string `form:"nickname" valid:"Required; MinSize(2); MaxSize(16)"`
+    Email string `form:"username" valid:"Required; MaxSize(64)"`
+    Password string `form:"password" valid:"Required; Email; MinSize(6); MaxSize(16)"`
 }

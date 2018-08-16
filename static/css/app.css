@@ -1,0 +1,21 @@
+.header {
+    height: 60px; line-height: 60px; background-color: #fbfbfb;
+    border-bottom: 1px solid #eee; margin-bottom: 10px;
+}
+.header ul li {
+    list-style: none;
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+.header .logo-text {
+    font-size: 3rem;
+}
+.footer {
+    color: gray; margin-top: 10px;
+}
+
+
+.login-box, .register-box {
+    margin-top: 120px; margin-bottom: 120px;
+}

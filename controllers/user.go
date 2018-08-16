@@ -3,7 +3,7 @@ package controllers
 import (
     "github.com/astaxie/beego"
     "github.com/astaxie/beego/validation"
-    "blog/validations"
+    "goa/validations"
 )
 
 type UserController struct {

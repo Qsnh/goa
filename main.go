@@ -1,10 +1,8 @@
 package main
 
 import (
-	_ "blog/routers"
 	"github.com/astaxie/beego"
-
-    _ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
     "github.com/astaxie/beego/orm"
 )
 

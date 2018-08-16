@@ -1,2 +1,3 @@
 *.pprof
 routes/commentsRouter_controllers.go
+goa.exe

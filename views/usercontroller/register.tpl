@@ -10,15 +10,15 @@
                         <form action="" method="post" class="form-horizontal">
                             <div class="form-group">
                                 <label>邮箱</label>
-                                <input type="text" name="username" class="form-control" placeholder="邮箱" required>
+                                <input type="text" name="username" class="form-control" placeholder="邮箱" >
                             </div>
                             <div class="form-group">
                                 <label>密码</label>
-                                <input type="password" name="password" class="form-control" placeholder="密码" required>
+                                <input type="password" name="password" class="form-control" placeholder="密码" >
                             </div>
                             <div class="form-group">
                                 <label>再输入一次密码</label>
-                                <input type="password" name="password_confirmation" class="form-control" placeholder="再输入一次密码" required>
+                                <input type="password" name="password_confirmation" class="form-control" placeholder="再输入一次密码" >
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block" type="submit">注册</button>

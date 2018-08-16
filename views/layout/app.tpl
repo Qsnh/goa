@@ -8,7 +8,9 @@
 </head>
 <body>
     {{template "components/header.tpl" .}}
-    
+
+    {{template "components/message.tpl" .}}
+
     {{.LayoutContent}}
 
     {{template "components/footer.tpl" .}}

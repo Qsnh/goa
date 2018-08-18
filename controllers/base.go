@@ -7,10 +7,9 @@ import (
 )
 
 type Base struct {
-	 beego.Controller
-	 FlashBag *beego.FlashData
-	 redirectUrl string
-	 redirectCode int
+	beego.Controller
+	FlashBag     *beego.FlashData
+	redirectUrl  string
 }
 
 func (Base *Base) Prepare() {
@@ -22,8 +21,6 @@ func (Base *Base) Prepare() {
 
 	// 初始化XSRF
 	Base.Data["xsrfdata"] = template.HTML(Base.XSRFFormHTML())
-
-	Base.redirectCode = 302
 }
 
 // 保存成功的Flash信息
@@ -33,32 +30,57 @@ func (Base *Base) FlashSuccess(message string) {
 }
 
 // 保存失败的Flash信息
-func (Base *Base) FlashError(message string)  {
+func (Base *Base) FlashError(message string) {
 	Base.FlashBag.Error(message)
 	Base.FlashBag.Store(&Base.Controller)
 }
 
 // 自动化的表单验证器
-func (Base *Base) ValidatorAuto(frontendData interface{})  {
+func (Base *Base) ValidatorAuto(frontendData interface{}) {
 
 	if err := Base.ParseForm(frontendData); err != nil {
 		Base.FlashBag.Error("参数解析错误")
-		Base.FlashBag.Store(&Base.Controller)
-		Base.Redirect(Base.redirectUrl, Base.redirectCode)
-		return
+		Base.RedirectTo(Base.redirectUrl)
 	}
 
+	defaultMessage := map[string]string{
+		"Required":     "不能为空",
+		"Min":          "不能小于%d",
+		"Max":          "不能大于%d",
+		"Range":        "取值必须在%d到%d之间",
+		"MinSize":      "长度不能小于%d",
+		"MaxSize":      "长度不能大于%d",
+		"Length":       "长度必须等于%d",
+		"Alpha":        "必须是字母",
+		"Numeric":      "必须是数字",
+		"AlphaNumeric": "必须是字母或者数字",
+		"Match":        "必须出现 %s 关键字",
+		"NoMatch":      "不能出现 %s 关键字",
+		"AlphaDash":    "必须是字母，数组或者横线(-)",
+		"Email":        "不合法的邮箱地址",
+		"IP":           "不合法的IP",
+		"Base64":       "不合法的Base64编码格式",
+		"Mobile":       "不合法的手机号",
+		"Tel":          "不合法的电话号码",
+		"Phone":        "不合法的手机号",
+		"ZipCode":      "不合法的邮编",
+	}
+	validation.SetDefaultMessage(defaultMessage)
 	validate := validation.Validation{}
+
 	isValid, err := validate.Valid(frontendData)
 	if err != nil {
 		Base.FlashError("服务器出错")
-		Base.Redirect(Base.redirectUrl, Base.redirectCode)
-		return
+		Base.RedirectTo(Base.redirectUrl)
 	}
 
 	if !isValid {
-		Base.FlashError(validate.Errors[0].Key + validate.Errors[0].Message)
-		Base.Redirect(Base.redirectUrl, Base.redirectCode)
-		return
+		Base.FlashError(validate.Errors[0].Message)
+		Base.RedirectTo(Base.redirectUrl)
 	}
+}
+
+func (Base *Base) RedirectTo(url string) {
+	Base.Redirect(url, 302)
+	Base.StopRun()
 }

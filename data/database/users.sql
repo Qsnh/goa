@@ -23,7 +23,7 @@ CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nickname` varchar(32) NOT NULL COMMENT '昵称',
   `email` varchar(64) NOT NULL COMMENT '邮箱',
-  `password` varchar(128) NOT NULL COMMENT '密码',
+  `password` varchar(256) NOT NULL COMMENT '密码',
   `is_lock` tinyint(1) NOT NULL COMMENT '1锁定,-1未锁定',
   `created_at` int(11) unsigned NOT NULL,
   `updated_at` int(11) unsigned NOT NULL,

@@ -1,6 +1,10 @@
 package controllers
 
-import "goa/validations"
+import (
+    "goa/validations"
+    "github.com/astaxie/beego"
+	"goa/models"
+)
 
 type UserController struct {
     Base
@@ -27,10 +31,16 @@ func (this *UserController) Register() {
 
 // @router /register [post]
 func (this *UserController) RegisterHandler() {
-    this.redirectUrl = "/register"
+    this.redirectUrl = beego.URLFor("UserController.Register")
     userData := validations.UserRegisterValidation{}
     this.ValidatorAuto(&userData)
 
+    _, err := models.CreateUser(userData.Nickname, userData.Email, userData.Password)
+    if err != nil {
+    	this.FlashError("注册失败")
+    	this.RedirectTo(this.redirectUrl)
+	}
+
     this.FlashSuccess("注册成功")
-    this.Redirect("/login", this.redirectCode)
+    this.RedirectTo(beego.URLFor("UserController.Login"))
 }

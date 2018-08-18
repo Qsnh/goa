@@ -2,17 +2,29 @@ package validations
 
 import (
     "github.com/astaxie/beego/validation"
+    "goa/models"
 )
 
 type UserRegisterValidation struct {
     Nickname string `form:"nickname" valid:"Required; MinSize(2); MaxSize(16)"`
-    Email string `form:"username" valid:"Required; MaxSize(64)"`
-    Password string `form:"password" valid:"Required; Email; MinSize(6); MaxSize(16)"`
+    Email string `form:"username" valid:"Required; Email; MaxSize(64)"`
+    Password string `form:"password" valid:"Required; MinSize(6); MaxSize(16)"`
     PasswordConfirmation string `form:"password_confirmation"`
 }
 
-func (urv *UserRegisterValidation) valid(valid *validation.Validation)  {
+func (urv *UserRegisterValidation) Valid(valid *validation.Validation)  {
     if urv.Password != urv.PasswordConfirmation {
         valid.SetError("password", "两次输入密码不一致")
+        return
+    }
+
+    if models.UserNicknameExists(urv.Nickname) == true {
+        valid.SetError("nickname", "昵称已经存在")
+        return
+    }
+
+    if models.UserEmailExists(urv.Email) == true {
+        valid.SetError("nickname", "邮箱已经存在")
+        return
     }
 }

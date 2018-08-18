@@ -14,5 +14,5 @@ var LoginCheckFilter = func(ctx *context.Context) {
 }
 
 func LoginCheck()  {
-	beego.InsertFilter("/member*", beego.BeforeRouter, LoginCheckFilter)
+	beego.InsertFilter("/member/*", beego.BeforeRouter, LoginCheckFilter)
 }

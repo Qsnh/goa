@@ -15,7 +15,7 @@ type Users struct {
     IsLock int
     CreatedAt int64
     UpdatedAt int64
-    Questions []*Question `orm:"reverse(many)"`
+    Questions []*Questions `orm:"reverse(many)"`
 }
 
 func FindUserById(id int) (*Users, error) {

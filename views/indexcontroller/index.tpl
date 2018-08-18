@@ -11,7 +11,7 @@
         <div class="col-sm-3 right-section">
             <div class="row">
                 <div class="col-sm-12 mt-10">
-                    <a href="" class="btn btn-block btn-success">我要提问</a>
+                    <a href="{{urlfor "QuestionController.Create"}}" class="btn btn-block btn-success">我要提问</a>
                 </div>
                 <div class="col-sm-12 data-statistic">
                     <p>问题总量：<b>121212</b>个</p>

@@ -27,10 +27,10 @@ func (this *QuestionController) Create()  {
 func (this *UserController) Store()  {
 	this.redirectUrl = beego.URLFor("QuestionController.Create")
 	questionData := validations.QuestionStoreValidation{}
-	this.ValidatorAuto(questionData)
+	this.ValidatorAuto(&questionData)
 
-	result, err := models.CreateQuestion(questionData.CategoryId, questionData.Title, questionData.Description, this.CurrentLoginUser)
-	if err != nil || result <= 0 {
+	id, err := models.CreateQuestion(questionData.CategoryId, questionData.Title, questionData.Description, this.CurrentLoginUser)
+	if err != nil || id <= 0 {
 		this.FlashError("问题创建失败")
 		this.RedirectTo(this.redirectUrl)
 	}

@@ -5,7 +5,9 @@ import (
     "github.com/astaxie/beego/orm"
 )
 
-type Question struct {
+type Questions struct {
+    User *Users `orm:"rel(fk)"`
+    Category *Categories `orm:"rel(fk)"`
     Id int64
     Title string
     Description string
@@ -13,13 +15,11 @@ type Question struct {
     IsBan int8
     CreatedAt int64
     UpdatedAt int64
-    User *Users `orm:"rel(fk)"`
-    Category *Categories `orm:"rel(fk)"`
 }
 
 func CreateQuestion(categoryId int64, title string, description string, user *Users) (int64, error)  {
     category, _ := FindCategoryById(categoryId)
-    question := new(Question)
+    question := new(Questions)
     question.Category = category
     question.User = user
     question.Title = title

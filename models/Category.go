@@ -6,7 +6,7 @@ type Categories struct {
     Id int64
     Name string
     CreatedAt int64
-    Questions []*Question `orm:"reverse(many)"`
+    Questions []*Questions `orm:"reverse(many)"`
 }
 
 func FindCategoryById(id int64) (*Categories, error)  {

@@ -1,3 +1,17 @@
+li { list-style: none }
+ul { padding: 0px; margin: 0px; }
+.mt-10 { margin-top: 10px; }
+.float-right { float: right }
+.float-left { float: left }
+
+/** 公共 */
+.avatar {
+    display: block; width: 50px; height: 50px;
+    padding: 3px; float: left;
+    margin: 3px; border: 1px solid #eeeeee;
+    border-radius: 50%;
+}
+
 .header {
     height: 60px; line-height: 60px; background-color: #fbfbfb;
     border-bottom: 1px solid #eee; margin-bottom: 10px;
@@ -15,7 +29,30 @@
     color: gray; margin-top: 10px;
 }
 
+/** 问题列表 */
+.question-box {
+    float: left;
+}
+.question-box .question-item {
+    display: block; float: left;
+    padding-top: 5px; padding-bottom: 5px;
+    float: left; border-bottom: 1px solid #fbfbfb;
+}
 
+
+/** 登陆界面 */
 .login-box, .register-box {
     margin-top: 100px; margin-bottom: 100px;
+}
+
+/** 首页 */
+.right-section .data-statistic {
+    padding: 15px 20px;
+}
+.right-section .register-member ul {
+    padding: 0px; margin: 0px;
+}
+.right-section .register-member li {
+    list-style: none; float: left; margin-right: 10px;
+    margin-bottom: 10px;
 }

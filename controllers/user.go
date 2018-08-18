@@ -38,6 +38,10 @@ func (this *UserController) LoginHandler() {
 
 // @router /logout [get]
 func (this *UserController) Logout() {
+	this.SetSession("login_user_id", 0)
+	this.CurrentLoginUser = nil
+	this.FlashSuccess("已安全退出")
+	this.RedirectTo("/")
 }
 
 // @router /register [get]

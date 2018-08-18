@@ -5,9 +5,11 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	_ "goa/routers"
 	"goa/models"
+	"goa/middlewares"
 )
 
 func main() {
 	models.Init()
+	middlewares.LoginCheck()
 	beego.Run()
 }

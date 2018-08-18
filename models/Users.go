@@ -18,11 +18,21 @@ type Users struct {
     Questions []*Question `orm:"reverse(many)"`
 }
 
-func UserNicknameExists(nickname string) bool  {
-    user := Users{}
+func FindUserById(id int) (*Users, error) {
+    user := new(Users)
     db := orm.NewOrm()
-    err := db.QueryTable(user).Filter("nickname", nickname).One(&user)
-    if err == orm.ErrNoRows {
+    err := db.QueryTable(user).Filter("id", id).One(user)
+    if err == nil {
+        return user, nil
+    }
+    return nil, err
+}
+
+func UserNicknameExists(nickname string) bool  {
+    user := new(Users)
+    db := orm.NewOrm()
+    err := db.QueryTable(user).Filter("nickname", nickname).One(user)
+    if err != nil {
         return false
     } else {
         return true
@@ -30,10 +40,10 @@ func UserNicknameExists(nickname string) bool  {
 }
 
 func UserEmailExists(email string) bool {
-    user := Users{Email:email}
+    user := new(Users)
     db := orm.NewOrm()
-    err := db.QueryTable(user).Filter("email", email).One(&user)
-    if err == orm.ErrNoRows {
+    err := db.QueryTable(user).Filter("email", email).One(user)
+    if err != nil {
         return false
     } else {
         return true
@@ -56,4 +66,14 @@ func CreateUser(nickname string, email string, password string) (int64, error)  
 
     id, err := db.Insert(&user)
     return id, err
+}
+
+func UserExistsByEmailAndPassword(email string, password string) (*Users, error) {
+    user := new(Users)
+    db := orm.NewOrm()
+    err := db.QueryTable(user).Filter("email", email).Filter("password", libs.SHA256Encode(password)).One(user)
+    if err != nil {
+        return nil, err
+    }
+    return user, nil
 }

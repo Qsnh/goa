@@ -4,12 +4,14 @@ import (
 	"github.com/astaxie/beego"
 	"html/template"
 	"github.com/astaxie/beego/validation"
+	"goa/models"
 )
 
 type Base struct {
 	beego.Controller
 	FlashBag     *beego.FlashData
 	redirectUrl  string
+	CurrentLoginUser *models.Users
 }
 
 func (Base *Base) Prepare() {
@@ -21,6 +23,16 @@ func (Base *Base) Prepare() {
 
 	// 初始化XSRF
 	Base.Data["xsrfdata"] = template.HTML(Base.XSRFFormHTML())
+
+	// 自动读取当前登陆用户
+	loginUserId := Base.GetSession("login_user_id")
+	if loginUserId != nil {
+		user, err := models.FindUserById(loginUserId.(int))
+		if err == nil {
+			Base.CurrentLoginUser = user
+		}
+	}
+	Base.Data["user"] = Base.CurrentLoginUser
 }
 
 // 保存成功的Flash信息

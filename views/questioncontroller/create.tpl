@@ -1,3 +1,5 @@
+<link href="https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.css" rel="stylesheet">
+
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
@@ -18,7 +20,7 @@
                 </div>
                 <div class="form-group">
                     <label>详情</label>
-                    <textarea name="description" class="form-control" rows="5" placeholder="详情"></textarea>
+                    <textarea name="description" id="description"></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">发起提问</button>
@@ -27,3 +29,8 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.js"></script>
+<script>
+    var simplemde = new SimpleMDE({ element: document.getElementById("description") });
+</script>

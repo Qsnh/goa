@@ -47,7 +47,6 @@ func Paginate(page int64, pageSize int64) ([]Questions, *libs.BootstrapPaginator
     db := orm.NewOrm()
     questions := []Questions{}
 
-    // 获取总数
     total, err := db.QueryTable("questions").Count()
     if err != nil {
         return questions, nil, err

@@ -10,4 +10,7 @@ go get github.com/astaxie/beego
 # MySQL Driver
 go get github.com/go-sql-driver/mysql
 
+# Markdown解析库
+go get github.com/russross/blackfriday
+
 ```

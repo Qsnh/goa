@@ -3,10 +3,10 @@
         <div class="col-sm-9">
             <div class="title">{{.question.Title}}</div>
             <div class="info">
-                <p>{{.question.Category.Name}} | {{.question.CreateAt}}</p>
+                <p>{{.question.Category.Name}} | {{.question.CreatedAt}}</p>
             </div>
             <div class="description">
-                {{.question.Description}}
+                {{str2html .question.Description}}
             </div>
         </div>
         <div class="col-sm-3 text-center">

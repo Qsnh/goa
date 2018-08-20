@@ -4,6 +4,7 @@ import (
 	"goa/validations"
 	"goa/models"
 	"github.com/astaxie/beego"
+	"github.com/russross/blackfriday"
 )
 
 type QuestionController struct {
@@ -50,6 +51,8 @@ func (this *QuestionController) Show() {
 		this.FlashError("该问题已被禁止")
 		this.RedirectTo("/")
 	}
+
+	question.Description = string(blackfriday.MarkdownCommon([]byte(question.Description)))
 
 	this.Data["question"] = question
 	this.Layout = "layout/app.tpl"

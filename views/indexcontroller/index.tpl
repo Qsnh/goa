@@ -10,7 +10,7 @@
             </div>
             {{end}}
 
-            <div>
+            <div class="text-right">
             {{str2html .paginator}}
             </div>
         </div>

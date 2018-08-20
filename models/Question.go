@@ -4,7 +4,6 @@ import (
     "time"
     "github.com/astaxie/beego/orm"
     "goa/libs"
-    "net/http"
     "github.com/astaxie/beego"
 )
 
@@ -44,7 +43,7 @@ func FindQuestionById(id string) (*Questions, error)  {
     return question, nil
 }
 
-func Paginate(page int, pageSize int64, request *http.Request) ([]Questions, *libs.BootstrapPaginator, error)  {
+func Paginate(page int64, pageSize int64) ([]Questions, *libs.BootstrapPaginator, error)  {
     db := orm.NewOrm()
     questions := []Questions{}
 
@@ -55,15 +54,15 @@ func Paginate(page int, pageSize int64, request *http.Request) ([]Questions, *li
     }
 
     paginator := new(libs.BootstrapPaginator)
-    paginator.Instance(total, int64(page), pageSize, beego.URLFor("IndexController.index"))
+    paginator.Instance(total, page, pageSize, beego.URLFor("IndexController.index"))
 
-    if int64(page) > paginator.TotalPage {
+    if page > paginator.TotalPage {
         return questions, paginator, nil
     }
 
     var startPosition int64
     if page > 0 {
-        startPosition = int64(page - 1) * pageSize
+        startPosition = (page - 1) * pageSize
     }
     rowsNum, err := db.QueryTable("questions").RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPosition).All(&questions)
     if err != nil || rowsNum == 0 {

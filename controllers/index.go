@@ -10,10 +10,10 @@ type IndexController struct {
 func (this *IndexController) Index() {
 	this.Layout = "layout/app.tpl"
 
-	page, _ := this.GetInt("page")
-	pageSize, _ := this.GetInt64("page_size")
+	page, _ := this.GetInt64("page")
+	pageSize := int64(20)
 
-	questions, paginator, _ := models.Paginate(page, pageSize, this.Ctx.Request)
+	questions, paginator, _ := models.Paginate(page, pageSize)
 
 	this.Data["paginator"] = paginator.Render()
 	this.Data["questions"] = questions

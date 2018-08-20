@@ -24,7 +24,7 @@ func (this *QuestionController) Create()  {
 }
 
 // @router /member/questions/create [post]
-func (this *UserController) Store()  {
+func (this *QuestionController) Store() {
 	this.redirectUrl = beego.URLFor("QuestionController.Create")
 	questionData := validations.QuestionStoreValidation{}
 	this.ValidatorAuto(&questionData)
@@ -37,4 +37,20 @@ func (this *UserController) Store()  {
 
 	this.FlashSuccess("问题创建成功")
 	this.RedirectTo("/")
+}
+
+// @router /questions/:id [get]
+func (this *QuestionController) Show() {
+	question, err := models.FindQuestionById(this.Ctx.Input.Param(":id"))
+	if err != nil {
+		this.FlashError("问题不存在")
+		this.RedirectTo("/")
+	}
+	if question.IsBan == 1 {
+		this.FlashError("该问题已被禁止")
+		this.RedirectTo("/")
+	}
+
+	this.Data["question"] = question
+	this.Layout = "layout/app.tpl"
 }

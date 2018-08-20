@@ -1,11 +1,17 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9 question-box">
+            {{range $index, $question := .questions}}
             <div class="question-item">
-                <a href="">
+                <a href="{{urlfor "QuestionController.Show" ":id" $question.Id}}">
                     <img src="https://ps.ssl.qhimg.com/t013658e41e8c191970.jpg" class="img-circle" width="50" height="50" alt="nickname">
-                    <span>我是一个问题，请不要把我忽略我是一个问题略</span>
+                    <span>{{$question.Title}}</span>
                 </a>
+            </div>
+            {{end}}
+
+            <div>
+            {{str2html .paginator}}
             </div>
         </div>
         <div class="col-sm-3 right-section">

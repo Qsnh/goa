@@ -3,6 +3,9 @@ package models
 import (
     "time"
     "github.com/astaxie/beego/orm"
+    "goa/libs"
+    "net/http"
+    "github.com/astaxie/beego"
 )
 
 type Questions struct {
@@ -30,4 +33,41 @@ func CreateQuestion(categoryId int64, title string, description string, user *Us
     question.UpdatedAt = time.Now().Unix()
 
     return orm.NewOrm().Insert(question)
+}
+
+func FindQuestionById(id string) (*Questions, error)  {
+    question := new(Questions)
+    err := orm.NewOrm().QueryTable(question).Filter("id", id).RelatedSel().One(question)
+    if err != nil {
+        return nil, err
+    }
+    return question, nil
+}
+
+func Paginate(page int, pageSize int64, request *http.Request) ([]Questions, *libs.BootstrapPaginator, error)  {
+    db := orm.NewOrm()
+    questions := []Questions{}
+
+    // 获取总数
+    total, err := db.QueryTable("questions").Count()
+    if err != nil {
+        return questions, nil, err
+    }
+
+    paginator := new(libs.BootstrapPaginator)
+    paginator.Instance(total, int64(page), pageSize, beego.URLFor("IndexController.index"))
+
+    if int64(page) > paginator.TotalPage {
+        return questions, paginator, nil
+    }
+
+    var startPosition int64
+    if page > 0 {
+        startPosition = int64(page - 1) * pageSize
+    }
+    rowsNum, err := db.QueryTable("questions").RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPosition).All(&questions)
+    if err != nil || rowsNum == 0 {
+        return questions, paginator, err
+    }
+    return questions, paginator, nil
 }

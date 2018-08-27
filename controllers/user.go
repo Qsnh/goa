@@ -1,68 +1,66 @@
 package controllers
 
 import (
-    "github.com/astaxie/beego"
-    "github.com/astaxie/beego/validation"
     "goa/validations"
+    "github.com/astaxie/beego"
+	"goa/models"
 )
 
 type UserController struct {
-    beego.Controller
+    Base
 }
 
 // @router /login [get]
 func (this *UserController) Login() {
+	if this.CurrentLoginUser != nil {
+		this.RedirectTo("/")
+	}
     this.Layout = "layout/app.tpl"
 }
 
 // @router /login [post]
 func (this *UserController) LoginHandler() {
+	this.redirectUrl = beego.URLFor("UserController.Login")
+	loginData := validations.UserLoginValidation{}
+	this.ValidatorAuto(&loginData)
 
+	user, err := models.UserExistsByEmailAndPassword(loginData.Email, loginData.Password)
+	if err != nil {
+		this.FlashError("用户名或密码错误")
+		this.RedirectTo(this.redirectUrl)
+	}
+
+	this.SetSession("login_user_id", user.Id)
+
+	this.FlashSuccess("登陆成功")
+	this.RedirectTo("/")
 }
 
 // @router /logout [get]
 func (this *UserController) Logout() {
-    
+	this.SetSession("login_user_id", 0)
+	this.CurrentLoginUser = nil
+	this.FlashSuccess("已安全退出")
+	this.RedirectTo("/")
 }
 
 // @router /register [get]
 func (this *UserController) Register() {
-    beego.ReadFromRequest(&this.Controller)
     this.Layout = "layout/app.tpl"
 }
 
 // @router /register [post]
 func (this *UserController) RegisterHandler() {
-    flash := beego.NewFlash()
-    
+    this.redirectUrl = beego.URLFor("UserController.Register")
     userData := validations.UserRegisterValidation{}
-    if err := this.ParseForm(&userData); err != nil {
-        flash.Error("参数解析错误")
-        flash.Store(&this.Controller)
-        this.Redirect("/register", 302)
-        return
-    }
+    this.ValidatorAuto(&userData)
 
-    validate := validation.Validation{}
-    isValid, err := validate.Valid(&userData)
+    _, err := models.CreateUser(userData.Nickname, userData.Email, userData.Password)
     if err != nil {
-        flash.Error("服务器出错")
-        flash.Store(&this.Controller)
-        this.Redirect("/register", 302)
-        return
-    }
+    	this.FlashError("注册失败")
+    	this.RedirectTo(this.redirectUrl)
+	}
 
-    if !isValid {
-        for _, err := range validate.Errors {
-            flash.Error(err.Key + err.Message)
-            break
-        }
-        flash.Store(&this.Controller)
-        this.Redirect("/register", 302)
-        return
-    }
-
-    flash.Notice("注册成功")
-    flash.Store(&this.Controller)
-    this.Redirect("/login", 302)
+    this.FlashSuccess("注册成功")
+    this.RedirectTo(beego.URLFor("UserController.Login"))
 }

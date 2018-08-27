@@ -3,24 +3,13 @@ package main
 import (
 	"github.com/astaxie/beego"
 	_ "github.com/go-sql-driver/mysql"
-    "github.com/astaxie/beego/orm"
-    "goa/models"
-    _ "goa/routers"
+	_ "goa/routers"
+	"goa/models"
+	"goa/middlewares"
 )
 
-func init() {
-    orm.RegisterDriver("mysql", orm.DRMySQL)
-
-    dbHost := beego.AppConfig.String("database_host")
-    dbPort := beego.AppConfig.String("database_port")
-    dbUser := beego.AppConfig.String("database_user")
-    dbPass := beego.AppConfig.String("database_pass")
-    dbDb := beego.AppConfig.String("database_db")
-
-    orm.RegisterDataBase(dbDb, "mysql", dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/?charset=utf8")
-    orm.RegisterModel(new(models.Category), new(models.User), new(models.Question))
-}
-
 func main() {
+	models.Init()
+	middlewares.LoginCheck()
 	beego.Run()
 }

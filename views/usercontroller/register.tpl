@@ -8,6 +8,7 @@
                 <div class="panel-body">
                     <div class="col-sm-12">
                         <form action="" method="post" class="form-horizontal">
+                            {{ .xsrfdata }}
                             <div class="form-group">
                                 <label>昵称</label>
                                 <input type="text" name="nickname" class="form-control" placeholder="昵称" >

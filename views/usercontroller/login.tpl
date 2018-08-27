@@ -7,6 +7,7 @@
                 </div>
                 <div class="panel-body">
                     <form action="" method="post" class="form-horizontal">
+                        {{ .xsrfdata }}
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>邮箱</label>

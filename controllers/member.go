@@ -1,9 +1,9 @@
 package controllers
 
 import (
+	"github.com/Qsnh/goa/libs"
+	"github.com/Qsnh/goa/validations"
 	"github.com/astaxie/beego"
-	"goa/validations"
-	"goa/libs"
 	"github.com/astaxie/beego/orm"
 )
 
@@ -12,17 +12,17 @@ type MemberController struct {
 }
 
 // @router /member [get]
-func (this *MemberController) Index()  {
+func (this *MemberController) Index() {
 	this.Layout = "layout/member.tpl"
 }
 
 // @router /member/change_password [get]
-func (this *MemberController) ChangePassword()  {
+func (this *MemberController) ChangePassword() {
 	this.Layout = "layout/member.tpl"
 }
 
 // @router /member/change_password [post]
-func (this *MemberController) ChangePasswordHandler()  {
+func (this *MemberController) ChangePasswordHandler() {
 	this.redirectUrl = beego.URLFor("MemberController.ChangePassword")
 	passwordData := validations.MemberChangePasswordValidation{}
 	this.ValidatorAuto(&passwordData)

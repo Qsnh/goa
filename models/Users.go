@@ -1,18 +1,18 @@
 package models
 
 import (
-    "github.com/astaxie/beego/orm"
+    "github.com/Qsnh/goa/libs"
     "github.com/astaxie/beego"
+    "github.com/astaxie/beego/orm"
     "time"
-    "goa/libs"
 )
 
 type Users struct {
-    Id int
-    Nickname string
-    Email string
-    Password string
-    IsLock int
+    Id        int
+    Nickname  string
+    Email     string
+    Password  string
+    IsLock    int
     CreatedAt int64
     UpdatedAt int64
     Questions []*Questions `orm:"reverse(many)"`
@@ -28,7 +28,7 @@ func FindUserById(id int) (*Users, error) {
     return nil, err
 }
 
-func UserNicknameExists(nickname string) bool  {
+func UserNicknameExists(nickname string) bool {
     user := new(Users)
     db := orm.NewOrm()
     err := db.QueryTable(user).Filter("nickname", nickname).One(user)
@@ -50,16 +50,16 @@ func UserEmailExists(email string) bool {
     }
 }
 
-func CreateUser(nickname string, email string, password string) (int64, error)  {
+func CreateUser(nickname string, email string, password string) (int64, error) {
     db := orm.NewOrm()
 
     isLock, _ := beego.AppConfig.Int("user_register_lock_status")
 
     user := Users{
-        Nickname: nickname,
-        Email: email,
-        Password: libs.SHA256Encode(password),
-        IsLock: isLock,
+        Nickname:  nickname,
+        Email:     email,
+        Password:  libs.SHA256Encode(password),
+        IsLock:    isLock,
         CreatedAt: time.Now().Unix(),
         UpdatedAt: time.Now().Unix(),
     }

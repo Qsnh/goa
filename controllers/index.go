@@ -1,6 +1,6 @@
 package controllers
 
-import "goa/models"
+import "github.com/Qsnh/goa/models"
 
 type IndexController struct {
 	Base

@@ -1,25 +1,25 @@
 package models
 
 import (
-    "time"
-    "github.com/astaxie/beego/orm"
-    "goa/libs"
+    "github.com/Qsnh/goa/libs"
     "github.com/astaxie/beego"
+    "github.com/astaxie/beego/orm"
+    "time"
 )
 
 type Questions struct {
-    User *Users `orm:"rel(fk)"`
-    Category *Categories `orm:"rel(fk)"`
-    Id int64
-    Title string
+    User        *Users      `orm:"rel(fk)"`
+    Category    *Categories `orm:"rel(fk)"`
+    Id          int64
+    Title       string
     Description string
-    ViewNum int
-    IsBan int8
-    CreatedAt int64
-    UpdatedAt int64
+    ViewNum     int
+    IsBan       int8
+    CreatedAt   int64
+    UpdatedAt   int64
 }
 
-func CreateQuestion(categoryId int64, title string, description string, user *Users) (int64, error)  {
+func CreateQuestion(categoryId int64, title string, description string, user *Users) (int64, error) {
     category, _ := FindCategoryById(categoryId)
     question := new(Questions)
     question.Category = category
@@ -34,7 +34,7 @@ func CreateQuestion(categoryId int64, title string, description string, user *Us
     return orm.NewOrm().Insert(question)
 }
 
-func FindQuestionById(id string) (*Questions, error)  {
+func FindQuestionById(id string) (*Questions, error) {
     question := new(Questions)
     err := orm.NewOrm().QueryTable(question).Filter("id", id).RelatedSel().One(question)
     if err != nil {
@@ -43,7 +43,7 @@ func FindQuestionById(id string) (*Questions, error)  {
     return question, nil
 }
 
-func Paginate(page int64, pageSize int64) ([]Questions, *libs.BootstrapPaginator, error)  {
+func Paginate(page int64, pageSize int64) ([]Questions, *libs.BootstrapPaginator, error) {
     db := orm.NewOrm()
     questions := []Questions{}
 

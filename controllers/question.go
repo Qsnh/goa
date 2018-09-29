@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"goa/validations"
-	"goa/models"
+	"github.com/Qsnh/goa/models"
+	"github.com/Qsnh/goa/validations"
 	"github.com/astaxie/beego"
 	"github.com/russross/blackfriday"
 )
@@ -12,7 +12,7 @@ type QuestionController struct {
 }
 
 // @router  /member/questions/create [get]
-func (this *QuestionController) Create()  {
+func (this *QuestionController) Create() {
 	this.Layout = "layout/app.tpl"
 
 	categories, err := models.AllCategories()

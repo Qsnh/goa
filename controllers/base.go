@@ -1,16 +1,16 @@
 package controllers
 
 import (
+	"github.com/Qsnh/goa/models"
 	"github.com/astaxie/beego"
-	"html/template"
 	"github.com/astaxie/beego/validation"
-	"goa/models"
+	"html/template"
 )
 
 type Base struct {
 	beego.Controller
-	FlashBag     *beego.FlashData
-	redirectUrl  string
+	FlashBag         *beego.FlashData
+	redirectUrl      string
 	CurrentLoginUser *models.Users
 }
 

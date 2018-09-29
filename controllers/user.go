@@ -1,9 +1,9 @@
 package controllers
 
 import (
+	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/validations"
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/validation"
 )
 
 type UserController struct {

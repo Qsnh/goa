@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"goa/controllers"
+	"github.com/Qsnh/goa/controllers"
 	"github.com/astaxie/beego"
 )
 

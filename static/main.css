@@ -6323,12 +6323,6 @@ ul, p {
   padding: 0px;
   margin: 0px; }
 
-.float-right {
-  float: right; }
-
-.float-left {
-  float: left; }
-
 a {
   color: #ecf0f1; }
 
@@ -6344,6 +6338,9 @@ a {
 .lh-46 {
   line-height: 46px; }
 
+.font-08 {
+  font-size: .8rem; }
+
 .card {
   background-color: #2c3e50; }
 
@@ -6357,7 +6354,7 @@ header.header-navbar {
   header.header-navbar a {
     color: #ecf0f1 !important; }
   header.header-navbar li.active a {
-    color: #28a745 !important; }
+    color: #17a2b8 !important; }
   header.header-navbar .header-right-box {
     margin-left: 20px; }
 
@@ -6371,3 +6368,10 @@ footer .footer {
 /** 登录/注册 */
 .center-form-box {
   margin-top: 120px; }
+
+.question-box {
+  color: grey; }
+  .question-box h5 a {
+    color: #ecf0f1; }
+  .question-box p a {
+    color: #17a2b8; }

@@ -7,13 +7,12 @@ body {
 }
 li { list-style: none }
 ul, p { padding: 0px; margin: 0px; }
-.float-right { float: right }
-.float-left { float: left }
 a { color: $color; }
 .mt-15 { margin-top: 15px; }
 .mb-15 { margin-bottom: 15px; }
 .lh-40 { line-height: 40px; }
 .lh-46 { line-height: 46px; }
+.font-08 { font-size: .8rem; }
 
 .card { background-color: $bgColor }
 .alert { margin-bottom: 15px; }
@@ -26,7 +25,7 @@ header.header-navbar {
         color: rgb(236, 240, 241)!important;
     }
     li.active a {
-        color: #28a745!important;
+        color: #17a2b8!important;
     }
     .header-right-box {
         margin-left: 20px;
@@ -42,4 +41,18 @@ footer {
 /** 登录/注册 */
 .center-form-box {
     margin-top: 120px;
+}
+
+.question-box {
+    color: grey;
+    h5 {
+        a {
+            color: $color;
+        }
+    }
+    p {
+        a {
+            color: #17a2b8;
+        }
+    }
 }

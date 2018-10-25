@@ -1,39 +1,27 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-9 question-box">
-            {{range $index, $question := .questions}}
-            <div class="question-item">
-                <a href="{{urlfor "QuestionController.Show" ":id" $question.Id}}">
-                    <img src="https://ps.ssl.qhimg.com/t013658e41e8c191970.jpg" class="img-circle" width="50" height="50" alt="nickname">
-                    <span>{{$question.Title}}</span>
-                </a>
-            </div>
-            {{end}}
+        <div class="col-sm question-box">
+            <table class="table table-hover table-borderless question-box">
+                <tbody>
+                <tr>
+                    <td class="align-middle" width="60px">
+                        <img src="https://ps.ssl.qhimg.com/sdmt/132_132_100/t01fb556f313934cb5b.webp" class="rounded-circle" width="50" height="50">
+                    </td>
+                    <td>
+                        <h6><a href="">深度会出跨平台即时通信软件吗？</a></h6>
+                        <p class="font-08">
+                            <a href=""><span class="badge badge-info">应用软件</span></a>&nbsp;/&nbsp;<a href="">shizendg</a>&nbsp;/&nbsp;4 小时前&nbsp;/&nbsp;最新回复 <a href="">ZCLZCL</a> 4 分钟前
+                        </p>
+                    </td>
+                    <td class="align-middle" width="20">
+                        <span class="badge badge-secondary">20</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
             <div class="text-right">
             {{str2html .paginator}}
-            </div>
-        </div>
-        <div class="col-sm-3 right-section">
-            <div class="row">
-                <div class="col-sm-12 mt-10">
-                    <a href="{{urlfor "QuestionController.Create"}}" class="btn btn-block btn-success">我要提问</a>
-                </div>
-                <div class="col-sm-12 data-statistic">
-                    <p>问题总量：<b>121212</b>个</p>
-                    <p>已解决：<b>12545</b>个</p>
-                    <p>会员总量：<b>21155</b>位</p>
-                </div>
-                <div class="col-sm-12 mt-10 register-member">
-                    <h5>最新注册</h5>
-                    <ul>
-                        <li><img src="https://ps.ssl.qhimg.com/t013658e41e8c191970.jpg" class="img-circle" width="50" height="50" alt="nickname"></li>
-                        <li><img src="https://ps.ssl.qhimg.com/t013658e41e8c191970.jpg" class="img-circle" width="50" height="50" alt="nickname"></li>
-                        <li><img src="https://ps.ssl.qhimg.com/t013658e41e8c191970.jpg" class="img-circle" width="50" height="50" alt="nickname"></li>
-                        <li><img src="https://ps.ssl.qhimg.com/t013658e41e8c191970.jpg" class="img-circle" width="50" height="50" alt="nickname"></li>
-                        <li><img src="https://ps.ssl.qhimg.com/t013658e41e8c191970.jpg" class="img-circle" width="50" height="50" alt="nickname"></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>

@@ -38,7 +38,7 @@ func (bp *BootstrapPaginator) BuildUrl(Page int64) string {
 func (bp *BootstrapPaginator) Render() string {
 	bp.ComputeTotalPage()
 
-	html := "<ul class=\"pagination\">"
+	html := "<ul class=\"pagination pagination-sm justify-content-end\">"
 	html += bp.RenderPrevItem()
 
 	if bp.TotalPage <= 8 {
@@ -90,7 +90,7 @@ func (bp *BootstrapPaginator) RenderItem(page int64) string {
 		active = "active"
 	}
 	url := bp.BuildUrl(page)
-	liTag = fmt.Sprintf("<li class=\"%s\"><a href=\"%s\">%d</a></li>", active, url, page)
+	liTag = fmt.Sprintf("<li class=\"page-item %s\"><a class=\"page-link\" href=\"%s\">%d</a></li>", active, url, page)
 	return liTag
 }
 
@@ -107,7 +107,7 @@ func (bp *BootstrapPaginator) RenderNextItem() string {
 	} else {
 		url = bp.BuildUrl(page)
 	}
-	liTag = fmt.Sprintf("<li class=\"%s\"><a aria-label=\"Next\" href=\"%s\"><span aria-hidden=\"true\">&raquo;</span></a></li>", disabled, url)
+	liTag = fmt.Sprintf("<li class=\"page-item %s\"><a class=\"page-link\" href=\"%s\">下一页</span></a></li>", disabled, url)
 	return liTag
 }
 
@@ -120,7 +120,7 @@ func (bp *BootstrapPaginator) RenderPrevItem() string {
 	} else {
 		url = bp.BuildUrl(page)
 	}
-	liTag = fmt.Sprintf("<li class=\"%s\"><a aria-label=\"Previous\" href=\"%s\"><span aria-hidden=\"true\">&laquo;</span></a></li>", disabled, url)
+	liTag = fmt.Sprintf("<li class=\"page-item %s\"><a class=\"page-link\" href=\"%s\"><span aria-hidden=\"true\">上一页</span></a></li>", disabled, url)
 	return liTag
 }
 

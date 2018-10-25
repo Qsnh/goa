@@ -23,7 +23,7 @@
                             <input type="password" name="password_confirmation" class="form-control form-control-sm" placeholder="再输入一次密码" >
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success btn-block" type="submit">注册</button>
+                            <button class="btn btn-outline-light btn-block btn-sm" type="submit">注册</button>
                         </div>
                     </form>
                 </div>

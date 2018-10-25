@@ -13,7 +13,7 @@ func (this *IndexController) Index() {
 	page, _ := this.GetInt64("page")
 	pageSize := int64(20)
 
-	questions, paginator, _ := models.Paginate(page, pageSize)
+	questions, paginator, _ := models.QuestionPaginate(page, pageSize)
 
 	this.Data["paginator"] = paginator.Render()
 	this.Data["questions"] = questions

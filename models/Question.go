@@ -43,7 +43,7 @@ func FindQuestionById(id string) (*Questions, error) {
     return question, nil
 }
 
-func Paginate(page int64, pageSize int64) ([]Questions, *libs.BootstrapPaginator, error) {
+func QuestionPaginate(page int64, pageSize int64) ([]Questions, *libs.BootstrapPaginator, error) {
     db := orm.NewOrm()
     questions := []Questions{}
 

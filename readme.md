@@ -6,11 +6,11 @@
 ```
 # 框架
 go get github.com/astaxie/beego
+go get -u github.com/beego/bee
 
 # MySQL Driver
 go get github.com/go-sql-driver/mysql
 
 # Markdown解析库
 go get github.com/russross/blackfriday
-
 ```

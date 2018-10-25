@@ -1,0 +1,45 @@
+$bgColor: rgb(44, 62, 80);
+$color: rgb(236, 240, 241);
+
+body {
+    background-color: $bgColor;
+    color: $color;
+}
+li { list-style: none }
+ul, p { padding: 0px; margin: 0px; }
+.float-right { float: right }
+.float-left { float: left }
+a { color: $color; }
+.mt-15 { margin-top: 15px; }
+.mb-15 { margin-bottom: 15px; }
+.lh-40 { line-height: 40px; }
+.lh-46 { line-height: 46px; }
+
+.card { background-color: $bgColor }
+.alert { margin-bottom: 15px; }
+
+/** 全局头部 */
+header.header-navbar {
+    border-bottom: 2px solid $color;
+    margin-bottom: 15px;
+    a {
+        color: rgb(236, 240, 241)!important;
+    }
+    li.active a {
+        color: #28a745!important;
+    }
+    .header-right-box {
+        margin-left: 20px;
+    }
+}
+/** 全局尾部 */
+footer {
+    .footer {
+        font-size: .8rem; line-height: 50px; margin-top: 15px; text-align: center;
+    }
+}
+
+/** 登录/注册 */
+.center-form-box {
+    margin-top: 120px;
+}

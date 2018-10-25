@@ -4,3 +4,6 @@ goa.exe~
 lastupdate.tmp
 goa.exe
 goa
+.idea/
+node_modules/
+.DS_Store

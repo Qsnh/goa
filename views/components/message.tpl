@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm">
             {{if .flash.notice}}
             <div class="alert alert-success">
                 <p>{{.flash.notice}}</p>

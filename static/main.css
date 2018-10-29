@@ -6341,6 +6341,9 @@ a {
 .font-08 {
   font-size: .8rem; }
 
+a:hover {
+  color: #17a2b8 !important; }
+
 .card {
   background-color: #2c3e50; }
 
@@ -6375,3 +6378,13 @@ footer .footer {
     color: #ecf0f1; }
   .question-box p a {
     color: #17a2b8; }
+
+/** 用户中心 */
+.member-left-box li {
+  background-color: #2c3e50; }
+
+.member-left-box .member-info-box {
+  padding-top: 30px;
+  padding-bottom: 30px; }
+  .member-left-box .member-info-box .nickname {
+    line-height: 40px; }

@@ -14,5 +14,6 @@
 
     {{template "components/footer.tpl" .}}
 
+    <script src="/static/bundle.js"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 $bgColor: rgb(44, 62, 80);
 $color: rgb(236, 240, 241);
+$activeColor: #17a2b8;
 
 body {
     background-color: $bgColor;
@@ -13,6 +14,7 @@ a { color: $color; }
 .lh-40 { line-height: 40px; }
 .lh-46 { line-height: 46px; }
 .font-08 { font-size: .8rem; }
+a:hover { color: $activeColor!important; }
 
 .card { background-color: $bgColor }
 .alert { margin-bottom: 15px; }
@@ -53,6 +55,19 @@ footer {
     p {
         a {
             color: #17a2b8;
+        }
+    }
+}
+
+/** 用户中心 */
+.member-left-box {
+    li {
+        background-color: $bgColor;
+    }
+    .member-info-box {
+        padding-top: 30px; padding-bottom: 30px;
+        .nickname {
+            line-height: 40px;
         }
     }
 }

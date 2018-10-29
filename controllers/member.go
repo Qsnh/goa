@@ -16,12 +16,12 @@ func (this *MemberController) Index() {
 	this.Layout = "layout/member.tpl"
 }
 
-// @router /member/change_password [get]
+// @router /member/password [get]
 func (this *MemberController) ChangePassword() {
 	this.Layout = "layout/member.tpl"
 }
 
-// @router /member/change_password [post]
+// @router /member/password [post]
 func (this *MemberController) ChangePasswordHandler() {
 	this.redirectUrl = beego.URLFor("MemberController.ChangePassword")
 	passwordData := validations.MemberChangePasswordValidation{}

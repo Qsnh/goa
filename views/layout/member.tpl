@@ -16,7 +16,9 @@
                 <ul class="list-group member-left-box text-center">
                     <li class="list-group-item member-info-box">
                         <p>
-                            <img src="https://ps.ssl.qhimg.com/t015b383a4233d7e9f4.jpg" width="80" height="80" class="rounded-circle">
+                            <a href="/member/avatar">
+                                <img src="{{.user.Avatar}}" width="80" height="80" class="rounded-circle">
+                            </a>
                         </p>
                         <p class="nickname">{{.user.Nickname}}</p>
                     </li>

@@ -20,7 +20,7 @@
                         <input type="password" name="new_password_confirmation" class="form-control form-control-sm" placeholder="再输入一次新密码" required>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-outline-light btn-block">立即修改</button>
+                        <button type="submit" class="btn btn-outline-light btn-block btn-sm">立即修改</button>
                     </div>
                 </form>
             </div>

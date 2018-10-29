@@ -10,6 +10,7 @@ import (
 type Users struct {
     Id        int
     Nickname  string
+    Avatar    string
     Email     string
     Password  string
     IsLock    int

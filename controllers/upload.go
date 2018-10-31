@@ -14,7 +14,7 @@ type UploadController struct {
 	Base
 }
 
-// @router /upload/image [post]
+// @router /member/upload/image [post]
 func (this *UploadController) Image() {
 	file, header, err := this.GetFile("file")
 	if err != nil {

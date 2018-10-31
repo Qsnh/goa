@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/Qsnh/goa/goaio"
 	"github.com/Qsnh/goa/models"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/validation"
@@ -92,7 +93,24 @@ func (Base *Base) ValidatorAuto(frontendData interface{}) {
 	}
 }
 
+// 重定向
 func (Base *Base) RedirectTo(url string) {
 	Base.Redirect(url, 302)
+	Base.StopRun()
+}
+
+// ajax错误返回
+func (Base *Base) AjaxError(message string, code uint16) {
+	res := goaio.ErrorResponseJson{message, code}
+	Base.Data["json"] = res
+	Base.ServeJSON()
+	Base.StopRun()
+}
+
+// ajax成功返回
+func (Base *Base) AjaxSuccess(message string, data interface{}) {
+	res := goaio.SuccessResponseJson{message,0,data}
+	Base.Data["json"] = res
+	Base.ServeJSON()
 	Base.StopRun()
 }

@@ -74,7 +74,7 @@ func (this *MemberController) ChangeAvatarHandler() {
 	extension := strings.ToLower(extensions[len(extensions)-1])
 	if extension != "jpg" && extension != "png" && extension != "gif" {
 		this.FlashError("请上传jpeg/png/gif图片")
-		this.RedirectTo(this.redirectUrl);
+		this.RedirectTo(this.redirectUrl)
 	}
 	// 文件大小判断
 	if header.Size/(1024*1024) > 2 {
@@ -106,7 +106,7 @@ func (this *MemberController) ChangeAvatarHandler() {
 func (this *MemberController) Logout() {
 	this.SetSession("login_user_id", 0)
 	this.FlashSuccess("已安全退出")
-	this.RedirectTo("/");
+	this.RedirectTo("/")
 }
 
 // @router /member/profile [get]

@@ -1,12 +1,15 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm question-box">
+        <div class="col-sm-12 mt-15 mb-15">
+            <a href="{{urlfor "QuestionController.Create"}}" class="btn btn-primary">我要提问</a>
+        </div>
+        <div class="col-sm-12 question-box">
             <table class="table table-hover table-borderless question-box">
                 <tbody>
                 {{range $index, $question := .questions}}
                 <tr>
                     <td class="align-middle" width="60px">
-                        <img src="" class="rounded-circle" width="50" height="50">
+                        <img src="{{$question.User.Avatar}}" class="rounded-circle" width="50" height="50">
                     </td>
                     <td>
                         <h6><a href="">{{$question.Title}}</a></h6>

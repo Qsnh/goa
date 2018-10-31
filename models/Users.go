@@ -23,6 +23,7 @@ type Users struct {
 	CreatedAt  int64
 	UpdatedAt  int64
 	Questions  []*Questions `orm:"reverse(many)"`
+	Answers    []*Answers   `orm:"reverse(many)"`
 }
 
 func FindUserById(id int) (*Users, error) {

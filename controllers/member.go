@@ -134,3 +134,13 @@ func (this *MemberController) SaveProfileHandler() {
 	}
 	this.RedirectTo(this.redirectUrl)
 }
+
+// @router /member/questions [get]
+func (this *MemberController) Questions() {
+	this.Layout = "layout/member.tpl"
+}
+
+// @router /member/answers [get]
+func (this *MemberController) Answers() {
+	this.Layout = "layout/member.tpl"
+}

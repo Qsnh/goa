@@ -1,9 +1,12 @@
+@import './_variables.scss';
+@import 'bootstrap/scss/bootstrap.scss';
+
 $bgColor: rgb(44, 62, 80);
 $color: rgb(236, 240, 241);
 $activeColor: #17a2b8;
 
 body {
-    background-color: $bgColor;
+    background-color: rgb(44, 62, 80);
     color: $color;
 }
 li { list-style: none }

@@ -86,17 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/bootstrap/scss/bootstrap.scss":
-/*!****************************************************!*\
-  !*** ./node_modules/bootstrap/scss/bootstrap.scss ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./node_modules/bootstrap/scss/bootstrap.scss?");
-
-/***/ }),
-
 /***/ "./views/assets/index.js":
 /*!*******************************!*\
   !*** ./views/assets/index.js ***!
@@ -105,7 +94,7 @@ eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./no
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\n__webpack_require__(/*! bootstrap/scss/bootstrap.scss */ \"./node_modules/bootstrap/scss/bootstrap.scss\");\n\n__webpack_require__(/*! ./scss/app.scss */ \"./views/assets/scss/app.scss\");\n\n//# sourceURL=webpack:///./views/assets/index.js?");
+eval("\n\n__webpack_require__(/*! ./scss/app.scss */ \"./views/assets/scss/app.scss\");\n\n//# sourceURL=webpack:///./views/assets/index.js?");
 
 /***/ }),
 

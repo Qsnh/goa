@@ -6351,6 +6351,10 @@ a:hover {
 .alert {
   margin-bottom: 15px; }
 
+/** bootstrap4 */
+.breadcrumb-item a {
+  color: #17a2b8; }
+
 /** 全局头部 */
 header.header-navbar {
   border-bottom: 2px solid #ecf0f1;
@@ -6389,3 +6393,8 @@ footer .footer {
   padding-bottom: 30px; }
   .member-left-box .member-info-box .nickname {
     line-height: 40px; }
+
+/** 问题详情界面 */
+.question-description img {
+  max-width: 100%;
+  margin: 5px; }

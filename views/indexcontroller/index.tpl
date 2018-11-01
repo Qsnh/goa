@@ -12,7 +12,7 @@
                         <img src="{{$question.User.Avatar}}" class="rounded-circle" width="50" height="50">
                     </td>
                     <td>
-                        <h6><a href="">{{$question.Title}}</a></h6>
+                        <h6><a href="{{urlfor "QuestionController.Show" ":id" $question.Id}}">{{$question.Title}}</a></h6>
                         <p class="font-08">
                             <a href="javascript:void(0)"><span class="badge badge-info">{{$question.Category.Name}}</span></a>&nbsp;
                             /&nbsp;<a href="javascript:void(0)">{{$question.User.Nickname}}</a>&nbsp;

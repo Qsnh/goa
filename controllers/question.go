@@ -46,7 +46,8 @@ func (this *QuestionController) Store() {
 
 // @router /questions/:id [get]
 func (this *QuestionController) Show() {
-	question, err := models.FindQuestionById(this.Ctx.Input.Param(":id"))
+	questionId := this.Ctx.Input.Param(":id")
+	question, err := models.FindQuestionById(questionId)
 	if err != nil {
 		this.FlashError("问题不存在")
 		this.RedirectTo("/")
@@ -58,7 +59,20 @@ func (this *QuestionController) Show() {
 
 	question.Description = string(blackfriday.MarkdownCommon([]byte(question.Description)))
 
+	// 回答
+	page, _ := this.GetInt64("page")
+	pageSize := int64(16)
+
+	answers, paginator, err := models.AnswerPaginate(questionId, page, pageSize)
+	if err != nil {
+		logs.Info(err)
+		this.FlashError("系统错误")
+		this.RedirectTo("/")
+	}
+
 	this.Data["question"] = question
+	this.Data["Answers"] = answers
+	this.Data["Paginator"] = paginator.Render()
 	this.Layout = "layout/app.tpl"
 }
 

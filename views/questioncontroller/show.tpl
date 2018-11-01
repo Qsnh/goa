@@ -51,6 +51,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-sm-9">
+
             <div class="card">
                 <div class="card-header">
                     我要回答
@@ -66,6 +67,41 @@
                         </div>
                     </form>
                 </div>
+            </div>
+
+            <div class="card mt-15">
+                <div class="card-header">
+                    小伙伴们的回答
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-borderless">
+                        <tbody>
+                        {{if .Answers}}
+                        {{range $index, $answer := .Answers}}
+                        <tr>
+                            <td width="100">
+                                <p><img src="{{$answer.User.Avatar}}" class="rounded-circle" width="40" height="40"></p>
+                                <p>{{$answer.User.Nickname}}</p>
+                            </td>
+                            <td>
+                            <div class="answer-content-box">
+                            {{str2html $answer.Content}}
+                            </div>
+                            </td>
+                        </tr>
+                        {{end}}
+                        {{else}}
+                        <tr>
+                            <td colspan="2" class="text-center">暂无回答</td>
+                        </tr>
+                        {{end}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+            {{str2html .Paginator}}
             </div>
         </div>
         <div class="col-sm-3">

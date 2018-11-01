@@ -1,7 +1,10 @@
 package models
 
 import (
+	"github.com/Qsnh/goa/libs"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
+	"github.com/russross/blackfriday"
 	"time"
 )
 
@@ -23,4 +26,36 @@ func AnswerCreate(user *Users, question *Questions, content string, orm *orm.Orm
 	answer.UpdatedAt = time.Now()
 
 	return (*orm).Insert(answer)
+}
+
+func AnswerPaginate(questionId string, page int64, pageSize int64) ([]Answers, *libs.BootstrapPaginator, error) {
+	db := orm.NewOrm()
+	answers := []Answers{}
+
+	total, err := db.QueryTable("answers").Filter("question_id", questionId).Count()
+	if err != nil {
+		return answers, nil, err
+	}
+
+	paginator := new(libs.BootstrapPaginator)
+	paginator.Instance(total, page, pageSize, beego.URLFor("QuestionController.show", ":id", questionId))
+
+	if page > paginator.TotalPage {
+		return answers, paginator, nil
+	}
+
+	var startPosition int64
+	if page > 0 {
+		startPosition = (page - 1) * pageSize
+	}
+	_, err = db.QueryTable("answers").Filter("question_id", questionId).RelatedSel().OrderBy("created_at", "id").Limit(pageSize, startPosition).All(&answers)
+	if err != nil {
+		return answers, paginator, err
+	}
+
+	for index, item := range answers {
+		answers[index].Content = string(blackfriday.MarkdownCommon([]byte(item.Content)))
+	}
+
+	return answers, paginator, nil
 }

@@ -15,9 +15,12 @@ type Questions struct {
 	Description string
 	ViewNum     int
 	IsBan       int8
-	CreatedAt   int64
-	UpdatedAt   int64
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+	AnswerAt    time.Time
+	AnswerCount int64
 	Answers     []*Answers `orm:"reverse(many)"`
+	AnswerUser  *Users     `orm:"null;rel(one)"`
 }
 
 func CreateQuestion(categoryId int64, title string, description string, user *Users) (int64, error) {
@@ -29,8 +32,8 @@ func CreateQuestion(categoryId int64, title string, description string, user *Us
 	question.Description = description
 	question.ViewNum = 0
 	question.IsBan = -1
-	question.CreatedAt = time.Now().Unix()
-	question.UpdatedAt = time.Now().Unix()
+	question.CreatedAt = time.Now()
+	question.UpdatedAt = time.Now()
 
 	return orm.NewOrm().Insert(question)
 }

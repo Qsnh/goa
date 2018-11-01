@@ -6,7 +6,7 @@
         <div class="col-sm-12 question-box">
             <table class="table table-hover table-borderless question-box">
                 <tbody>
-                {{range $index, $question := .questions}}
+                {{range $index, $question := .Questions}}
                 <tr>
                     <td class="align-middle" width="60px">
                         <img src="{{$question.User.Avatar}}" class="rounded-circle" width="50" height="50">
@@ -14,11 +14,17 @@
                     <td>
                         <h6><a href="">{{$question.Title}}</a></h6>
                         <p class="font-08">
-                            <a href=""><span class="badge badge-info">{{$question.Category.Name}}</span></a>&nbsp;/&nbsp;<a href="">shizendg</a>&nbsp;/&nbsp;4 小时前&nbsp;/&nbsp;最新回复 <a href="">ZCLZCL</a> 4 分钟前
+                            <a href="javascript:void(0)"><span class="badge badge-info">{{$question.Category.Name}}</span></a>&nbsp;
+                            /&nbsp;<a href="javascript:void(0)">{{$question.User.Nickname}}</a>&nbsp;
+                            /&nbsp;{{$question.CreatedAt}}&nbsp;
+                            /&nbsp;最新回复&nbsp;
+                            {{if $question.AnswerUser}}
+                            <a href="javascript:void(0)">{{$question.AnswerUser.Nickname}}</a>&nbsp;{{$question.AnswerAt}}
+                            {{end}}
                         </p>
                     </td>
                     <td class="align-middle" width="20">
-                        <span class="badge badge-secondary">20</span>
+                        <span class="badge badge-secondary">{{$question.AnswerCount}}</span>
                     </td>
                 </tr>
                 {{end}}
@@ -26,7 +32,7 @@
             </table>
 
             <div class="text-right">
-            {{str2html .paginator}}
+            {{str2html .Paginator}}
             </div>
         </div>
     </div>

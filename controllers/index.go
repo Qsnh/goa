@@ -1,6 +1,8 @@
 package controllers
 
-import "github.com/Qsnh/goa/models"
+import (
+	"github.com/Qsnh/goa/models"
+)
 
 type IndexController struct {
 	Base
@@ -11,10 +13,14 @@ func (this *IndexController) Index() {
 	this.Layout = "layout/app.tpl"
 
 	page, _ := this.GetInt64("page")
-	pageSize := int64(20)
+	pageSize := int64(16)
 
-	questions, paginator, _ := models.QuestionPaginate(page, pageSize)
+	questions, paginator, err := models.QuestionPaginate(page, pageSize)
+	if err != nil {
+		this.StopRun()
+	}
 
-	this.Data["paginator"] = paginator.Render()
-	this.Data["questions"] = questions
+	this.Data["Paginator"] = paginator.Render()
+	this.Data["Questions"] = questions
+	this.Layout = "layout/app.tpl"
 }

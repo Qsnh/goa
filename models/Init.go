@@ -22,7 +22,7 @@ func Init()  {
 	}
 
 	orm.RegisterDataBase("default", "mysql", dsn)
-	orm.RegisterModel(new(Categories), new(Users), new(Questions), new(Answers))
+	orm.RegisterModel(new(Categories), new(Users), new(Answers), new(Questions))
 
 	if beego.AppConfig.String("runmode") == "dev" {
 		orm.Debug = true

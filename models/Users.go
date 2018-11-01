@@ -20,8 +20,8 @@ type Users struct {
 	Website    string
 	Weibo      string
 	Wechat     string
-	CreatedAt  int64
-	UpdatedAt  int64
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
 	Questions  []*Questions `orm:"reverse(many)"`
 	Answers    []*Answers   `orm:"reverse(many)"`
 }
@@ -68,8 +68,8 @@ func CreateUser(nickname string, email string, password string) (int64, error) {
 		Email:     email,
 		Password:  libs.SHA256Encode(password),
 		IsLock:    isLock,
-		CreatedAt: time.Now().Unix(),
-		UpdatedAt: time.Now().Unix(),
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
 	}
 
 	id, err := db.Insert(&user)

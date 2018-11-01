@@ -1,11 +1,14 @@
 package models
 
-import "github.com/astaxie/beego/orm"
+import (
+    "github.com/astaxie/beego/orm"
+    "time"
+)
 
 type Categories struct {
     Id int64
     Name string
-    CreatedAt int64
+    CreatedAt time.Time
     Questions []*Questions `orm:"reverse(many)"`
 }
 

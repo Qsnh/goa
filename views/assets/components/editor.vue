@@ -2,7 +2,7 @@
     <div>
         <mavon-editor ref="md" @imgAdd="imgUpload" :boxShadow="false" :subfield="false" v-model="content"></mavon-editor>
         <div style="display: none">
-            <textarea v-model="content"></textarea>
+            <textarea name="description" v-model="content"></textarea>
         </div>
     </div>
 </template>

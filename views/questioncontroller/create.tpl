@@ -7,9 +7,9 @@
                     <label>分类</label>
                     <select name="category_id" class="form-control">
                         <option value="">无</option>
-                    {{range $index, $category := .categories}}
-                        <option value="{{$category.Id}}">{{$category.Name}}</option>
-                    {{end}}
+                        {{range $index, $category := .categories}}
+                            <option value="{{$category.Id}}">{{$category.Name}}</option>
+                        {{end}}
                     </select>
                 </div>
                 <div class="form-group">

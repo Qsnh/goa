@@ -4,6 +4,7 @@ import (
 	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/validations"
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 	"github.com/russross/blackfriday"
 )
 
@@ -30,8 +31,9 @@ func (this *QuestionController) Store() {
 	questionData := validations.QuestionStoreValidation{}
 	this.ValidatorAuto(&questionData)
 
-	id, err := models.CreateQuestion(questionData.CategoryId, questionData.Title, questionData.Description, this.CurrentLoginUser)
-	if err != nil || id <= 0 {
+	_, err := models.CreateQuestion(questionData.CategoryId, questionData.Title, questionData.Description, this.CurrentLoginUser)
+	if err != nil {
+		logs.Info(err)
 		this.FlashError("问题创建失败")
 		this.RedirectTo(this.redirectUrl)
 	}

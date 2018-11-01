@@ -47,3 +47,36 @@
         </div>
     </div>
 </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-header">
+                    我要回答
+                </div>
+                <div class="card-body">
+                    <form action="{{urlfor "QuestionController.AnswerHandler" ":id" .question.Id}}" class="form-horizontal" method="post">
+                        {{ .xsrfdata }}
+                        <div class="form-group">
+                            <editor></editor>
+                        </div>
+                        <div class="form-group text-right">
+                            <button class="btn btn-primary">回答TA</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header">
+                    广告
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

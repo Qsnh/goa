@@ -61,7 +61,7 @@ func (this *QuestionController) Show() {
 
 	// 回答
 	page, _ := this.GetInt64("page")
-	pageSize := int64(16)
+	pageSize := int64(8)
 
 	answers, paginator, err := models.AnswerPaginate(questionId, page, pageSize)
 	if err != nil {

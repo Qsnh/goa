@@ -5,15 +5,15 @@
     <div class="card-body">
         <div class="row text-center">
             <div class="col-sm-4">
-                <h3>21</h3>
+                <h3>{{.QuestionCount}}</h3>
                 <p>提问</p>
             </div>
             <div class="col-sm-4">
-                <h3>1002</h3>
+                <h3>{{.AnswerCount}}</h3>
                 <p>回答</p>
             </div>
             <div class="col-sm-4">
-                <h3>33%</h3>
+                <h3>{{.Rate}}%</h3>
                 <p>采纳率</p>
             </div>
         </div>

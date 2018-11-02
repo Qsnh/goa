@@ -22,6 +22,15 @@ type MemberController struct {
 // @router /member [get]
 func (this *MemberController) Index() {
 	this.Layout = "layout/member.tpl"
+
+	user := this.CurrentLoginUser
+	questionCount, _ := orm.NewOrm().QueryTable("questions").Filter("user_id", user.Id).Count()
+	answerCount, _ := orm.NewOrm().QueryTable("Answers").Filter("user_id", user.Id).Count()
+	rate := 0
+
+	this.Data["QuestionCount"] = questionCount
+	this.Data["AnswerCount"] = answerCount
+	this.Data["Rate"] = rate
 }
 
 // @router /member/password [get]
@@ -149,13 +158,8 @@ func (this *MemberController) Questions() {
 	startPos := (page - 1) * pageSize
 
 	questions := []models.Questions{}
-	_, err := orm.NewOrm().QueryTable("questions").Filter("user_id", this.CurrentLoginUser.Id).RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPos).All(&questions)
-	if err != nil {
-		this.FlashError("系统错误")
-		this.RedirectTo("/")
-	}
-
-	count, err := orm.NewOrm().QueryTable("questions").Filter("user_id", this.CurrentLoginUser.Id).Count()
+	_, _ = orm.NewOrm().QueryTable("questions").Filter("user_id", this.CurrentLoginUser.Id).RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPos).All(&questions)
+	count, _ := orm.NewOrm().QueryTable("questions").Filter("user_id", this.CurrentLoginUser.Id).Count()
 
 	paginator := new(libs.BootstrapPaginator)
 	paginator.Instance(count, page, pageSize, beego.URLFor("MemberController.Questions"))
@@ -177,13 +181,8 @@ func (this *MemberController) Answers() {
 	startPos := (page - 1) * pageSize
 
 	answers := []models.Answers{}
-	_, err := orm.NewOrm().QueryTable("answers").Filter("user_id", this.CurrentLoginUser.Id).RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPos).All(&answers)
-	if err != nil {
-		this.FlashError("系统错误")
-		this.RedirectTo("/")
-	}
-
-	count, err := orm.NewOrm().QueryTable("answers").Filter("user_id", this.CurrentLoginUser.Id).Count()
+	_, _ = orm.NewOrm().QueryTable("answers").Filter("user_id", this.CurrentLoginUser.Id).RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPos).All(&answers)
+	count, _ := orm.NewOrm().QueryTable("answers").Filter("user_id", this.CurrentLoginUser.Id).Count()
 
 	paginator := new(libs.BootstrapPaginator)
 	paginator.Instance(count, page, pageSize, beego.URLFor("MemberController.Answers"))

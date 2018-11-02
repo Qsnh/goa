@@ -34,6 +34,7 @@ func CreateQuestion(categoryId int64, title string, description string, user *Us
 	question.IsBan = -1
 	question.CreatedAt = time.Now()
 	question.UpdatedAt = time.Now()
+	question.AnswerAt = time.Now()
 
 	return orm.NewOrm().Insert(question)
 }

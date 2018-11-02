@@ -79,9 +79,9 @@
                         {{if .Answers}}
                         {{range $index, $answer := .Answers}}
                         <tr>
-                            <td width="100">
+                            <td class="text-center" width="100">
                                 <p><img src="{{$answer.User.Avatar}}" class="rounded-circle" width="40" height="40"></p>
-                                <p>{{$answer.User.Nickname}}</p>
+                                <p><small>{{$answer.User.Nickname}}</small></p>
                             </td>
                             <td>
                             <div class="answer-content-box">

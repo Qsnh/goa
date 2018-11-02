@@ -15,9 +15,6 @@
                                     <li class="nav-item active">
                                         <a class="nav-link" href="/">首页</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/">其它</a>
-                                    </li>
                                 </ul>
                                 <form class="form-inline" method="post" action="">
                                     <div class="input-group input-group-sm">

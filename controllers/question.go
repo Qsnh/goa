@@ -105,6 +105,7 @@ func (this *QuestionController) AnswerHandler() {
 	question.AnswerUser = this.CurrentLoginUser
 	question.AnswerAt = time.Now()
 	question.AnswerCount += 1
+	question.UpdatedAt = time.Now()
 	if _, err := orm.Update(question); err != nil {
 		orm.Rollback()
 		logs.Info(err)

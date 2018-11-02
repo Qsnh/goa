@@ -67,7 +67,7 @@ func QuestionPaginate(page int64, pageSize int64) ([]Questions, *libs.BootstrapP
 	if page > 0 {
 		startPosition = (page - 1) * pageSize
 	}
-	rowsNum, err := db.QueryTable("questions").RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPosition).All(&questions)
+	rowsNum, err := db.QueryTable("questions").RelatedSel().OrderBy("-updated_at", "-id").Limit(pageSize, startPosition).All(&questions)
 	if err != nil || rowsNum == 0 {
 		return questions, paginator, err
 	}

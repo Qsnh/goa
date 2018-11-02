@@ -48,14 +48,9 @@ func AnswerPaginate(questionId string, page int64, pageSize int64) ([]Answers, *
 	if page > 0 {
 		startPosition = (page - 1) * pageSize
 	}
-	_, err = db.QueryTable("answers").Filter("question_id", questionId).RelatedSel().OrderBy("created_at", "id").Limit(pageSize, startPosition).All(&answers)
-	if err != nil {
-		return answers, paginator, err
-	}
-
+	_, _ = db.QueryTable("answers").Filter("question_id", questionId).RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPosition).All(&answers)
 	for index, item := range answers {
 		answers[index].Content = string(blackfriday.MarkdownCommon([]byte(item.Content)))
 	}
-
 	return answers, paginator, nil
 }

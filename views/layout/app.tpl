@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://lib.baomitu.com/highlight.js/9.13.1/styles/atelier-dune-dark.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/assets/main.css">
     <title>GOA</title>
 </head>

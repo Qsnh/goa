@@ -16,9 +16,9 @@
                                         <a class="nav-link" href="/">首页</a>
                                     </li>
                                 </ul>
-                                <form class="form-inline" method="post" action="">
+                                <form class="form-inline" method="get" action="{{urlfor "IndexController.Index"}}">
                                     <div class="input-group input-group-sm">
-                                        <input class="form-control" type="search" placeholder="请输入关键字">
+                                        <input class="form-control" type="search" name="keywords" placeholder="请输入关键字">
                                         <div class="input-group-append">
                                             <button class="btn btn-dark" type="submit">搜索</button>
                                         </div>

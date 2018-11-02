@@ -3,6 +3,18 @@
         <div class="col-sm-12 mt-15 mb-15">
             <a href="{{urlfor "QuestionController.Create"}}" class="btn btn-primary">我要提问</a>
         </div>
+        <div class="col-sm-12">
+            {{if .Keywords}}
+            <a href="{{urlfor "IndexController.Index"}}" title="点击取消" class="badge badge-info">
+                关键字过滤：{{.Keywords}}
+            </a>
+            {{end}}
+            {{if .Category.Name}}
+                <a href="{{urlfor "IndexController.Index"}}" title="点击取消" class="badge badge-secondary">
+                    分类过滤：{{.Category.Name}}
+                </a>
+            {{end}}
+        </div>
         <div class="col-sm-12 question-box">
             <table class="table table-hover table-borderless question-box">
                 <tbody>

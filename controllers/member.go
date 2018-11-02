@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"fmt"
 	"github.com/Qsnh/goa/libs"
+	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/validations"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
@@ -138,9 +139,55 @@ func (this *MemberController) SaveProfileHandler() {
 // @router /member/questions [get]
 func (this *MemberController) Questions() {
 	this.Layout = "layout/member.tpl"
+
+	page, _ := this.GetInt64("page")
+	if page <= 0 {
+		page = 1
+	}
+	var pageSize int64
+	pageSize = 8
+	startPos := (page - 1) * pageSize
+
+	questions := []models.Questions{}
+	_, err := orm.NewOrm().QueryTable("questions").Filter("user_id", this.CurrentLoginUser.Id).RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPos).All(&questions)
+	if err != nil {
+		this.FlashError("系统错误")
+		this.RedirectTo("/")
+	}
+
+	count, err := orm.NewOrm().QueryTable("questions").Filter("user_id", this.CurrentLoginUser.Id).Count()
+
+	paginator := new(libs.BootstrapPaginator)
+	paginator.Instance(count, page, pageSize, beego.URLFor("MemberController.Questions"))
+
+	this.Data["Questions"] = questions
+	this.Data["Paginator"] = paginator.Render()
 }
 
 // @router /member/answers [get]
 func (this *MemberController) Answers() {
 	this.Layout = "layout/member.tpl"
+
+	page, _ := this.GetInt64("page")
+	if page <= 0 {
+		page = 1
+	}
+	var pageSize int64
+	pageSize = 8
+	startPos := (page - 1) * pageSize
+
+	answers := []models.Answers{}
+	_, err := orm.NewOrm().QueryTable("answers").Filter("user_id", this.CurrentLoginUser.Id).RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPos).All(&answers)
+	if err != nil {
+		this.FlashError("系统错误")
+		this.RedirectTo("/")
+	}
+
+	count, err := orm.NewOrm().QueryTable("answers").Filter("user_id", this.CurrentLoginUser.Id).Count()
+
+	paginator := new(libs.BootstrapPaginator)
+	paginator.Instance(count, page, pageSize, beego.URLFor("MemberController.Answers"))
+
+	this.Data["Answers"] = answers
+	this.Data["Paginator"] = paginator.Render()
 }

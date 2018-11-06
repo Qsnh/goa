@@ -13,4 +13,8 @@ go get github.com/go-sql-driver/mysql
 
 # Markdown解析库
 go get github.com/russross/blackfriday
+
+# env
+go get github.com/joho/godotenv
+
 ```

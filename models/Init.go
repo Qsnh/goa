@@ -2,19 +2,19 @@ package models
 
 import (
 	"github.com/astaxie/beego/orm"
-	"github.com/astaxie/beego"
 	"net/url"
+	"os"
 )
 
 func Init()  {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 
-	dbHost := beego.AppConfig.String("database_host")
-	dbPort := beego.AppConfig.String("database_port")
-	dbUser := beego.AppConfig.String("database_user")
-	dbPass := beego.AppConfig.String("database_pass")
-	dbName := beego.AppConfig.String("database_name")
-	dbTimeZone := beego.AppConfig.String("database_timezone")
+	dbHost := os.Getenv("DATABASE_HOST")
+	dbPort := os.Getenv("DATABASE_PORT")
+	dbUser := os.Getenv("DATABASE_USER")
+	dbPass := os.Getenv("DATABASE_PASS")
+	dbName := os.Getenv("DATABASE_NAME")
+	dbTimeZone := os.Getenv("DATABASE_TIMEZONE")
 
 	dsn := dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName + "?charset=utf8mb4"
 	if dbTimeZone != "" {
@@ -24,7 +24,7 @@ func Init()  {
 	orm.RegisterDataBase("default", "mysql", dsn)
 	orm.RegisterModel(new(Categories), new(Users), new(Answers), new(Questions))
 
-	if beego.AppConfig.String("runmode") == "dev" {
+	if os.Getenv("APP_DEBUG") == "dev" {
 		orm.Debug = true
 	}
 }

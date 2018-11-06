@@ -2,8 +2,9 @@ package models
 
 import (
 	"github.com/Qsnh/goa/libs"
-	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
+	"os"
+	"strconv"
 	"time"
 )
 
@@ -61,7 +62,7 @@ func UserEmailExists(email string) bool {
 func CreateUser(nickname string, email string, password string) (int64, error) {
 	db := orm.NewOrm()
 
-	isLock, _ := beego.AppConfig.Int("user_register_lock_status")
+	isLock, _ := strconv.Atoi(os.Getenv("USER_REGISTER_LOCK_STATUS"))
 
 	user := Users{
 		Nickname:  nickname,

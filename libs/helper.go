@@ -4,7 +4,6 @@ import (
 	"crypto"
 	"encoding/hex"
 	"fmt"
-	"github.com/astaxie/beego/logs"
 	"strings"
 )
 
@@ -16,7 +15,6 @@ func SHA256Encode(s string) string {
 
 func Url(url string, params ...interface{}) string {
 	queryString := ""
-	logs.Info(params)
 	for index, item := range params {
 		if index%2 == 0 {
 			queryString += item.(string) + "="
@@ -24,7 +22,9 @@ func Url(url string, params ...interface{}) string {
 			queryString += ToString(item) + "&"
 		}
 	}
-	url = strings.TrimRight(url, "/")
+	if url != "/" {
+		url = strings.TrimRight(url, "/")
+	}
 	queryString = strings.TrimRight(queryString, "&")
 	return url + "?" + queryString
 }

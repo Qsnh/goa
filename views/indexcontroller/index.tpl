@@ -5,12 +5,12 @@
         </div>
         <div class="col-sm-12">
             {{if .Keywords}}
-            <a href="{{(urlquery $.Baseurl "keywords" $.Keywords)}}" title="点击取消" class="badge badge-info">
+            <a href="{{(urlfor "IndexController.Index")}}" title="点击取消" class="badge badge-info">
                 关键字过滤：{{.Keywords}}
             </a>
             {{end}}
             {{if .Category.Name}}
-                <a href="{{(urlquery $.Baseurl "category_id" $.Category.Id)}}" title="点击取消" class="badge badge-secondary">
+                <a href="{{(urlfor "IndexController.Index")}}" title="点击取消" class="badge badge-secondary">
                     分类过滤：{{.Category.Name}}
                 </a>
             {{end}}

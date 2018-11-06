@@ -3,8 +3,10 @@
         <div class="col-sm-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">首页</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">{{.question.Category.Name}}</a></li>
+                    <li class="breadcrumb-item"><a href="{{urlfor "IndexController.Index"}}">首页</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="{{(urlquery (urlfor "IndexController.Index") "category_id" .question.Category.Id)}}">{{.question.Category.Name}}</a>
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">{{.question.Title}}</li>
                 </ol>
             </nav>

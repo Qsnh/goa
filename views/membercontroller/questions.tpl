@@ -8,6 +8,7 @@
             <tr>
                 <th class="text-center">时间</th>
                 <th class="text-center">标题</th>
+                <th class="text-center">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -16,11 +17,14 @@
             <tr class="text-center">
                 <td>{{$question.CreatedAt}}</td>
                 <td><a href="{{urlfor "QuestionController.Show" ":id" $question.Id}}">{{$question.Title}}</a></td>
+                <td>
+                    <a href="{{urlfor "QuestionController.Edit" ":question_id" $question.Id}}" class="btn btn-sm btn-primary">编辑</a>
+                </td>
             </tr>
             {{end}}
             {{else}}
             <tr>
-                <td colspan="2" class="text-center">暂无数据</td>
+                <td colspan="3" class="text-center">暂无数据</td>
             </tr>
             {{end}}
             </tbody>

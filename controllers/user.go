@@ -4,6 +4,7 @@ import (
 	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/validations"
 	"github.com/astaxie/beego"
+	"os"
 )
 
 type UserController struct {
@@ -16,6 +17,9 @@ func (this *UserController) Login() {
 		this.RedirectTo("/")
 	}
 	this.Layout = "layout/app.tpl"
+	this.Data["PageTitle"] = "登录"
+	this.Data["PageKeywords"] = os.Getenv("SEO_INDEX_KEYWORDS")
+	this.Data["PageDescription"] = os.Getenv("SEO_INDEX_DESCRIPTION")
 }
 
 // @router /login [post]
@@ -47,6 +51,9 @@ func (this *UserController) Logout() {
 // @router /register [get]
 func (this *UserController) Register() {
 	this.Layout = "layout/app.tpl"
+	this.Data["PageTitle"] = "注册"
+	this.Data["PageKeywords"] = os.Getenv("SEO_INDEX_KEYWORDS")
+	this.Data["PageDescription"] = os.Getenv("SEO_INDEX_DESCRIPTION")
 }
 
 // @router /register [post]

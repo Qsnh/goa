@@ -51,6 +51,7 @@ func(this *DashboardController) MemberQuestions() {
 	this.Data["Questions"] = questions
 	this.Data["Indexurl"] = IndexUrl
 	this.Data["User"] = user
+	this.Data["PageTitle"] = user.Nickname+"的主页"
 }
 
 // @router /user/:user_id/answers [get]
@@ -91,4 +92,5 @@ func(this *DashboardController) MemberAnswers() {
 	this.Data["Answers"] = answers
 	this.Data["Indexurl"] = IndexUrl
 	this.Data["User"] = user
+	this.Data["PageTitle"] = user.Nickname+"的回答"
 }

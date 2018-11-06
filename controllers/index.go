@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
+	"os"
 )
 
 type IndexController struct {
@@ -58,5 +59,8 @@ func (this *IndexController) Index() {
 	this.Data["Keywords"] = keywords
 	this.Data["Category"] = category
 	this.Data["Baseurl"] = baseUrl
+	this.Data["PageTitle"] = os.Getenv("SEO_INDEX_TITLE")
+	this.Data["PageKeywords"] = os.Getenv("SEO_INDEX_KEYWORDS")
+	this.Data["PageDescription"] = os.Getenv("SEO_INDEX_DESCRIPTION")
 	this.Layout = "layout/app.tpl"
 }

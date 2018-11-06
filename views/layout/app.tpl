@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="{{.PageKeywords}}">
+    <meta name="author" content="GOA">
+    <meta name="description" content="{{.PageDescription}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="https://lib.baomitu.com/highlight.js/9.13.1/styles/atelier-dune-dark.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/assets/main.css">
-    <title>GOA</title>
+    <title>{{.PageTitle}} - {{.AppName}}</title>
 </head>
 <body>
     <div id="app">

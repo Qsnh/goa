@@ -25,6 +25,7 @@ func (this *QuestionController) Create() {
 	}
 
 	this.Data["categories"] = categories
+	this.Data["PageTitle"] = "我要提问"
 }
 
 // @router /member/questions/create [post]
@@ -65,6 +66,7 @@ func (this *QuestionController) Edit() {
 
 	this.Data["Question"] = question
 	this.Data["categories"] = categories
+	this.Data["PageTitle"] = "问题编辑："+question.Title
 }
 
 // @router /member/questions/:question_id/edit [post]
@@ -133,6 +135,9 @@ func (this *QuestionController) Show() {
 	this.Data["question"] = question
 	this.Data["Answers"] = answers
 	this.Data["Paginator"] = paginator.Render()
+	this.Data["PageTitle"] = question.Title
+	this.Data["PageKeywords"] = question.Title
+	this.Data["PageDescription"] = question.Description
 	this.Layout = "layout/app.tpl"
 }
 

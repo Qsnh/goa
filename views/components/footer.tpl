@@ -4,7 +4,7 @@
             <div class="container footer">
                 <div class="row">
                     <div class="col-sm">
-                        <p>Copyright ©2018-2019 goaio.org 皖ICP备123456789号-1</p>
+                        <p>Copyright ©2018-2019 goaio.org {{.AppIcp}}</p>
                     </div>
                 </div>
             </div>

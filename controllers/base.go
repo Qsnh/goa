@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/validation"
 	"html/template"
+	"os"
 )
 
 type Base struct {
@@ -34,6 +35,13 @@ func (Base *Base) Prepare() {
 		}
 	}
 	Base.Data["user"] = Base.CurrentLoginUser
+
+	// SEO
+	Base.Data["PageTitle"] = ""
+	Base.Data["PageKeywords"] = ""
+	Base.Data["PageDescription"] = ""
+	Base.Data["AppName"] = os.Getenv("APP_NAME")
+	Base.Data["AppIcp"] = os.Getenv("APP_ICP")
 }
 
 // 保存成功的Flash信息

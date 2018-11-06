@@ -31,11 +31,13 @@ func (this *MemberController) Index() {
 	this.Data["QuestionCount"] = questionCount
 	this.Data["AnswerCount"] = answerCount
 	this.Data["Rate"] = rate
+	this.Data["PageTitle"] = user.Nickname+"的个人中心"
 }
 
 // @router /member/password [get]
 func (this *MemberController) ChangePassword() {
 	this.Layout = "layout/member.tpl"
+	this.Data["PageTitle"] = this.CurrentLoginUser.Nickname+" - 修改密码"
 }
 
 // @router /member/password [post]
@@ -62,6 +64,7 @@ func (this *MemberController) ChangePasswordHandler() {
 // @router /member/avatar [get]
 func (this *MemberController) ChangeAvatar() {
 	this.Layout = "layout/member.tpl"
+	this.Data["PageTitle"] = this.CurrentLoginUser.Nickname+" - 修改头像"
 }
 
 // @router /member/avatar [post]
@@ -122,6 +125,7 @@ func (this *MemberController) Logout() {
 // @router /member/profile [get]
 func (this *MemberController) Profile() {
 	this.Layout = "layout/member.tpl"
+	this.Data["PageTitle"] = this.CurrentLoginUser.Nickname+" - 修改我的资料"
 }
 
 // @router /member/profile [post]
@@ -166,6 +170,7 @@ func (this *MemberController) Questions() {
 
 	this.Data["Questions"] = questions
 	this.Data["Paginator"] = paginator.Render()
+	this.Data["PageTitle"] = this.CurrentLoginUser.Nickname+"提出的问题"
 }
 
 // @router /member/answers [get]
@@ -189,4 +194,5 @@ func (this *MemberController) Answers() {
 
 	this.Data["Answers"] = answers
 	this.Data["Paginator"] = paginator.Render()
+	this.Data["PageTitle"] = this.CurrentLoginUser.Nickname+"回答的问题"
 }

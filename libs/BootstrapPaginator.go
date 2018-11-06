@@ -27,7 +27,13 @@ func (bp *BootstrapPaginator) Append(params map[string]string) {
 }
 
 func (bp *BootstrapPaginator) BuildUrl(Page int64) string {
-	query := fmt.Sprintf(bp.Url + "?page=%d", Page)
+	isContainerMark := strings.Contains(bp.Url, "?")
+	query := ""
+	if isContainerMark {
+		query = fmt.Sprintf(bp.Url + "&page=%d", Page)
+	} else {
+		query = fmt.Sprintf(bp.Url + "?page=%d", Page)
+	}
 	for index, item := range bp.Appends {
 		query += "&" + index + "=" + item
 	}

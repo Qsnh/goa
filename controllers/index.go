@@ -15,6 +15,7 @@ type IndexController struct {
 // @router / [get]
 func (this *IndexController) Index() {
 	this.Layout = "layout/app.tpl"
+	baseUrl := beego.URLFor("IndexController.Index")
 
 	// 过滤
 	categoryId, err := this.GetInt64("category_id")
@@ -34,7 +35,7 @@ func (this *IndexController) Index() {
 		err = orm.NewOrm().QueryTable("categories").Filter("id", categoryId).One(&category)
 		if err != nil {
 			logs.Info(err)
-			this.StopRun()
+			this.Abort("500")
 		}
 		db = db.Filter("category_id", category.Id)
 	}
@@ -50,11 +51,12 @@ func (this *IndexController) Index() {
 	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&questions)
 
 	paginator := new(libs.BootstrapPaginator)
-	paginator.Instance(count, page, pageSize, beego.URLFor("IndexController.Index"))
+	paginator.Instance(count, page, pageSize, libs.Url(baseUrl, "keywords", keywords, "category_id", categoryId))
 
 	this.Data["Paginator"] = paginator.Render()
 	this.Data["Questions"] = questions
 	this.Data["Keywords"] = keywords
 	this.Data["Category"] = category
+	this.Data["Baseurl"] = baseUrl
 	this.Layout = "layout/app.tpl"
 }

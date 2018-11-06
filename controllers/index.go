@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/Qsnh/goa/libs"
 	"github.com/Qsnh/goa/models"
+	"github.com/Qsnh/goa/utils"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
@@ -51,8 +51,8 @@ func (this *IndexController) Index() {
 	}
 	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&questions)
 
-	paginator := new(libs.BootstrapPaginator)
-	paginator.Instance(count, page, pageSize, libs.Url(baseUrl, "keywords", keywords, "category_id", categoryId))
+	paginator := new(utils.BootstrapPaginator)
+	paginator.Instance(count, page, pageSize, utils.Url(baseUrl, "keywords", keywords, "category_id", categoryId))
 
 	this.Data["Paginator"] = paginator.Render()
 	this.Data["Questions"] = questions

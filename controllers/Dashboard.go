@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/Qsnh/goa/libs"
 	"github.com/Qsnh/goa/models"
+	"github.com/Qsnh/goa/utils"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
@@ -42,7 +42,7 @@ func(this *DashboardController) MemberQuestions() {
 	questions := []models.Questions{}
 	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&questions)
 
-	paginator := new(libs.BootstrapPaginator)
+	paginator := new(utils.BootstrapPaginator)
 	paginator.Instance(total, page, pageSize, beego.URLFor("DashboardController.MemberQuestion"))
 
 	IndexUrl := beego.URLFor("IndexController.Index")
@@ -83,7 +83,7 @@ func(this *DashboardController) MemberAnswers() {
 	answers := []models.Answers{}
 	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&answers)
 
-	paginator := new(libs.BootstrapPaginator)
+	paginator := new(utils.BootstrapPaginator)
 	paginator.Instance(total, page, pageSize, beego.URLFor("DashboardController.MemberQuestion"))
 
 	IndexUrl := beego.URLFor("IndexController.Index")

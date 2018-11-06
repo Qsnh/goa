@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/Qsnh/goa/libs"
+	"github.com/Qsnh/goa/utils"
 	"github.com/astaxie/beego/orm"
 	"os"
 	"strconv"
@@ -67,7 +67,7 @@ func CreateUser(nickname string, email string, password string) (int64, error) {
 	user := Users{
 		Nickname:  nickname,
 		Email:     email,
-		Password:  libs.SHA256Encode(password),
+		Password:  utils.SHA256Encode(password),
 		IsLock:    isLock,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
@@ -80,7 +80,7 @@ func CreateUser(nickname string, email string, password string) (int64, error) {
 func UserExistsByEmailAndPassword(email string, password string) (*Users, error) {
 	user := new(Users)
 	db := orm.NewOrm()
-	err := db.QueryTable(user).Filter("email", email).Filter("password", libs.SHA256Encode(password)).One(user)
+	err := db.QueryTable(user).Filter("email", email).Filter("password", utils.SHA256Encode(password)).One(user)
 	if err != nil {
 		return nil, err
 	}

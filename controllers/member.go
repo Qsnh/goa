@@ -3,8 +3,8 @@ package controllers
 import (
 	"crypto/md5"
 	"fmt"
-	"github.com/Qsnh/goa/libs"
 	"github.com/Qsnh/goa/models"
+	"github.com/Qsnh/goa/utils"
 	"github.com/Qsnh/goa/validations"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
@@ -46,12 +46,12 @@ func (this *MemberController) ChangePasswordHandler() {
 	passwordData := validations.MemberChangePasswordValidation{}
 	this.ValidatorAuto(&passwordData)
 
-	if this.CurrentLoginUser.Password != libs.SHA256Encode(passwordData.OldPassword) {
+	if this.CurrentLoginUser.Password != utils.SHA256Encode(passwordData.OldPassword) {
 		this.FlashError("原密码不正确")
 		this.RedirectTo(this.redirectUrl)
 	}
 
-	this.CurrentLoginUser.Password = libs.SHA256Encode(passwordData.NewPassword)
+	this.CurrentLoginUser.Password = utils.SHA256Encode(passwordData.NewPassword)
 	if result, err := orm.NewOrm().Update(this.CurrentLoginUser); err != nil || result == 0 {
 		this.FlashError("修改失败")
 		this.RedirectTo(this.redirectUrl)
@@ -165,7 +165,7 @@ func (this *MemberController) Questions() {
 	_, _ = orm.NewOrm().QueryTable("questions").Filter("user_id", this.CurrentLoginUser.Id).RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPos).All(&questions)
 	count, _ := orm.NewOrm().QueryTable("questions").Filter("user_id", this.CurrentLoginUser.Id).Count()
 
-	paginator := new(libs.BootstrapPaginator)
+	paginator := new(utils.BootstrapPaginator)
 	paginator.Instance(count, page, pageSize, beego.URLFor("MemberController.Questions"))
 
 	this.Data["Questions"] = questions
@@ -189,7 +189,7 @@ func (this *MemberController) Answers() {
 	_, _ = orm.NewOrm().QueryTable("answers").Filter("user_id", this.CurrentLoginUser.Id).RelatedSel().OrderBy("-created_at", "-id").Limit(pageSize, startPos).All(&answers)
 	count, _ := orm.NewOrm().QueryTable("answers").Filter("user_id", this.CurrentLoginUser.Id).Count()
 
-	paginator := new(libs.BootstrapPaginator)
+	paginator := new(utils.BootstrapPaginator)
 	paginator.Instance(count, page, pageSize, beego.URLFor("MemberController.Answers"))
 
 	this.Data["Answers"] = answers

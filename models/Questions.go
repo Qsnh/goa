@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/Qsnh/goa/libs"
+	"github.com/Qsnh/goa/utils"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"html"
@@ -49,7 +49,7 @@ func FindQuestionById(id string) (*Questions, error) {
 	return question, nil
 }
 
-func QuestionPaginate(page int64, pageSize int64) ([]Questions, *libs.BootstrapPaginator, error) {
+func QuestionPaginate(page int64, pageSize int64) ([]Questions, *utils.BootstrapPaginator, error) {
 	db := orm.NewOrm()
 	questions := []Questions{}
 
@@ -58,7 +58,7 @@ func QuestionPaginate(page int64, pageSize int64) ([]Questions, *libs.BootstrapP
 		return questions, nil, err
 	}
 
-	paginator := new(libs.BootstrapPaginator)
+	paginator := new(utils.BootstrapPaginator)
 	paginator.Instance(total, page, pageSize, beego.URLFor("IndexController.index"))
 
 	if page > paginator.TotalPage {

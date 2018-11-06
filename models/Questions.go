@@ -4,6 +4,7 @@ import (
 	"github.com/Qsnh/goa/libs"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
+	"html"
 	"time"
 )
 
@@ -29,7 +30,7 @@ func CreateQuestion(categoryId int64, title string, description string, user *Us
 	question.Category = category
 	question.User = user
 	question.Title = title
-	question.Description = description
+	question.Description = html.EscapeString(description)
 	question.ViewNum = 0
 	question.IsBan = -1
 	question.CreatedAt = time.Now()

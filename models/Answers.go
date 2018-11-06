@@ -5,6 +5,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/russross/blackfriday"
+	"html"
 	"time"
 )
 
@@ -21,7 +22,7 @@ func AnswerCreate(user *Users, question *Questions, content string, orm *orm.Orm
 	answer := new(Answers)
 	answer.User = user
 	answer.Question = question
-	answer.Content = content
+	answer.Content = html.EscapeString(content)
 	answer.CreatedAt = time.Now()
 	answer.UpdatedAt = time.Now()
 

@@ -44,6 +44,66 @@ func (this *QuestionController) Store() {
 	this.RedirectTo("/")
 }
 
+// @router  /member/questions/:question_id/edit [get]
+func (this *QuestionController) Edit() {
+	questionId := this.Ctx.Input.Param(":question_id")
+	question, err := models.FindQuestionById(questionId)
+	if err != nil {
+		this.FlashError("问题不存在")
+		this.RedirectTo("/")
+	}
+	if this.CurrentLoginUser.Id != question.User.Id {
+		this.Abort("401")
+		this.StopRun()
+	}
+
+	categories, err := models.AllCategories()
+	if err != nil {
+		this.FlashError("读取分类失败")
+		this.RedirectTo("/")
+	}
+
+	this.Data["Question"] = question
+	this.Data["categories"] = categories
+}
+
+// @router /member/questions/:question_id/edit [post]
+func (this *QuestionController) Update() {
+	questionId := this.Ctx.Input.Param(":question_id")
+	question, err := models.FindQuestionById(questionId)
+	if err != nil {
+		this.FlashError("问题不存在")
+		this.RedirectTo("/")
+	}
+	if this.CurrentLoginUser.Id != question.User.Id {
+		this.Abort("401")
+		this.StopRun()
+	}
+
+	this.redirectUrl = beego.URLFor("QuestionController.Edit", ":question_id", questionId)
+	questionData := validations.QuestionStoreValidation{}
+	this.ValidatorAuto(&questionData)
+
+	category := models.Categories{}
+	err = orm.NewOrm().QueryTable("categories").Filter("id", questionData.CategoryId).One(&category)
+	if err != nil {
+		logs.Info(err)
+		this.Abort("404")
+		this.StopRun()
+	}
+
+	question.Category = &category
+	question.Title = questionData.Title
+	question.Description = questionData.Description
+
+	if _, err := orm.NewOrm().Update(question); err != nil {
+		this.FlashError("问题修改失败")
+	} else {
+		this.FlashSuccess("问题修改成功")
+	}
+	this.RedirectTo(this.redirectUrl)
+}
+
 // @router /questions/:id [get]
 func (this *QuestionController) Show() {
 	questionId := this.Ctx.Input.Param(":id")

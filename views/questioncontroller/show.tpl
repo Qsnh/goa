@@ -118,6 +118,3 @@
         </div>
     </div>
 </div>
-
-<script src="https://lib.baomitu.com/highlight.js/9.13.1/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>

@@ -1,17 +1,22 @@
 <template>
     <div>
-        <mavon-editor ref="md" @imgAdd="imgUpload" :boxShadow="false" :subfield="false" v-model="content"></mavon-editor>
+        <mavon-editor ref="md" @imgAdd="imgUpload" :boxShadow="false" :subfield="false" v-model="contents"></mavon-editor>
         <div style="display: none">
-            <textarea name="description" v-model="content"></textarea>
+            <textarea name="description" v-model="contents"></textarea>
         </div>
     </div>
 </template>
 
 <script>
     export default {
+        created() {
+            if (typeof window.text != 'undefined') {
+                this.contents = window.text;
+            }
+        },
         data() {
             return {
-                content: ''
+                contents: ''
             }
         },
         methods: {

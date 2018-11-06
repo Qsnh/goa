@@ -35,7 +35,7 @@ func (this *IndexController) Index() {
 		err = orm.NewOrm().QueryTable("categories").Filter("id", categoryId).One(&category)
 		if err != nil {
 			logs.Info(err)
-			this.Abort("500")
+			this.Abort("404")
 		}
 		db = db.Filter("category_id", category.Id)
 	}

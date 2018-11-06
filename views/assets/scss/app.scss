@@ -25,8 +25,11 @@ a:hover { color: $activeColor!important; }
 /** bootstrap4 */
 .breadcrumb-item {
     a {
-        color: $activeColor
+        color: $activeColor;
     }
+}
+.list-group-item.active a:hover {
+    color: $color;
 }
 
 /** 全局头部 */

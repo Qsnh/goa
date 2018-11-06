@@ -11,4 +11,5 @@ func init() {
 	beego.Include(&controllers.MemberController{})
 	beego.Include(&controllers.QuestionController{})
 	beego.Include(&controllers.UploadController{})
+	beego.Include(&controllers.DashboardController{})
 }

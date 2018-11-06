@@ -29,11 +29,15 @@
                             <a href="{{(urlquery $.Baseurl "category_id" $question.Category.Id)}}">
                                 <span class="badge badge-info">{{$question.Category.Name}}</span>
                             </a>&nbsp;
-                            /&nbsp;<a href="javascript:void(0)">{{$question.User.Nickname}}</a>&nbsp;
+                            /&nbsp;
+                            <a href="{{urlfor "DashboardController.MemberQuestions" ":user_id" $question.User.Id}}">
+                                {{$question.User.Nickname}}
+                            </a>
+                            &nbsp;
                             /&nbsp;{{$question.CreatedAt}}&nbsp;
                             /&nbsp;最新回复&nbsp;
                             {{if $question.AnswerUser}}
-                            <a href="javascript:void(0)">{{$question.AnswerUser.Nickname}}</a>&nbsp;{{$question.AnswerAt}}
+                            <a href="{{urlfor "DashboardController.MemberQuestions" ":user_id" $question.AnswerUser.Id}}">{{$question.AnswerUser.Nickname}}</a>&nbsp;{{$question.AnswerAt}}
                             {{end}}
                         </p>
                     </td>

@@ -6355,6 +6355,9 @@ a:hover {
 .breadcrumb-item a {
   color: #17a2b8; }
 
+.list-group-item.active a:hover {
+  color: #ecf0f1; }
+
 /** 全局头部 */
 header.header-navbar {
   border-bottom: 2px solid #ecf0f1;

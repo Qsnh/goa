@@ -34,6 +34,7 @@ func ToString(i interface{}) string {
 	case string:
 		return i.(string)
 	case int:
+		return fmt.Sprintf("%d", i)
 	case int64:
 		return fmt.Sprintf("%d", i)
 	}

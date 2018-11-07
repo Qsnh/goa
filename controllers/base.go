@@ -4,6 +4,7 @@ import (
 	"github.com/Qsnh/goa/goaio"
 	"github.com/Qsnh/goa/models"
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/validation"
 	"html/template"
 	"os"
@@ -120,5 +121,11 @@ func (Base *Base) AjaxSuccess(message string, data interface{}) {
 	res := goaio.SuccessResponseJson{message,0,data}
 	Base.Data["json"] = res
 	Base.ServeJSON()
+	Base.StopRun()
+}
+
+func (Base *Base) ErrorHandler(err error)  {
+	logs.Info(err)
+	Base.Abort("500")
 	Base.StopRun()
 }

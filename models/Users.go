@@ -2,9 +2,11 @@ package models
 
 import (
 	"github.com/Qsnh/goa/utils"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -31,10 +33,7 @@ func FindUserById(id int) (*Users, error) {
 	user := new(Users)
 	db := orm.NewOrm()
 	err := db.QueryTable(user).Filter("id", id).One(user)
-	if err == nil {
-		return user, nil
-	}
-	return nil, err
+	return user, err
 }
 
 func UserNicknameExists(nickname string) bool {
@@ -85,4 +84,34 @@ func UserExistsByEmailAndPassword(email string, password string) (*Users, error)
 		return nil, err
 	}
 	return user, nil
+}
+
+// 生成密码重置地址
+func (user *Users) GeneratePasswordResetUrl() string {
+	hashString := ""
+	idString := strconv.Itoa(user.Id)
+	time := time.Now().Unix()
+	timeString := strconv.FormatInt(time, 10)
+	hashString += idString
+	hashString += timeString
+	hashString += beego.Substr(user.Password, 1, 10)
+	hashString += idString
+	hashed := utils.SHA256Encode(hashString)
+
+	baseUrl := beego.URLFor("UserController.PasswordReset")
+	url := utils.Url(baseUrl, "id", user.Id, "time", time, "sign", hashed)
+	url = strings.TrimRight(os.Getenv("APP_URL"), "/") + url
+	return url
+}
+
+// 验证密码重置特征值
+func (user *Users) CheckPasswordResetHash(giveHashed string, timeString string) bool {
+	hashString := ""
+	idString := strconv.Itoa(user.Id)
+	hashString += idString
+	hashString += timeString
+	hashString += beego.Substr(user.Password, 1, 10)
+	hashString += idString
+	hashed := utils.SHA256Encode(hashString)
+	return hashed == giveHashed
 }

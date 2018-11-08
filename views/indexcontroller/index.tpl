@@ -34,10 +34,10 @@
                                 {{$question.User.Nickname}}
                             </a>
                             &nbsp;
-                            /&nbsp;{{$question.CreatedAt}}&nbsp;
+                            /&nbsp;{{timeforhumnas $question.CreatedAt}}&nbsp;
                             /&nbsp;最新回复&nbsp;
                             {{if $question.AnswerUser}}
-                            <a href="{{urlfor "DashboardController.MemberQuestions" ":user_id" $question.AnswerUser.Id}}">{{$question.AnswerUser.Nickname}}</a>&nbsp;{{$question.AnswerAt}}
+                            <a href="{{urlfor "DashboardController.MemberQuestions" ":user_id" $question.AnswerUser.Id}}">{{$question.AnswerUser.Nickname}}</a>&nbsp;{{timeforhumnas $question.AnswerAt}}
                             {{end}}
                         </p>
                     </td>

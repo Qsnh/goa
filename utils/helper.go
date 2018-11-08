@@ -3,8 +3,10 @@ package utils
 import (
 	"crypto"
 	"encoding/hex"
+	"fmt"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func SHA256Encode(s string) string {
@@ -41,3 +43,40 @@ func ToString(i interface{}) string {
 	return ""
 }
 
+func TimeDiffForHumans(t time.Time) string  {
+	unix := t.Unix()
+	now := time.Now().Unix()
+	b := now - unix
+	if b < 0 {
+		return t.Format("2006-01-01 15:04:05")
+	}
+	if b < 60 {
+		return fmt.Sprintf("%d秒前", b)
+	}
+	// 单位：分钟
+	if b < 3600 {
+		b = b / 60
+		return fmt.Sprintf("%d分钟前", b)
+	}
+	// 单位：小时
+	b = b / 3600
+	if b < 24 {
+		return fmt.Sprintf("%d个小时前", b)
+	}
+	// 单位：天
+	b = b / 24
+	if b < 30 {
+		return fmt.Sprintf("%d天前", b)
+	}
+	// 单位：月
+	b = b / 30
+	if b < 12 {
+		return fmt.Sprintf("%d个月前", b)
+	}
+	// 单位：年
+	b = b / 12
+	if b > 3 {
+		return t.Format("2006-01-01 15:04:05")
+	}
+	return fmt.Sprintf("%d年钱", b)
+}

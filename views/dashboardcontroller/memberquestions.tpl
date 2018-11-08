@@ -43,6 +43,7 @@
                         <thead>
                         <tr>
                             <th class="text-center">标题</th>
+                            <th class="text-center">时间</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,11 +51,12 @@
                         {{range $index, $question := .Questions}}
                         <tr class="text-center">
                             <td><a href="{{urlfor "QuestionController.Show" ":id" $question.Id}}">{{$question.Title}}</a></td>
+                            <td>{{timeforhumnas $question.CreatedAt}}</td>
                         </tr>
                         {{end}}
                         {{else}}
                         <tr>
-                            <td colspan="1" class="text-center">暂无数据</td>
+                            <td colspan="2" class="text-center">暂无数据</td>
                         </tr>
                         {{end}}
                         </tbody>

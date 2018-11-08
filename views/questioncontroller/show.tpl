@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <small>{{.question.Category.Name}} | {{.question.User.Nickname}} | {{.question.CreatedAt}}</small>
+                    <small>{{.question.User.Nickname}} | {{timeforhumnas .question.CreatedAt}}</small>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
             <ul class="list-group member-left-box text-center">
                 <li class="list-group-item member-info-box">
                     <p>
-                        <a href="{{urlfor "MemberController.Index"}}">
+                        <a href="{{urlfor "DashboardController.MemberQuestions" ":user_id" .question.User.Id}}">
                             <img src="{{.question.User.Avatar}}" width="80" height="80" class="rounded-circle">
                         </a>
                     </p>
@@ -53,7 +53,6 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-sm-9">
-
             <div class="card">
                 <div class="card-header">
                     我要回答
@@ -87,7 +86,8 @@
                             </td>
                             <td>
                             <div class="answer-content-box">
-                            {{str2html $answer.Content}}
+                                {{str2html $answer.Content}}
+                                <p class="text-right"><small>{{timeforhumnas $answer.CreatedAt}}</small></p>
                             </div>
                             </td>
                         </tr>

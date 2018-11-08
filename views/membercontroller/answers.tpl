@@ -14,7 +14,7 @@
             {{if .Answers}}
             {{range $index, $answer := .Answers}}
             <tr class="text-center">
-                <td>{{$answer.CreatedAt}}</td>
+                <td>{{timeforhumnas $answer.CreatedAt}}</td>
                 <td><a href="{{urlfor "QuestionController.Show" ":id" $answer.Question.Id}}">{{$answer.Question.Title}}</a></td>
             </tr>
             {{end}}

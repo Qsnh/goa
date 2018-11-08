@@ -20,8 +20,15 @@ func main() {
 		return
 	}
 	models.Init()
+
+	// 中间件注册
 	middlewares.LoginCheck()
+
+	// 模板函数注册
 	beego.AddFuncMap("urlquery", utils.Url)
+	beego.AddFuncMap("timeforhumnas", utils.TimeDiffForHumans)
+
+	// 运行
 	beego.Run(":"+os.Getenv("APP_PORT"))
 	logs.SetLogger("console")
 }

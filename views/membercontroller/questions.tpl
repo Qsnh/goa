@@ -15,7 +15,7 @@
             {{if .Questions}}
             {{range $index, $question := .Questions}}
             <tr class="text-center">
-                <td>{{$question.CreatedAt}}</td>
+                <td>{{timeforhumnas $question.CreatedAt}}</td>
                 <td><a href="{{urlfor "QuestionController.Show" ":id" $question.Id}}">{{$question.Title}}</a></td>
                 <td>
                     <a href="{{urlfor "QuestionController.Edit" ":question_id" $question.Id}}" class="btn btn-sm btn-primary">编辑</a>

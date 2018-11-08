@@ -2,20 +2,13 @@ package controllers
 
 import (
 	"bytes"
-	"crypto/md5"
-	"fmt"
 	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/utils"
 	"github.com/Qsnh/goa/validations"
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"github.com/dchest/captcha"
 	template2 "html/template"
-	"math/rand"
-	"path"
-	"strings"
-	"time"
 )
 
 type MemberController struct {
@@ -67,55 +60,19 @@ func (this *MemberController) ChangePasswordHandler() {
 // @router /member/avatar [get]
 func (this *MemberController) ChangeAvatar() {
 	this.Layout = "layout/member.tpl"
+	this.Data["xsrf"] = this.XSRFToken()
 	this.Data["PageTitle"] = this.CurrentLoginUser.Nickname+" - 修改头像"
 }
 
 // @router /member/avatar [post]
 func (this *MemberController) ChangeAvatarHandler() {
-	this.redirectUrl = beego.URLFor("MemberController.ChangeAvatarHandler")
-	file, header, err := this.GetFile("file")
-	if err != nil {
-		this.FlashError("请选择头像文件")
-		this.RedirectTo(this.redirectUrl)
-	}
-	defer file.Close()
-	// 文件mime判断
-	mime := header.Header["Content-Type"][0]
-	if mime != "image/jpeg" && mime != "image/png" && mime != "image/gif" {
-		this.FlashError("请上传有效图片文件")
-		this.RedirectTo(this.redirectUrl)
-	}
-	// 文件后缀判断
-	extensions := strings.Split(header.Filename, ".")
-	extension := strings.ToLower(extensions[len(extensions)-1])
-	if extension != "jpg" && extension != "png" && extension != "gif" {
-		this.FlashError("请上传jpeg/png/gif图片")
-		this.RedirectTo(this.redirectUrl)
-	}
-	// 文件大小判断
-	if header.Size/(1024*1024) > 2 {
-		this.FlashError("头像文件大小不能超过2MB")
-		this.RedirectTo(this.redirectUrl)
-	}
-	// 保存文件
-	rand.Seed(time.Now().Unix())
-	newFilename := fmt.Sprintf("%d+%d", time.Now().Unix(), rand.Intn(100))
-	newFilename = fmt.Sprintf("%x", md5.Sum([]byte(newFilename)))
-	path := path.Join("static/uploads/avatar", newFilename+"."+extension)
-	err = this.SaveToFile("file", path)
-	if err != nil {
-		logs.Info(err)
-		this.FlashError("头像上传失败")
-		this.RedirectTo(this.redirectUrl)
-	}
-	// 修改数据表
-	this.CurrentLoginUser.Avatar = "/" + path
+	this.CurrentLoginUser.Avatar = this.GetString("avatar")
 	if result, err := orm.NewOrm().Update(this.CurrentLoginUser); err != nil || result == 0 {
 		this.FlashSuccess("头像保存失败")
-		this.RedirectTo(this.redirectUrl)
+	} else {
+		this.FlashSuccess("头像更换成功")
 	}
-	this.FlashSuccess("头像更换成功")
-	this.RedirectTo(this.redirectUrl)
+	this.Back()
 }
 
 // @router /member/logout [get]

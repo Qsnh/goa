@@ -3,7 +3,7 @@ package utils
 import (
 	"crypto"
 	"encoding/hex"
-	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -34,9 +34,10 @@ func ToString(i interface{}) string {
 	case string:
 		return i.(string)
 	case int:
-		return fmt.Sprintf("%d", i)
+		return strconv.Itoa(i.(int))
 	case int64:
-		return fmt.Sprintf("%d", i)
+		return strconv.FormatInt(i.(int64), 10)
 	}
 	return ""
 }
+

@@ -17,6 +17,18 @@
 
     {{template "components/message.tpl" .}}
 
+    {{if not .IsActive}}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div class="alert alert-warning">
+                    您的账户还未激活，请先 <a class="color-primary" href="{{urlfor "MemberController.SendActiveMail"}}">激活</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{end}}
+
     {{.LayoutContent}}
 
     {{template "components/footer.tpl" .}}

@@ -28,14 +28,22 @@ func (Base *Base) Prepare() {
 	Base.Data["xsrfdata"] = template.HTML(Base.XSRFFormHTML())
 
 	// 自动读取当前登陆用户
+	isLogin := false
 	loginUserId := Base.GetSession("login_user_id")
 	if loginUserId != nil {
 		user, err := models.FindUserById(loginUserId.(int))
 		if err == nil {
 			Base.CurrentLoginUser = user
 		}
+		isLogin = true
 	}
+	Base.Data["IsLogin"] = isLogin
 	Base.Data["user"] = Base.CurrentLoginUser
+	isActive := true
+	if isLogin {
+		isActive = Base.CurrentLoginUser.IsLock == models.IS_LOCK_NO
+	}
+	Base.Data["IsActive"] = isActive
 
 	// SEO
 	Base.Data["PageTitle"] = ""

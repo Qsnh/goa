@@ -6345,6 +6345,9 @@ a {
 a:hover {
   color: #17a2b8 !important; }
 
+.color-primary {
+  color: #17a2b8; }
+
 .card {
   background-color: #2c3e50; }
 

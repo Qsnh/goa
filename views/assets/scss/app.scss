@@ -18,6 +18,7 @@ a { color: $color; }
 .lh-46 { line-height: 46px; }
 .font-08 { font-size: .8rem; }
 a:hover { color: $activeColor!important; }
+.color-primary { color: $activeColor }
 
 .card { background-color: $bgColor }
 .alert { margin-bottom: 15px; }

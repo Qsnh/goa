@@ -10,6 +10,11 @@ import (
 	"time"
 )
 
+const (
+	IS_LOCK_YES = -1
+	IS_LOCK_NO = 1
+)
+
 type Users struct {
 	Id         int
 	Nickname   string
@@ -87,7 +92,7 @@ func UserExistsByEmailAndPassword(email string, password string) (*Users, error)
 }
 
 // 生成密码重置地址
-func (user *Users) GeneratePasswordResetUrl() string {
+func (user *Users) GenerateHashedUrl(baseUrl string) string {
 	hashString := ""
 	idString := strconv.Itoa(user.Id)
 	time := time.Now().Unix()
@@ -98,14 +103,17 @@ func (user *Users) GeneratePasswordResetUrl() string {
 	hashString += idString
 	hashed := utils.SHA256Encode(hashString)
 
-	baseUrl := beego.URLFor("UserController.PasswordReset")
 	url := utils.Url(baseUrl, "id", user.Id, "time", time, "sign", hashed)
 	url = strings.TrimRight(os.Getenv("APP_URL"), "/") + url
 	return url
 }
 
 // 验证密码重置特征值
-func (user *Users) CheckPasswordResetHash(giveHashed string, timeString string) bool {
+func (user *Users) CheckHash(giveHashed string, timeString string) bool {
+	timeInt, _ := strconv.ParseInt(timeString, 10, 64)
+	if timeInt + 3600 < time.Now().Unix() {
+		return false
+	}
 	hashString := ""
 	idString := strconv.Itoa(user.Id)
 	hashString += idString

@@ -30,10 +30,11 @@ func (a *loginAuth) Next(fromServer []byte, more bool) ([]byte, error) {
 	return nil, nil
 }
 
-func SendMail(to, subject, body, replyToAddress string) error {
+func SendMail(to, subject, body string) error {
 	user := os.Getenv("SMTP_USER")
 	password := os.Getenv("SMPT_PASS")
 	host := os.Getenv("SMTP_HOST")
+	replyToAddress := os.Getenv("SMTP_REPLY")
 	auth := LoginAuth(user, password)
 	content_type := "Content-Type: text/html; charset=UTF-8"
 	msg := []byte("To: " + to + "\r\nFrom: " + user + "\r\nSubject: " + subject + "\r\nReply-To: " +replyToAddress + "\r\n" + content_type + "\r\n\r\n" + body)

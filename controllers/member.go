@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"bytes"
 	"crypto/md5"
 	"fmt"
 	"github.com/Qsnh/goa/models"
@@ -9,6 +10,8 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
+	"github.com/dchest/captcha"
+	template2 "html/template"
 	"math/rand"
 	"path"
 	"strings"
@@ -195,4 +198,44 @@ func (this *MemberController) Answers() {
 	this.Data["Answers"] = answers
 	this.Data["Paginator"] = paginator.Render()
 	this.Data["PageTitle"] = this.CurrentLoginUser.Nickname+"回答的问题"
+}
+
+// @router /member/active/mail/send [get]
+func (this *MemberController) SendActiveMail() {
+	this.Layout = "layout/member.tpl"
+	this.Data["user"] = this.CurrentLoginUser
+	this.Data["PageTitle"] = "激活"
+}
+
+// @router /member/active/mail/send [post]
+func (this *MemberController) SendActiveMailHandler() {
+	if this.CurrentLoginUser.IsLock != models.IS_LOCK_YES {
+		this.FlashError("您的账户已经激活啦")
+		this.Back()
+	}
+	if captcha.VerifyString(this.GetSession("captcha_id").(string), this.GetString("captcha_code")) == false {
+		this.FlashError("验证码错误")
+		this.Back()
+	}
+	template, err := template2.ParseFiles("./views/emails/verify.tpl")
+	if err != nil {
+		this.ErrorHandler(err)
+	}
+	data := map[string]string{
+		"Url": this.CurrentLoginUser.GenerateHashedUrl(beego.URLFor("UserController.ActiveHandler")),
+	}
+	html := new(bytes.Buffer)
+	err = template.Execute(html, data)
+	if err != nil {
+		this.ErrorHandler(err)
+	}
+	err = utils.SendMail(this.CurrentLoginUser.Email, "密码重置链接", html.String())
+	if err != nil {
+		this.FlashError("激活邮件发送失败")
+		this.Back()
+	} else {
+		this.FlashSuccess("激活邮件发送成功，有效期一个小时，请尽快操作")
+		this.RedirectTo("/")
+	}
+	this.StopRun()
 }

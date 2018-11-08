@@ -17,4 +17,7 @@ go get github.com/russross/blackfriday
 # env
 go get github.com/joho/godotenv
 
+# 图片验证码
+go get github.com/dchest/captcha
+
 ```

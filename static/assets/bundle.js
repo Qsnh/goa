@@ -385,6 +385,18 @@ eval("\n\nvar bind = __webpack_require__(/*! ./helpers/bind */ \"./node_modules/
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./views/assets/components/captcha.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4!./node_modules/vue-loader/lib??vue-loader-options!./views/assets/components/captcha.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\n//\n//\n//\nvar _default = {\n  data: function data() {\n    return {\n      src: '/captcha'\n    };\n  },\n  methods: {\n    change: function change() {\n      this.src = '/captcha?' + Math.random();\n    }\n  }\n};\nexports.default = _default;\n\n//# sourceURL=webpack:///./views/assets/components/captcha.vue?./node_modules/babel-loader/lib??ref--4!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./views/assets/components/editor.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4!./node_modules/vue-loader/lib??vue-loader-options!./views/assets/components/editor.vue?vue&type=script&lang=js& ***!
@@ -584,6 +596,18 @@ eval("/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./views/assets/components/captcha.vue?vue&type=template&id=9920a9e4&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./views/assets/components/captcha.vue?vue&type=template&id=9920a9e4& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"img\", {\n    staticClass: \"rounded\",\n    attrs: { src: _vm.src, width: \"240\", height: \"80\" },\n    on: { click: _vm.change }\n  })\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./views/assets/components/captcha.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./views/assets/components/editor.vue?vue&type=template&id=1d9679ee&":
 /*!*********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./views/assets/components/editor.vue?vue&type=template&id=1d9679ee& ***!
@@ -655,6 +679,42 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 
 /***/ }),
 
+/***/ "./views/assets/components/captcha.vue":
+/*!*********************************************!*\
+  !*** ./views/assets/components/captcha.vue ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _captcha_vue_vue_type_template_id_9920a9e4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./captcha.vue?vue&type=template&id=9920a9e4& */ \"./views/assets/components/captcha.vue?vue&type=template&id=9920a9e4&\");\n/* harmony import */ var _captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./captcha.vue?vue&type=script&lang=js& */ \"./views/assets/components/captcha.vue?vue&type=script&lang=js&\");\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _captcha_vue_vue_type_template_id_9920a9e4___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _captcha_vue_vue_type_template_id_9920a9e4___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"views/assets/components/captcha.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./views/assets/components/captcha.vue?");
+
+/***/ }),
+
+/***/ "./views/assets/components/captcha.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./views/assets/components/captcha.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_node_modules_vue_loader_lib_index_js_vue_loader_options_captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4!../../../node_modules/vue-loader/lib??vue-loader-options!./captcha.vue?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./views/assets/components/captcha.vue?vue&type=script&lang=js&\");\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_node_modules_vue_loader_lib_index_js_vue_loader_options_captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_node_modules_vue_loader_lib_index_js_vue_loader_options_captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_node_modules_vue_loader_lib_index_js_vue_loader_options_captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_node_modules_vue_loader_lib_index_js_vue_loader_options_captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_ref_4_node_modules_vue_loader_lib_index_js_vue_loader_options_captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack:///./views/assets/components/captcha.vue?");
+
+/***/ }),
+
+/***/ "./views/assets/components/captcha.vue?vue&type=template&id=9920a9e4&":
+/*!****************************************************************************!*\
+  !*** ./views/assets/components/captcha.vue?vue&type=template&id=9920a9e4& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_captcha_vue_vue_type_template_id_9920a9e4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./captcha.vue?vue&type=template&id=9920a9e4& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./views/assets/components/captcha.vue?vue&type=template&id=9920a9e4&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_captcha_vue_vue_type_template_id_9920a9e4___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_captcha_vue_vue_type_template_id_9920a9e4___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./views/assets/components/captcha.vue?");
+
+/***/ }),
+
 /***/ "./views/assets/components/editor.vue":
 /*!********************************************!*\
   !*** ./views/assets/components/editor.vue ***!
@@ -699,7 +759,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _vue = _interopRequireDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.esm.js\"));\n\nvar _mavonEditor = _interopRequireDefault(__webpack_require__(/*! mavon-editor */ \"./node_modules/mavon-editor/dist/mavon-editor.js\"));\n\n__webpack_require__(/*! mavon-editor/dist/css/index.css */ \"./node_modules/mavon-editor/dist/css/index.css\");\n\n__webpack_require__(/*! ./scss/app.scss */ \"./views/assets/scss/app.scss\");\n\nvar _editor = _interopRequireDefault(__webpack_require__(/*! ./components/editor */ \"./views/assets/components/editor.vue\"));\n\nvar _axios = _interopRequireDefault(__webpack_require__(/*! axios */ \"./node_modules/axios/index.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nwindow.axios = _axios.default;\n\n_vue.default.use(_mavonEditor.default);\n\n_vue.default.component('editor', _editor.default);\n\nvar app = new _vue.default({\n  el: '#app'\n});\n\n//# sourceURL=webpack:///./views/assets/index.js?");
+eval("\n\nvar _vue = _interopRequireDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.esm.js\"));\n\nvar _mavonEditor = _interopRequireDefault(__webpack_require__(/*! mavon-editor */ \"./node_modules/mavon-editor/dist/mavon-editor.js\"));\n\n__webpack_require__(/*! mavon-editor/dist/css/index.css */ \"./node_modules/mavon-editor/dist/css/index.css\");\n\n__webpack_require__(/*! ./scss/app.scss */ \"./views/assets/scss/app.scss\");\n\nvar _editor = _interopRequireDefault(__webpack_require__(/*! ./components/editor.vue */ \"./views/assets/components/editor.vue\"));\n\nvar _captcha = _interopRequireDefault(__webpack_require__(/*! ./components/captcha.vue */ \"./views/assets/components/captcha.vue\"));\n\nvar _axios = _interopRequireDefault(__webpack_require__(/*! axios */ \"./node_modules/axios/index.js\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nwindow.axios = _axios.default;\n\n_vue.default.use(_mavonEditor.default);\n\n_vue.default.component('editor', _editor.default);\n\n_vue.default.component('captcha', _captcha.default);\n\nvar app = new _vue.default({\n  el: '#app'\n});\n\n//# sourceURL=webpack:///./views/assets/index.js?");
 
 /***/ }),
 

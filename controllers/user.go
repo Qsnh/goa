@@ -9,9 +9,7 @@ import (
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"os"
-	"strconv"
 	template2 "text/template"
-	time2 "time"
 )
 
 type UserController struct {
@@ -112,14 +110,14 @@ func (this *UserController) FindPasswordHandler() {
 		this.ErrorHandler(err)
 	}
 	data := map[string]string{
-		"Url": user.GeneratePasswordResetUrl(),
+		"Url": user.GenerateHashedUrl(beego.URLFor("UserController.PasswordReset")),
 	}
 	html := new(bytes.Buffer)
 	err = template.Execute(html, data)
 	if err != nil {
 		this.ErrorHandler(err)
 	}
-	err = utils.SendMail(email, "密码重置链接", html.String(), "12345@qq.com")
+	err = utils.SendMail(email, "密码重置链接", html.String())
 	if err != nil {
 		logs.Info(err)
 		this.FlashError("密码重置邮件发送失败，有效期一个小时，请尽快操作")
@@ -143,7 +141,7 @@ func (this *UserController) PasswordReset() {
 	}
 	sign := this.GetString("sign")
 	time := this.GetString("time")
-	if user.CheckPasswordResetHash(sign, time) == false {
+	if user.CheckHash(sign, time) == false {
 		this.FlashError("参数错误2")
 		this.RedirectTo("/")
 	}
@@ -156,7 +154,6 @@ func (this *UserController) PasswordReset() {
 
 // @router /password/reset [post]
 func (this *UserController) PasswordResetHandler() {
-	this.redirectUrl = beego.URLFor("UserController.PasswordReset")
 	passwordResetData := validations.PasswordResetValidation{}
 	this.ValidatorAuto(&passwordResetData)
 
@@ -167,20 +164,37 @@ func (this *UserController) PasswordResetHandler() {
 	}
 	sign := this.GetString("sign")
 	time := this.GetString("time")
-	if user.CheckPasswordResetHash(sign, time) == false {
+	if user.CheckHash(sign, time) == false {
 		this.ErrorHandler(err)
-	}
-	timeInt, _ := strconv.ParseInt(time, 10, 64)
-	if timeInt + 3600 < time2.Now().Unix() {
-		this.FlashError("密码重置链接已过期，请重新请求")
-		this.RedirectTo("/")
 	}
 
 	user.Password = utils.SHA256Encode(passwordResetData.Password)
 	if _, err := orm.NewOrm().Update(user); err != nil {
 		this.FlashError("系统错误")
-		this.RedirectTo(this.redirectUrl)
+		this.Back()
 	}
 	this.FlashSuccess("修改成功，请重新登录")
 	this.RedirectTo(beego.URLFor("UserController.Login"))
+}
+
+// @router /user/active [get]
+func (this *UserController) ActiveHandler() {
+	userId, _ := this.GetInt("id")
+	user, err := models.FindUserById(userId)
+	if err != nil {
+		this.ErrorHandler(err)
+	}
+	sign := this.GetString("sign")
+	time := this.GetString("time")
+	if user.CheckHash(sign, time) == false {
+		this.ErrorHandler(err)
+	}
+
+	user.IsLock = models.IS_LOCK_NO
+	if _, err := orm.NewOrm().Update(user); err != nil {
+		this.ErrorHandler(err)
+	}
+
+	this.FlashSuccess("激活成功")
+	this.RedirectTo("/")
 }

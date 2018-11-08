@@ -124,8 +124,15 @@ func (Base *Base) AjaxSuccess(message string, data interface{}) {
 	Base.StopRun()
 }
 
+// 抛出500
 func (Base *Base) ErrorHandler(err error)  {
 	logs.Info(err)
 	Base.Abort("500")
+	Base.StopRun()
+}
+
+// 跳转到前一页
+func (Base *Base) Back()  {
+	Base.RedirectTo(Base.Ctx.Request.Referer())
 	Base.StopRun()
 }

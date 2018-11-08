@@ -1,12 +1,14 @@
 package controllers
 
 import (
+	"os"
+
 	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/utils"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
-	"os"
+	"github.com/dchest/captcha"
 )
 
 type IndexController struct {
@@ -63,4 +65,15 @@ func (this *IndexController) Index() {
 	this.Data["PageKeywords"] = os.Getenv("SEO_INDEX_KEYWORDS")
 	this.Data["PageDescription"] = os.Getenv("SEO_INDEX_DESCRIPTION")
 	this.Layout = "layout/app.tpl"
+}
+
+// @router /captcha [get]
+func (this *IndexController) CaptchaShow() {
+	captchaId := captcha.New()
+	this.SetSession("captcha_id", captchaId)
+	err := captcha.WriteImage(this.Ctx.ResponseWriter, captchaId, 240, 80)
+	if err != nil {
+		this.ErrorHandler(err)
+	}
+	this.StopRun()
 }

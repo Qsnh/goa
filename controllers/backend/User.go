@@ -42,7 +42,7 @@ func (this *UserController) Index()  {
 	data["page"] = page
 	data["page_size"] = pageSize
 	data["code"] = 0
-	this.Data["json"] = data
+	this.Data["json"] = map[string]interface{}{"data": data}
 	this.ServeJSON()
 	this.StopRun()
 }

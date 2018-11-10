@@ -11,6 +11,6 @@ export default {
   children: (pre => [
     { path: 'index', name: 'category-index', component: () => import('@/pages/category/index'), meta: { meta, title: '分类列表' } },
     { path: 'create', name: 'category-create', component: () => import('@/pages/category/create'), meta: { meta, title: '添加分类' } },
-    { path: 'edit', name: 'category-edit', component: () => import('@/pages/category/edit'), meta: { meta, title: '编辑分类' } }
+    { path: 'edit/:id', name: 'category-edit', component: () => import('@/pages/category/edit'), meta: { meta, title: '编辑分类' } }
   ])('demo-')
 }

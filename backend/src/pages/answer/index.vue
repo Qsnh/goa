@@ -1,36 +1,30 @@
 <template>
 	<d2-container>
-		<el-table
-		    :data="questions"
+		<el-table class="mb-10"
+		    :data="answers"
 		    style="width: 100%">
+		    <el-table-column
+		      label="ID">
+		      <template slot-scope="scope">
+		        <span>{{ scope.row.id }}</span>
+		      </template>
+		    </el-table-column>
 		    <el-table-column
 		      label="分类名">
 		      <template slot-scope="scope">
-		        <span>{{ scope.row.category.name }}</span>
+		        <span>{{ scope.row.Question.Category.name }}</span>
 		      </template>
 		    </el-table-column>
 		    <el-table-column
 		      label="问题名">
 		      <template slot-scope="scope">
-		        <span>{{ scope.row.name }}</span>
-		      </template>
-		    </el-table-column>
-		    <el-table-column
-		      label="用户">
-		      <template slot-scope="scope">
-		        <span>{{ scope.row.User.nickname }}</span>
-		      </template>
-		    </el-table-column>
-		    <el-table-column
-		      label="回答数">
-		      <template slot-scope="scope">
-		        <span>{{ scope.row.answer_count }}</span>
+		        <span>{{ scope.row.Question.title }}</span>
 		      </template>
 		    </el-table-column>
 		     <el-table-column
-		      label="最近回答用户">
+		      label="回答用户">
 		      <template slot-scope="scope">
-		        <span>{{ scope.row.AnswerUser.nickname }}</span>
+		        <span>{{ scope.row.User.nickname }}</span>
 		      </template>
 		    </el-table-column>
 		    <el-table-column
@@ -44,14 +38,23 @@
 		      <template slot-scope="scope">
 		        <el-button
 		          size="mini"
-		          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-		        <el-button
-		          size="mini"
 		          type="danger"
 		          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
 		      </template>
 		    </el-table-column>
 		  </el-table>
+		  <el-row>
+			<el-col :span="24">
+				<el-pagination
+				  background
+				  layout="total, prev, pager, next"
+				  @current-change="handleCurrentChange"
+				  :total="total"
+				  :current-page="page"
+				  :page-size="page_size">
+				</el-pagination>
+			</el-col>
+		</el-row>
 	</d2-container>
 </template>
 
@@ -59,27 +62,27 @@
 import request from '@/plugin/axios'
 export default {
 	created() {
-		this.getQuestions()
+		this.getAnswers()
 	},
 	data () {
 		return {
-			questions: [],
+			answers: [],
 			page: 1,
-			page_size: 10
+			page_size: 10,
+			total: 0
 		}
 	},
 	methods: {
-		getQuestions() {
-			request.get('/getQuestions').then(res => {
-				this.questions = res.questions
+		getAnswers() {
+			request.get('/answers').then(res => {
+				res = res.data
+				this.answers = res.answers
 				this.page = res.page
 				this.page_size = res.page_size
+				this.total = res.total
 			}).catch(res => {
 				this.$message.warning('无法获取数据')
 			})
-		},
-		handleEdit(index, row) {
-			this.$router.push({name: "category-edit", params: {id: row.id}});
 		},
 		handleDelete(index, row) {
 			this.$confirm('确定删除, 是否继续?', '提示', {
@@ -87,13 +90,16 @@ export default {
 	          cancelButtonText: '取消',
 	          type: 'warning'
 	        }).then(() => {
-	        	request.delete(`/category/${row.id}`).then(res => {
+	        	request.delete(`/answer/${row.id}`).then(res => {
 	        		this.$message.success('删除成功')
-	        		this.getCategories()
+	        		this.getAnswers()
 	        	}).catch(err => {
 	        		console.log(err)
 	        	});
 	        })
+		},
+		handleCurrentChange() {
+			this.getAnswers()
 		}
 	}
 }

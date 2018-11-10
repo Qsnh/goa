@@ -35,12 +35,12 @@ func (this *AnswerContoller) Index()  {
 	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&answers)
 
 	data := make(map[string]interface{})
-	data["users"] = answers
+	data["answers"] = answers
 	data["total"] = count
 	data["page"] = page
 	data["page_size"] = pageSize
 	data["code"] = 0
-	this.Data["json"] = data
+	this.Data["json"] = map[string]interface{}{"data": data}
 	this.ServeJSON()
 	this.StopRun()
 }

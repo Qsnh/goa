@@ -53,7 +53,8 @@
 			<el-col :span="24">
 				<el-pagination
 				  background
-				  layout="prev, pager, next"
+				  layout="total, prev, pager, next"
+				  @current-change="handleCurrentChange"
 				  :total="total"
 				  :current-page="page"
 				  :page-size="page_size">
@@ -102,6 +103,9 @@ export default {
 	        		console.log(err)
 	        	});
 	        })
+		},
+		handleCurrentChange() {
+			this.getQuestions()
 		}
 	}
 }

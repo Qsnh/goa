@@ -7,6 +7,22 @@ import (
 
 func init() {
 
+	beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:AnswerContoller"] = append(beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:AnswerContoller"],
+		beego.ControllerComments{
+			Method: "Destroy",
+			Router: `/backend/answer/:id`,
+			AllowHTTPMethods: []string{"delete"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:AnswerContoller"] = append(beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:AnswerContoller"],
+		beego.ControllerComments{
+			Method: "Index",
+			Router: `/backend/answers`,
+			AllowHTTPMethods: []string{"get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
 	beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:CategoryController"] = append(beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:CategoryController"],
 		beego.ControllerComments{
 			Method: "Index",

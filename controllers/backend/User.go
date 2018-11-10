@@ -22,7 +22,7 @@ func (this *UserController) Index()  {
 	}
 	pageSize := int64(10)
 	startPos := (page - 1) * pageSize
-	questions := []models.Users{}
+	users := []models.Users{}
 
 	db := orm.NewOrm().QueryTable("users")
 	if keywords != "" {
@@ -34,10 +34,10 @@ func (this *UserController) Index()  {
 		logs.Info(err)
 		this.StopRun()
 	}
-	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&questions)
+	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&users)
 
 	data := make(map[string]interface{})
-	data["users"] = questions
+	data["users"] = users
 	data["total"] = count
 	data["page"] = page
 	data["page_size"] = pageSize

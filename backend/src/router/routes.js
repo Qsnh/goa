@@ -1,4 +1,4 @@
-import demo from './modules/demo'
+import category from './modules/category'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
@@ -13,14 +13,12 @@ const frameIn = [
     redirect: { name: 'index' },
     component: layoutHeaderAside,
     children: [
-      // 首页 必须 name:index
       {
         path: 'index',
         name: 'index',
         meta,
         component: () => import('@/pages/index')
       },
-      // 刷新页面 必须保留
       {
         path: 'refresh',
         name: 'refresh',
@@ -32,7 +30,6 @@ const frameIn = [
           render: h => h()
         }
       },
-      // 页面重定向 必须保留
       {
         path: 'redirect/:route*',
         name: 'redirect',
@@ -46,7 +43,7 @@ const frameIn = [
       }
     ]
   },
-  demo
+  category
 ]
 
 /**

@@ -5,8 +5,8 @@ export default [
     title: '分类',
     icon: 'folder-o',
     children: [
-      { path: '/demo/page1', title: '列表' },
-      { path: '/demo/page2', title: '添加' }
+      { path: '/category/index', title: '列表' },
+      { path: '/category/create', title: '添加' }
     ]
   },
   { path: '/questions', title: '问题', icon: 'home' },

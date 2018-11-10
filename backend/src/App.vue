@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'GOA后台管理系统'
+  name: ''
 }
 </script>
 

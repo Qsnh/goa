@@ -39,6 +39,7 @@ func (this *AnswerContoller) Index()  {
 	data["total"] = count
 	data["page"] = page
 	data["page_size"] = pageSize
+	data["code"] = 0
 	this.Data["json"] = data
 	this.ServeJSON()
 	this.StopRun()

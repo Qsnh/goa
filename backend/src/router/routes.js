@@ -40,6 +40,24 @@ const frameIn = [
           },
           render: h => h()
         }
+      },
+      {
+        path: 'questions',
+        name: 'questions',
+        meta: {meta, title: "问题列表"},
+        component: () => import('@/pages/question/index')
+      },
+      {
+        path: 'answers',
+        name: 'answers',
+        meta: {meta, title: "回答列表"},
+        component: () => import('@/pages/answer/index')
+      },
+      {
+        path: 'members',
+        name: 'members',
+        meta: {meta, title: "会员列表"},
+        component: () => import('@/pages/member/index')
       }
     ]
   },

@@ -48,7 +48,8 @@ func (this *QuestionController) Index()  {
 	data["total"] = count
 	data["page"] = page
 	data["page_size"] = pageSize
-	this.Data["json"] = data
+	data["code"] = 0
+	this.Data["json"] = map[string]interface{}{"data": data}
 	this.ServeJSON()
 	this.StopRun()
 }

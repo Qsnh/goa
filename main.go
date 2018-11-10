@@ -23,6 +23,7 @@ func main() {
 
 	// 中间件注册
 	middlewares.LoginCheck()
+	middlewares.CorsHandler()
 
 	// 模板函数注册
 	beego.AddFuncMap("urlquery", utils.Url)

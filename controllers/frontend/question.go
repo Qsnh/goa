@@ -1,8 +1,8 @@
-package controllers
+package frontend
 
 import (
 	"github.com/Qsnh/goa/models"
-	"github.com/Qsnh/goa/validations"
+	"github.com/Qsnh/goa/validations/fronted"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
@@ -31,7 +31,7 @@ func (this *QuestionController) Create() {
 // @router /member/questions/create [post]
 func (this *QuestionController) Store() {
 	this.redirectUrl = beego.URLFor("QuestionController.Create")
-	questionData := validations.QuestionStoreValidation{}
+	questionData := fronted.QuestionStoreValidation{}
 	this.ValidatorAuto(&questionData)
 
 	_, err := models.CreateQuestion(questionData.CategoryId, questionData.Title, questionData.Description, this.CurrentLoginUser)
@@ -83,7 +83,7 @@ func (this *QuestionController) Update() {
 	}
 
 	this.redirectUrl = beego.URLFor("QuestionController.Edit", ":question_id", questionId)
-	questionData := validations.QuestionStoreValidation{}
+	questionData := fronted.QuestionStoreValidation{}
 	this.ValidatorAuto(&questionData)
 
 	category := models.Categories{}
@@ -145,7 +145,7 @@ func (this *QuestionController) Show() {
 func (this *QuestionController) AnswerHandler() {
 	questionId := this.Ctx.Input.Param(":id")
 	this.redirectUrl = beego.URLFor("QuestionController.Show", ":id", questionId)
-	questionData := validations.AnswerValidation{}
+	questionData := fronted.AnswerValidation{}
 	this.ValidatorAuto(&questionData)
 
 	question, err := models.FindQuestionById(questionId)

@@ -1,4 +1,4 @@
-package validations
+package fronted
 
 import "github.com/astaxie/beego/validation"
 

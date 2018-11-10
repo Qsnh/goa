@@ -1,10 +1,10 @@
-package controllers
+package frontend
 
 import (
 	"bytes"
 	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/utils"
-	"github.com/Qsnh/goa/validations"
+	"github.com/Qsnh/goa/validations/fronted"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
@@ -30,7 +30,7 @@ func (this *UserController) Login() {
 // @router /login [post]
 func (this *UserController) LoginHandler() {
 	this.redirectUrl = beego.URLFor("UserController.Login")
-	loginData := validations.UserLoginValidation{}
+	loginData := fronted.UserLoginValidation{}
 	this.ValidatorAuto(&loginData)
 
 	user, err := models.UserExistsByEmailAndPassword(loginData.Email, loginData.Password)
@@ -64,7 +64,7 @@ func (this *UserController) Register() {
 // @router /register [post]
 func (this *UserController) RegisterHandler() {
 	this.redirectUrl = beego.URLFor("UserController.Register")
-	userData := validations.UserRegisterValidation{}
+	userData := fronted.UserRegisterValidation{}
 	this.ValidatorAuto(&userData)
 
 	_, err := models.CreateUser(userData.Nickname, userData.Email, userData.Password)
@@ -154,7 +154,7 @@ func (this *UserController) PasswordReset() {
 
 // @router /password/reset [post]
 func (this *UserController) PasswordResetHandler() {
-	passwordResetData := validations.PasswordResetValidation{}
+	passwordResetData := fronted.PasswordResetValidation{}
 	this.ValidatorAuto(&passwordResetData)
 
 	userId, _ := this.GetInt("id")

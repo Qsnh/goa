@@ -1,10 +1,10 @@
-package controllers
+package frontend
 
 import (
 	"bytes"
 	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/utils"
-	"github.com/Qsnh/goa/validations"
+	"github.com/Qsnh/goa/validations/fronted"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/dchest/captcha"
@@ -39,7 +39,7 @@ func (this *MemberController) ChangePassword() {
 // @router /member/password [post]
 func (this *MemberController) ChangePasswordHandler() {
 	this.redirectUrl = beego.URLFor("MemberController.ChangePassword")
-	passwordData := validations.MemberChangePasswordValidation{}
+	passwordData := fronted.MemberChangePasswordValidation{}
 	this.ValidatorAuto(&passwordData)
 
 	if this.CurrentLoginUser.Password != utils.SHA256Encode(passwordData.OldPassword) {
@@ -91,7 +91,7 @@ func (this *MemberController) Profile() {
 // @router /member/profile [post]
 func (this *MemberController) SaveProfileHandler() {
 	this.redirectUrl = beego.URLFor("MemberController.Profile")
-	profileData := validations.MemberProfileValidation{}
+	profileData := fronted.MemberProfileValidation{}
 	this.ValidatorAuto(&profileData)
 
 	this.CurrentLoginUser.Company = profileData.Company

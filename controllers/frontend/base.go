@@ -1,4 +1,4 @@
-package controllers
+package frontend
 
 import (
 	"github.com/Qsnh/goa/goaio"
@@ -100,8 +100,7 @@ func (Base *Base) ValidatorAuto(frontendData interface{}) {
 
 	isValid, err := validate.Valid(frontendData)
 	if err != nil {
-		Base.FlashError("服务器出错")
-		Base.RedirectTo(Base.redirectUrl)
+		Base.ErrorHandler(err)
 	}
 
 	if !isValid {

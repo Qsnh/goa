@@ -1,4 +1,4 @@
-package validations
+package fronted
 
 type MemberProfileValidation struct {
 	Company    string `form:"company"`

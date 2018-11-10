@@ -1,4 +1,4 @@
-package validations
+package fronted
 
 type UserLoginValidation struct {
 	Email string `form:"username" valid:"Required; Email; MaxSize(64)"`

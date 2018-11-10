@@ -1,4 +1,4 @@
-package controllers
+package frontend
 
 import (
 	"crypto/md5"

@@ -1,15 +1,18 @@
 package routers
 
 import (
-	"github.com/Qsnh/goa/controllers"
+	"github.com/Qsnh/goa/controllers/backend"
+	"github.com/Qsnh/goa/controllers/frontend"
 	"github.com/astaxie/beego"
 )
 
 func init() {
-	beego.Include(&controllers.IndexController{})
-    beego.Include(&controllers.UserController{})
-	beego.Include(&controllers.MemberController{})
-	beego.Include(&controllers.QuestionController{})
-	beego.Include(&controllers.UploadController{})
-	beego.Include(&controllers.DashboardController{})
+	beego.Include(&frontend.IndexController{})
+    beego.Include(&frontend.UserController{})
+	beego.Include(&frontend.MemberController{})
+	beego.Include(&frontend.QuestionController{})
+	beego.Include(&frontend.UploadController{})
+	beego.Include(&frontend.DashboardController{})
+
+	beego.Include(&backend.CategoryController{})
 }

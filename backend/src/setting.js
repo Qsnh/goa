@@ -31,13 +31,13 @@ export default {
   },
   // 菜单搜索
   search: {
-    enable: true
+    enable: false
   },
   // 注册的主题
   theme: {
     list: [
       {
-        title: 'd2admin 经典',
+        title: '经典',
         name: 'd2',
         preview: 'image/theme/d2/preview@2x.png'
       },
@@ -72,7 +72,7 @@ export default {
   // 在读取持久化数据失败时默认用户信息
   user: {
     info: {
-      name: 'Ghost'
+      name: 'GOA'
     }
   }
 }

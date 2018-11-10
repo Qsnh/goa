@@ -63,4 +63,20 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
+	beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:UserController"] = append(beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:UserController"],
+		beego.ControllerComments{
+			Method: "Update",
+			Router: `/backend/user/:id`,
+			AllowHTTPMethods: []string{"put"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:UserController"] = append(beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:UserController"],
+		beego.ControllerComments{
+			Method: "Index",
+			Router: `/backend/users`,
+			AllowHTTPMethods: []string{"get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
 }

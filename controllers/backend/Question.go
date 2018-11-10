@@ -21,7 +21,7 @@ func (this *QuestionController) Index()  {
 	if page <= 0 {
 		page = 1
 	}
-	pageSize := int64(16)
+	pageSize := int64(10)
 	startPos := (page - 1) * pageSize
 	questions := []models.Questions{}
 

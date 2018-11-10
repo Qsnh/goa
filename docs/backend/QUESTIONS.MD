@@ -7,6 +7,14 @@
 
 接口：`/backend/questions`
 方法：`get`
+
+**请求：**
+
+| 参数 | 说明 |
+| --- | --- |
+| `keywords` | 模糊搜索标题 |
+| `category_id` | 分类过滤 |
+
 返回：
 
 ```

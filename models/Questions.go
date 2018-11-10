@@ -11,17 +11,17 @@ import (
 type Questions struct {
 	User        *Users      `orm:"rel(fk)"`
 	Category    *Categories `orm:"rel(fk)"`
-	Id          int64
-	Title       string
-	Description string
-	ViewNum     int
-	IsBan       int8
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
-	AnswerAt    time.Time
-	AnswerCount int64
-	Answers     []*Answers `orm:"reverse(many)"`
-	AnswerUser  *Users     `orm:"null;rel(one)"`
+	Id          int64       `json:"id"`
+	Title       string      `json:"title"`
+	Description string      `json:"description"`
+	ViewNum     int         `json:"view_num"`
+	IsBan       int8        `json:"is_ban"`
+	CreatedAt   time.Time   `json:"created_at"`
+	UpdatedAt   time.Time   `json:"updated_at"`
+	AnswerAt    time.Time   `json:"answer_at"`
+	AnswerCount int64       `json:"answer_count"`
+	Answers     []*Answers  `orm:"reverse(many)"`
+	AnswerUser  *Users      `orm:"null;rel(one)"`
 }
 
 func CreateQuestion(categoryId int64, title string, description string, user *Users) (int64, error) {

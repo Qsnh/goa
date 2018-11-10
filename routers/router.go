@@ -15,4 +15,5 @@ func init() {
 	beego.Include(&frontend.DashboardController{})
 
 	beego.Include(&backend.CategoryController{})
+	beego.Include(&backend.QuestionController{})
 }

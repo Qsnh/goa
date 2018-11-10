@@ -12,26 +12,26 @@ import (
 
 const (
 	IS_LOCK_YES = -1
-	IS_LOCK_NO = 1
+	IS_LOCK_NO  = 1
 )
 
 type Users struct {
-	Id         int
-	Nickname   string
-	Avatar     string
-	Email      string
-	Password   string
-	IsLock     int
-	Company    string
-	Age        int64
-	Profession string
-	Website    string
-	Weibo      string
-	Wechat     string
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
-	Questions  []*Questions `orm:"reverse(many)"`
-	Answers    []*Answers   `orm:"reverse(many)"`
+	Id         int          `json:"id"`
+	Nickname   string       `json:"nickname"`
+	Avatar     string       `json:"avatar"`
+	Email      string       `json:"email"`
+	Password   string       `json:"-"`
+	IsLock     int          `json:"is_lock"`
+	Company    string       `json:"company"`
+	Age        int64        `json:"age"`
+	Profession string       `json:"profession"`
+	Website    string       `json:"website"`
+	Weibo      string       `json:"weibo"`
+	Wechat     string       `json:"wechat"`
+	CreatedAt  time.Time    `json:"created_at"`
+	UpdatedAt  time.Time    `json:"updated_at"`
+	Questions  []*Questions `orm:"reverse(many)" json:"questions"`
+	Answers    []*Answers   `orm:"reverse(many)" json:"answers"`
 }
 
 func FindUserById(id int) (*Users, error) {
@@ -111,7 +111,7 @@ func (user *Users) GenerateHashedUrl(baseUrl string) string {
 // 验证密码重置特征值
 func (user *Users) CheckHash(giveHashed string, timeString string) bool {
 	timeInt, _ := strconv.ParseInt(timeString, 10, 64)
-	if timeInt + 3600 < time.Now().Unix() {
+	if timeInt+3600 < time.Now().Unix() {
 		return false
 	}
 	hashString := ""

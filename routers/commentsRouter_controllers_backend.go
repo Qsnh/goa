@@ -47,4 +47,20 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
+	beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:QuestionController"] = append(beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:QuestionController"],
+		beego.ControllerComments{
+			Method: "Destroy",
+			Router: `/backend/question/:id`,
+			AllowHTTPMethods: []string{"delete"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:QuestionController"] = append(beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:QuestionController"],
+		beego.ControllerComments{
+			Method: "Index",
+			Router: `/backend/questions`,
+			AllowHTTPMethods: []string{"get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
 }

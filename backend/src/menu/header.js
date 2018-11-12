@@ -11,5 +11,5 @@ export default [
   },
   { path: '/questions', title: '问题', icon: 'home' },
   { path: '/answers', title: '回答', icon: 'home' },
-  { path: '/members', title: '会员', icon: 'home' }
+  { path: '/member', title: '会员', icon: 'home' }
 ]

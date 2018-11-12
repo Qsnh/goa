@@ -1,4 +1,5 @@
 import category from './modules/category'
+import member from './modules/members'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
@@ -52,16 +53,11 @@ const frameIn = [
         name: 'answers',
         meta: {meta, title: "回答列表"},
         component: () => import('@/pages/answer/index')
-      },
-      {
-        path: 'members',
-        name: 'members',
-        meta: {meta, title: "会员列表"},
-        component: () => import('@/pages/member/index')
       }
     ]
   },
-  category
+  category,
+  member
 ]
 
 /**

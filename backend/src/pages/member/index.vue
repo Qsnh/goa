@@ -86,7 +86,9 @@ export default {
 			})
 		},
 		handleEdit(index, row) {
-
+			this.$router.push({name: 'member-edit', params: {
+				id: row.id
+			}})
 		},
 		handleCurrentChange() {
 			this.getUsers()

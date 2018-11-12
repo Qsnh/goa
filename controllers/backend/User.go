@@ -1,8 +1,10 @@
 package backend
 
 import (
+	"encoding/json"
 	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/utils"
+	"github.com/Qsnh/goa/validations/backend"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"strconv"
@@ -13,7 +15,7 @@ type UserController struct {
 }
 
 // @router /backend/users [get]
-func (this *UserController) Index()  {
+func (this *UserController) Index() {
 	// 过滤
 	keywords := this.GetString("keywords")
 
@@ -49,7 +51,7 @@ func (this *UserController) Index()  {
 }
 
 // @router /backend/user/:id [get]
-func (this *UserController) Show()  {
+func (this *UserController) Show() {
 	userId := this.Ctx.Input.Param(":id")
 	userIdString, _ := strconv.Atoi(userId)
 	user, err := models.FindUserById(userIdString)
@@ -62,17 +64,20 @@ func (this *UserController) Show()  {
 }
 
 // @router /backend/user/:id [put]
-func (this *UserController) Update()  {
+func (this *UserController) Update() {
 	userId := this.Ctx.Input.Param(":id")
 	user := models.Users{}
 	if err := orm.NewOrm().QueryTable("users").Filter("id", userId).One(&user); err != nil {
 		this.errorHandler(err)
 	}
-	password := this.GetString("password")
-	isLock, _ := this.GetInt("is_lock")
-	user.IsLock = isLock
-	if password != "" {
-		user.Password = utils.SHA256Encode(password)
+
+	userUpdateValidation := backend.UserUpdateValidation{}
+	if err := json.Unmarshal(this.Ctx.Input.RequestBody, &userUpdateValidation); err != nil {
+		this.errorHandler(err)
+	}
+	user.IsLock = userUpdateValidation.IsLock
+	if userUpdateValidation.Password != "" {
+		user.Password = utils.SHA256Encode(userUpdateValidation.Password)
 	}
 
 	if _, err := orm.NewOrm().Update(&user); err != nil {

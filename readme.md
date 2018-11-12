@@ -1,4 +1,4 @@
-<p align="center"><img src="static/goa.png" height=240/></p>
+<p align="center"><img src="static/goa.png" height=300/></p>
 
 <p align="center">
 <a href="https://travis-ci.org/Qsnh/goa"><img src="https://travis-ci.org/Qsnh/goa.svg?branch=master" alt="Build Status"></a>
@@ -7,8 +7,6 @@
 <a><img src="https://img.shields.io/github/issues-closed/Qsnh/goa.svg"/></a>
 <a><img src="https://img.shields.io/github/issues-pr/Qsnh/goa.svg"/></a>
 <a><img src="https://img.shields.io/github/issues-pr-closed/Qsnh/goa.svg"/></a>
-<a><img src="https://img.shields.io/github/forks/Qsnh/goa.svg"/></a>
-<a><img src="https://img.shields.io/github/stars/Qsnh/goa.svg"/></a>
 </p>
 
 ## 介绍

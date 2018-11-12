@@ -1,5 +1,21 @@
 <template>
 	<d2-container>
+		<el-row class="mb-10">
+			<el-form label-width="100px">
+				<el-form-item label="关键字搜索">
+					<el-input v-model="keywords" placeholder="模糊搜索标题"></el-input>
+				</el-form-item>
+				<el-form-item label="分类过滤">
+					<el-select v-model="category_id">
+						<el-option v-for="item in categories" :key="item.id" :label="item.name" :value="item.id"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" @click="filter()">过滤</el-button>
+					<el-button type="warning" @click="resetFilter()">取消过滤</el-button>
+				</el-form-item>
+			</el-form>
+		</el-row>
 		<el-table class="mb-10"
 		    :data="questions"
 		    style="width: 100%">
@@ -69,18 +85,27 @@ import request from '@/plugin/axios'
 export default {
 	created() {
 		this.getQuestions()
+		this.getCategories()
 	},
 	data () {
 		return {
 			questions: [],
+			categories: [],
 			page: 1,
 			page_size: 10,
-			total: 0
+			total: 0,
+			category_id: '',
+			keywords: ''
 		}
 	},
 	methods: {
+		getCategories() {
+			request.get('/categories').then(res => {
+				this.categories = res.categories
+			});
+		},
 		getQuestions() {
-			request.get('/questions').then(res => {
+			request.get(`/questions?keywords=${this.keywords}&category_id=${this.category_id}`).then(res => {
 				res = res.data
 				this.questions = res.questions
 				this.page = res.page
@@ -106,6 +131,14 @@ export default {
 		},
 		handleCurrentChange() {
 			this.getQuestions()
+		},
+		filter() {
+			this.getQuestions()
+		},
+		resetFilter() {
+			this.keywords = ''
+			this.category_id = ''
+			this.filter()
 		}
 	}
 }

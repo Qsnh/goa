@@ -1,4 +1,4 @@
-<p align="center"><img src="static/goa.png"/></p>
+<p align="center"><img src="static/goa.png" height=240/></p>
 
 <p align="center">
 <a href="https://travis-ci.org/Qsnh/goa"><img src="https://travis-ci.org/Qsnh/goa.svg?branch=master" alt="Build Status"></a>

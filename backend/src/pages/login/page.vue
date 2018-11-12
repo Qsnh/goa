@@ -2,15 +2,11 @@
   <div class="login-page">
     <div class="layer bg" id="login"></div>
     <div class="layer flex-center">
-      <!-- logo部分 -->
-      <div class="logo-group">
-        <img src="./image/logo.png" alt="logo">
-      </div>
-      <!-- 表单部分 -->
+      <h2>GOA</h2>
       <div class="form-group">
         <el-card>
           <el-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="default">
-            <el-form-item  prop="username">
+            <el-form-item prop="username">
               <el-input type="text" v-model="formLogin.username" placeholder="用户名"></el-input>
             </el-form-item>
             <el-form-item prop="password">

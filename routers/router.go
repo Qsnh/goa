@@ -18,4 +18,5 @@ func init() {
 	beego.Include(&backend.QuestionController{})
 	beego.Include(&backend.UserController{})
 	beego.Include(&backend.AnswerContoller{})
+	beego.Include(&backend.LoginController{})
 }

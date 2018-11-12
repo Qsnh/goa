@@ -40,8 +40,10 @@ func (Base *Base) Prepare() {
 	Base.Data["IsLogin"] = isLogin
 	Base.Data["user"] = Base.CurrentLoginUser
 	isActive := true
-	if isLogin {
-		isActive = Base.CurrentLoginUser.IsLock == models.IS_LOCK_NO
+	if isLogin && Base.CurrentLoginUser.Id > 0 {
+		if Base.CurrentLoginUser.IsLock == models.IS_LOCK_NO {
+			isActive = true
+		}
 	}
 	Base.Data["IsActive"] = isActive
 

@@ -43,6 +43,8 @@ go get github.com/russross/blackfriday
 go get github.com/joho/godotenv
 # 图片验证码
 go get github.com/dchest/captcha
+# 压缩
+go get -u github.com/mholt/archiver
 ```
 
 ## 后台地址：

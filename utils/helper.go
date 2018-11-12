@@ -4,6 +4,8 @@ import (
 	"crypto"
 	"encoding/hex"
 	"fmt"
+	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -79,4 +81,8 @@ func TimeDiffForHumans(t time.Time) string  {
 		return t.Format("2006-01-01 15:04:05")
 	}
 	return fmt.Sprintf("%d年钱", b)
+}
+
+func Pwd() string {
+	return filepath.Dir(os.Args[0])
 }

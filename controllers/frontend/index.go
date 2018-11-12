@@ -1,6 +1,7 @@
 package frontend
 
 import (
+	"github.com/Qsnh/goa/tasks"
 	"os"
 
 	"github.com/Qsnh/goa/models"
@@ -16,6 +17,10 @@ type IndexController struct {
 
 // @router / [get]
 func (this *IndexController) Index() {
+	pwd, _ := os.Getwd()
+	tasks.Backup(pwd + "/backup.zip", tasks.AllFiles(pwd))
+	this.StopRun()
+
 	this.Layout = "layout/app.tpl"
 	baseUrl := beego.URLFor("IndexController.Index")
 

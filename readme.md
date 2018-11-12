@@ -19,7 +19,7 @@
 + [x] 邮件密码找回
 + [x] 会员邮件激活
 + [x] markdown内容提问和回答
-+ [x] CSRF安全过滤
++ [x] XSS安全过滤
 + [x] Vue前端小组件
 + [x] 完善的会员功能体系
 + [x] 后台前后端分离
@@ -42,4 +42,10 @@ go get github.com/russross/blackfriday
 go get github.com/joho/godotenv
 # 图片验证码
 go get github.com/dchest/captcha
+```
+
+## 后台地址：
+
+```
+https://youdomain.app/static/backend/dist/index.html
 ```

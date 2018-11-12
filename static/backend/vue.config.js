@@ -1,6 +1,6 @@
 const resolve = dir => require('path').join(__dirname, dir)
 
-let baseUrl = '/'
+let baseUrl = '/static/backend/dist/'
 
 module.exports = {
   baseUrl: baseUrl,

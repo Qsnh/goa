@@ -6,7 +6,6 @@ import (
 	"github.com/Qsnh/goa/utils"
 	"github.com/Qsnh/goa/validations/fronted"
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"os"
 	template2 "text/template"
@@ -117,13 +116,8 @@ func (this *UserController) FindPasswordHandler() {
 	if err != nil {
 		this.ErrorHandler(err)
 	}
-	err = utils.SendMail(email, "密码重置链接", html.String())
-	if err != nil {
-		logs.Info(err)
-		this.FlashError("密码重置邮件发送失败，有效期一个小时，请尽快操作")
-	} else {
-		this.FlashSuccess("密码重置邮件发送成功")
-	}
+	go utils.SendMail(email, "密码重置链接", html.String())
+	this.FlashSuccess("密码重置邮件发送成功")
 	this.RedirectTo(this.redirectUrl)
 }
 
@@ -135,9 +129,7 @@ func (this *UserController) PasswordReset() {
 	userId, _ := this.GetInt("id")
 	user, err := models.FindUserById(userId)
 	if err != nil {
-		logs.Info(err)
-		this.FlashError("参数错误1")
-		this.RedirectTo("/")
+		this.ErrorHandler(err)
 	}
 	sign := this.GetString("sign")
 	time := this.GetString("time")

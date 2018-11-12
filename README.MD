@@ -34,6 +34,7 @@
 # 框架
 go get github.com/astaxie/beego
 go get -u github.com/beego/bee
+go get github.com/astaxie/beego/toolbox
 # MySQL Driver
 go get github.com/go-sql-driver/mysql
 # Markdown解析库

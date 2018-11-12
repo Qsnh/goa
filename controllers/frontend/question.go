@@ -20,8 +20,7 @@ func (this *QuestionController) Create() {
 
 	categories, err := models.AllCategories()
 	if err != nil {
-		this.FlashError("读取分类失败")
-		this.RedirectTo("/")
+		this.ErrorHandler(err)
 	}
 
 	this.Data["categories"] = categories
@@ -36,9 +35,7 @@ func (this *QuestionController) Store() {
 
 	_, err := models.CreateQuestion(questionData.CategoryId, questionData.Title, questionData.Description, this.CurrentLoginUser)
 	if err != nil {
-		logs.Info(err)
-		this.FlashError("问题创建失败")
-		this.RedirectTo(this.redirectUrl)
+		this.ErrorHandler(err)
 	}
 
 	this.FlashSuccess("问题创建成功")
@@ -50,18 +47,15 @@ func (this *QuestionController) Edit() {
 	questionId := this.Ctx.Input.Param(":question_id")
 	question, err := models.FindQuestionById(questionId)
 	if err != nil {
-		this.FlashError("问题不存在")
-		this.RedirectTo("/")
+		this.ErrorHandler(err)
 	}
 	if this.CurrentLoginUser.Id != question.User.Id {
-		this.Abort("401")
-		this.StopRun()
+		this.ErrorHandler(err)
 	}
 
 	categories, err := models.AllCategories()
 	if err != nil {
-		this.FlashError("读取分类失败")
-		this.RedirectTo("/")
+		this.ErrorHandler(err)
 	}
 
 	this.Data["Question"] = question
@@ -74,12 +68,10 @@ func (this *QuestionController) Update() {
 	questionId := this.Ctx.Input.Param(":question_id")
 	question, err := models.FindQuestionById(questionId)
 	if err != nil {
-		this.FlashError("问题不存在")
-		this.RedirectTo("/")
+		this.ErrorHandler(err)
 	}
 	if this.CurrentLoginUser.Id != question.User.Id {
-		this.Abort("401")
-		this.StopRun()
+		this.ErrorHandler(err)
 	}
 
 	this.redirectUrl = beego.URLFor("QuestionController.Edit", ":question_id", questionId)
@@ -111,8 +103,7 @@ func (this *QuestionController) Show() {
 	questionId := this.Ctx.Input.Param(":id")
 	question, err := models.FindQuestionById(questionId)
 	if err != nil {
-		this.FlashError("问题不存在")
-		this.RedirectTo("/")
+		this.ErrorHandler(err)
 	}
 	if question.IsBan == 1 {
 		this.FlashError("该问题已被禁止")
@@ -127,9 +118,7 @@ func (this *QuestionController) Show() {
 
 	answers, paginator, err := models.AnswerPaginate(questionId, page, pageSize)
 	if err != nil {
-		logs.Info(err)
-		this.FlashError("系统错误")
-		this.RedirectTo("/")
+		this.ErrorHandler(err)
 	}
 
 	this.Data["question"] = question
@@ -150,22 +139,16 @@ func (this *QuestionController) AnswerHandler() {
 
 	question, err := models.FindQuestionById(questionId)
 	if err != nil {
-		this.FlashError("问题不存在");
-		this.RedirectTo(this.redirectUrl)
+		this.ErrorHandler(err)
 	}
-
 	orm := orm.NewOrm()
 	orm.Begin()
-
 	// 创建回答
 	_, err = models.AnswerCreate(this.CurrentLoginUser, question, questionData.Description, &orm)
 	if err != nil {
 		orm.Rollback()
-		logs.Info(err)
-		this.FlashError("系统发生错误了哦")
-		this.RedirectTo(this.redirectUrl)
+		this.ErrorHandler(err)
 	}
-
 	// 更新问题
 	question.AnswerUser = this.CurrentLoginUser
 	question.AnswerAt = time.Now()
@@ -173,12 +156,9 @@ func (this *QuestionController) AnswerHandler() {
 	question.UpdatedAt = time.Now()
 	if _, err := orm.Update(question); err != nil {
 		orm.Rollback()
-		logs.Info(err)
-		this.FlashError("系统发生错误了哦")
-		this.RedirectTo(this.redirectUrl)
+		this.ErrorHandler(err)
 	}
 	orm.Commit()
-
 	this.FlashSuccess("回答成功")
 	this.RedirectTo(this.redirectUrl)
 }

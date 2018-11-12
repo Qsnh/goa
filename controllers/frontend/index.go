@@ -6,7 +6,6 @@ import (
 	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/utils"
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"github.com/dchest/captcha"
 )
@@ -37,8 +36,7 @@ func (this *IndexController) Index() {
 	if categoryId > 0 {
 		err = orm.NewOrm().QueryTable("categories").Filter("id", categoryId).One(&category)
 		if err != nil {
-			logs.Info(err)
-			this.Abort("404")
+			this.ErrorHandler(err)
 		}
 		db = db.Filter("category_id", category.Id)
 	}
@@ -48,8 +46,7 @@ func (this *IndexController) Index() {
 
 	count, err := db.Count()
 	if err != nil {
-		logs.Info(err)
-		this.StopRun()
+		this.ErrorHandler(err)
 	}
 	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&questions)
 

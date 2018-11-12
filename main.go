@@ -30,6 +30,6 @@ func main() {
 	beego.AddFuncMap("timeforhumnas", utils.TimeDiffForHumans)
 
 	// 运行
-	beego.Run(":"+os.Getenv("APP_PORT"))
+	beego.Run(":" + os.Getenv("APP_PORT"))
 	logs.SetLogger("console")
 }

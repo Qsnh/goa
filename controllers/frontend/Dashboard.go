@@ -4,7 +4,6 @@ import (
 	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/utils"
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"strconv"
 )
@@ -20,9 +19,7 @@ func(this *DashboardController) MemberQuestions() {
 	userId, _ := strconv.Atoi(userIdString)
 	user, err := models.FindUserById(userId)
 	if err != nil {
-		logs.Info(err)
-		this.Abort("404")
-		this.StopRun()
+		this.ErrorHandler(err)
 	}
 
 	page, _ := this.GetInt64("page")
@@ -35,9 +32,7 @@ func(this *DashboardController) MemberQuestions() {
 	db := orm.NewOrm().QueryTable("questions").Filter("user_id", user.Id)
 	total, err := db.Count()
 	if err != nil {
-		logs.Info(err)
-		this.Abort("500")
-		this.StopRun()
+		this.ErrorHandler(err)
 	}
 	questions := []models.Questions{}
 	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&questions)
@@ -61,9 +56,7 @@ func(this *DashboardController) MemberAnswers() {
 	userId, _ := strconv.Atoi(userIdString)
 	user, err := models.FindUserById(userId)
 	if err != nil {
-		logs.Info(err)
-		this.Abort("404")
-		this.StopRun()
+		this.ErrorHandler(err)
 	}
 
 	page, _ := this.GetInt64("page")
@@ -76,9 +69,7 @@ func(this *DashboardController) MemberAnswers() {
 	db := orm.NewOrm().QueryTable("answers").Filter("user_id", user.Id)
 	total, err := db.Count()
 	if err != nil {
-		logs.Info(err)
-		this.Abort("500")
-		this.StopRun()
+		this.ErrorHandler(err)
 	}
 	answers := []models.Answers{}
 	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&answers)

@@ -1,5 +1,15 @@
 <template>
 	<d2-container>
+		<el-row class="mb-10">
+			<el-col class="mb-10" :span="24">
+				<el-input v-model="keywords" placeholder="可模糊搜索昵称/邮箱"></el-input>
+			</el-col>
+			<el-col :span="24">
+				<el-button @click="userSearch()" type="primary">过滤</el-button>
+				<el-button @click="resetUserSearch()" type="warning">取消过滤</el-button>
+			</el-col>
+		</el-row>
+
 		<el-table class="mb-10"
 		    :data="users"
 		    style="width: 100%">
@@ -70,12 +80,13 @@ export default {
 			users: [],
 			page: 1,
 			page_size: 10,
-			total: 0
+			total: 0,
+			keywords: ''
 		}
 	},
 	methods: {
 		getUsers() {
-			request.get('/users').then(res => {
+			request.get(`/users?keywords=${this.keywords}`).then(res => {
 				res = res.data
 				this.users = res.users
 				this.page = res.page
@@ -92,6 +103,13 @@ export default {
 		},
 		handleCurrentChange() {
 			this.getUsers()
+		},
+		userSearch() {
+			this.getUsers()
+		},
+		resetUserSearch() {
+			this.keywords = ''
+			this.userSearch()
 		}
 	}
 }

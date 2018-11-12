@@ -28,16 +28,17 @@ func (this *UserController) Index() {
 	users := []models.Users{}
 
 	db := orm.NewOrm().QueryTable("users")
+	cond := orm.NewCondition()
 	if keywords != "" {
-		db = db.Filter("nickname__icontains", keywords).Filter("email__icontains", keywords)
+		cond = cond.Or("nickname__icontains", keywords).Or("email__icontains", keywords)
 	}
 
-	count, err := db.Count()
+	count, err := db.SetCond(cond).Count()
 	if err != nil {
 		logs.Info(err)
 		this.StopRun()
 	}
-	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&users)
+	_, _ = db.SetCond(cond).OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&users)
 
 	data := make(map[string]interface{})
 	data["users"] = users

@@ -186,13 +186,7 @@ func (this *MemberController) SendActiveMailHandler() {
 	if err != nil {
 		this.ErrorHandler(err)
 	}
-	err = utils.SendMail(this.CurrentLoginUser.Email, "密码重置链接", html.String())
-	if err != nil {
-		this.FlashError("激活邮件发送失败")
-		this.Back()
-	} else {
-		this.FlashSuccess("激活邮件发送成功，有效期一个小时，请尽快操作")
-		this.RedirectTo("/")
-	}
-	this.StopRun()
+	go utils.SendMail(this.CurrentLoginUser.Email, "密码重置链接", html.String())
+	this.FlashSuccess("激活邮件发送成功，有效期一个小时，请尽快操作")
+	this.RedirectTo("/")
 }

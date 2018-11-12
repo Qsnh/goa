@@ -33,10 +33,9 @@
                             <a href="{{urlfor "DashboardController.MemberQuestions" ":user_id" $question.User.Id}}">
                                 {{$question.User.Nickname}}
                             </a>
-                            &nbsp;
-                            /&nbsp;{{timeforhumnas $question.CreatedAt}}&nbsp;
-                            /&nbsp;最新回复&nbsp;
+                            &nbsp;/&nbsp;{{timeforhumnas $question.CreatedAt}}&nbsp;
                             {{if $question.AnswerUser}}
+                            /&nbsp;最新回复&nbsp;
                             <a href="{{urlfor "DashboardController.MemberQuestions" ":user_id" $question.AnswerUser.Id}}">{{$question.AnswerUser.Nickname}}</a>&nbsp;{{timeforhumnas $question.AnswerAt}}
                             {{end}}
                         </p>

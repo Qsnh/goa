@@ -42,8 +42,8 @@ func (Base *Base) Prepare() {
 	// 是否激活
 	isActive := true
 	if isLogin {
-		if Base.CurrentLoginUser.IsLock == models.IS_LOCK_NO {
-			isActive = true
+		if Base.CurrentLoginUser.IsLock == models.IS_LOCK_YES {
+			isActive = false
 		}
 	}
 	Base.Data["IsActive"] = isActive

@@ -2,8 +2,8 @@ package backend
 
 import (
 	"encoding/json"
-	"github.com/Qsnh/goa/request/backend"
 	"github.com/Qsnh/goa/utils"
+	"github.com/Qsnh/goa/validations/backend"
 	"os"
 )
 
@@ -13,7 +13,7 @@ type LoginController struct {
 
 // @router /backend/login [post]
 func (this *LoginController) LoginHandler()  {
-	loginRequest := backend.LoginRequest{}
+	loginRequest := backend.LoginValidation{}
 	if err := json.Unmarshal(this.Ctx.Input.RequestBody, &loginRequest); err != nil {
 		this.errorHandler(err)
 	}

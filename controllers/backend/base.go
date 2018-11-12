@@ -1,6 +1,7 @@
 package backend
 
 import (
+	"encoding/json"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/validation"
@@ -12,7 +13,7 @@ type Base struct {
 
 func (this *Base) ValidatorAuto(frontendData interface{}) {
 
-	if err := this.ParseForm(frontendData); err != nil {
+	if err := json.Unmarshal(this.Ctx.Input.RequestBody, &frontendData); err != nil {
 		this.errorHandler(err)
 	}
 

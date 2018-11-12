@@ -28,7 +28,9 @@ export default {
 				this.$message.warning('请输入分类名')
 				return
 			}
-			request.post('/category', "name="+this.category.name).then(res => {
+			request.post('/category', {
+				'name': this.category.name
+			}).then(res => {
 				this.$message.success('创建成功')
 				this.$router.push({name: 'category'})
 			}).catch(err => {

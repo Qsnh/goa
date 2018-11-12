@@ -5,6 +5,7 @@ import (
 	"github.com/Qsnh/goa/utils"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
+	"strconv"
 )
 
 type UserController struct {
@@ -47,6 +48,19 @@ func (this *UserController) Index()  {
 	this.StopRun()
 }
 
+// @router /backend/user/:id [get]
+func (this *UserController) Show()  {
+	userId := this.Ctx.Input.Param(":id")
+	userIdString, _ := strconv.Atoi(userId)
+	user, err := models.FindUserById(userIdString)
+	if err != nil {
+		this.errorHandler(err)
+	}
+	this.Data["json"] = map[string]interface{}{"user": user}
+	this.ServeJSON()
+	this.StopRun()
+}
+
 // @router /backend/user/:id [put]
 func (this *UserController) Update()  {
 	userId := this.Ctx.Input.Param(":id")
@@ -54,7 +68,6 @@ func (this *UserController) Update()  {
 	if err := orm.NewOrm().QueryTable("users").Filter("id", userId).One(&user); err != nil {
 		this.errorHandler(err)
 	}
-
 	password := this.GetString("password")
 	isLock, _ := this.GetInt("is_lock")
 	user.IsLock = isLock

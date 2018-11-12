@@ -2,6 +2,7 @@
 
 + [用户分页列表](#用户分页列表)
 + [编辑用户](#编辑用户)
++ [用户详情](#用户详情)
 
 ### 用户分页列表
 
@@ -78,5 +79,33 @@
 {
     "code": "0",
     "message": ""
+}
+```
+
+### 用户详情
+
+接口：`/backend/user/:id`
+方法：`get`
+返回：
+
+```
+{
+    "user": {
+        "id": 1,
+        "nickname": "小滕",
+        "avatar": "/static/uploads/avatar/e8e89f75ef964f6cb95f7c7edb88919e.jpg",
+        "email": "12345@qq.com",
+        "is_lock": 1,
+        "company": "阿里云",
+        "age": 23,
+        "profession": "PHPER",
+        "website": "https://v.58hualong.cn",
+        "weibo": "xiaotenggogogo",
+        "wechat": "wechat",
+        "created_at": "0001-01-01T08:00:00+08:00",
+        "updated_at": "0001-01-01T08:00:00+08:00",
+        "questions": null,
+        "answers": null
+    }
 }
 ```

@@ -89,6 +89,14 @@ func init() {
 
 	beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:UserController"] = append(beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:UserController"],
 		beego.ControllerComments{
+			Method: "Show",
+			Router: `/backend/user/:id`,
+			AllowHTTPMethods: []string{"get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:UserController"] = append(beego.GlobalControllerRouter["github.com/Qsnh/goa/controllers/backend:UserController"],
+		beego.ControllerComments{
 			Method: "Update",
 			Router: `/backend/user/:id`,
 			AllowHTTPMethods: []string{"put"},

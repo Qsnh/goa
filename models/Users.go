@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	IS_LOCK_YES = -1
-	IS_LOCK_NO  = 1
+	IS_LOCK_YES = 1
+	IS_LOCK_NO  = -1
 )
 
 type Users struct {

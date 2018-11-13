@@ -13,10 +13,12 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 func main() {
-	err := godotenv.Load()
+	pwd, _ := os.Getwd()
+	err := godotenv.Load(pwd + string(filepath.Separator) + ".env")
 	if err != nil {
 		log.Fatal("can't find .env file")
 		return

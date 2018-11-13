@@ -25,27 +25,22 @@
 + [x] ENV环境配置
 + [ ] 单元测试
 
-## 安装
+## 依赖
 
-```
-# 框架
-go get github.com/astaxie/beego
-go get -u github.com/beego/bee
-go get github.com/astaxie/beego/toolbox
-# MySQL Driver
-go get github.com/go-sql-driver/mysql
-# Markdown解析库
-go get github.com/russross/blackfriday
-# env
-go get github.com/joho/godotenv
-# 图片验证码
-go get github.com/dchest/captcha
-# 压缩
-go get -u github.com/mholt/archiver
-```
+| 库 | 介绍 |
+| --- | --- |
+| `github.com/astaxie/beego` | Beego框架 |
+| `github.com/go-sql-driver/mysql` | Mysql库 |
+| `github.com/russross/blackfriday` | Markdown解析库 |
+| `github.com/joho/godotenv` | ENV文件读取 |
+| `github.com/dchest/captcha` | 图形验证码 |
 
-## 后台地址：
+## FAQ
 
-```
-https://youdomain.app/static/backend/dist/index.html
-```
++ [安装文档](docs/INSTALL.MD)
++ [前端开发](docs/FRONTEND.MD)
++ [后端单页面开发](docs/BACKEND.MD)
+
+## License
+
+**GOA** 采用 MIT 开源许可证，你可以在商业项目中免费使用 **GOA** 或者基于 **GOA** 二次 开发而不必支付费用。

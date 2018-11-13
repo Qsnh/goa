@@ -38,8 +38,8 @@
 ## FAQ
 
 + [安装文档](docs/INSTALL.MD)
-+ [前端开发](docs/FRONTEND.MD)
-+ [后端单页面开发](docs/BACKEND.MD)
++ [Vue前端开发](docs/FRONTEND.MD)
++ [后端SPA开发](docs/BACKEND.MD)
 
 ## License
 

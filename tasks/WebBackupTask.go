@@ -2,6 +2,7 @@ package tasks
 
 import (
 	"archive/zip"
+	"github.com/Qsnh/goa/utils"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -82,6 +83,6 @@ func Backup(dist string, files []string) error {
 
 func WebBackupTask() error {
 	dist := strings.TrimRight(os.Getenv("BACKUP_SAVE_PATH"), "/") + "/" + time.Now().Format("2006-01-01 15-04-05") + "_backup.zip"
-	pwd, _ := os.Getwd()
+	pwd := utils.Pwd()
 	return Backup(dist, AllFiles(pwd))
 }

@@ -17,8 +17,7 @@ import (
 )
 
 func main() {
-	pwd, _ := os.Getwd()
-	err := godotenv.Load(pwd + string(filepath.Separator) + ".env")
+	err := godotenv.Load(utils.Pwd() + string(filepath.Separator) + ".env")
 	if err != nil {
 		log.Fatal("can't find .env file")
 		return

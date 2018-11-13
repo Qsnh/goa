@@ -44,3 +44,6 @@
 ## License
 
 **GOA** 采用 MIT 开源许可证，你可以在商业项目中免费使用 **GOA** 或者基于 **GOA** 二次 开发而不必支付费用。
+
+
+<a href="https://github.com/d2-projects/d2-admin" target="_blank"><img src="https://raw.githubusercontent.com/FairyEver/d2-admin/master/doc/image/d2-admin@2x.png" width="200"></a>

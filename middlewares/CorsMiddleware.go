@@ -3,11 +3,12 @@ package middlewares
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/plugins/cors"
+	"os"
 )
 
 func CorsHandler()  {
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
-		AllowOrigins:     []string{"http://127.0.0.1:8080"},
+		AllowOrigins:     []string{os.Getenv("CORS_ORIGINAL")},
 		AllowMethods:     []string{"GET", "POST", "DELETE", "HEAD", "PUT"},
 		AllowHeaders:     []string{"token", "Content-Type"},
 		ExposeHeaders:    []string{},

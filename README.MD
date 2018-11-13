@@ -4,9 +4,6 @@
 <a href="https://travis-ci.org/Qsnh/goa"><img src="https://travis-ci.org/Qsnh/goa.svg?branch=master" alt="Build Status"></a>
 <a><img src="https://img.shields.io/github/last-commit/Qsnh/goa.svg"/></a>
 <a><img src="https://img.shields.io/github/issues/Qsnh/goa.svg"/></a>
-<a><img src="https://img.shields.io/github/issues-closed/Qsnh/goa.svg"/></a>
-<a><img src="https://img.shields.io/github/issues-pr/Qsnh/goa.svg"/></a>
-<a><img src="https://img.shields.io/github/issues-pr-closed/Qsnh/goa.svg"/></a>
 </p>
 
 ## 介绍
@@ -24,7 +21,7 @@
 + [x] 完善的会员功能体系
 + [x] 后台前后端分离
 + [x] API接口
-+ [ ] 程序/数据库定时备份
++ [x] 程序/数据库定时备份
 + [x] ENV环境配置
 + [ ] 单元测试
 

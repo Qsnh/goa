@@ -60,7 +60,7 @@ func (this *QuestionController) Edit() {
 
 	this.Data["Question"] = question
 	this.Data["categories"] = categories
-	this.Data["PageTitle"] = "问题编辑："+question.Title
+	this.Data["PageTitle"] = "问题编辑：" + question.Title
 }
 
 // @router /member/questions/:question_id/edit [post]

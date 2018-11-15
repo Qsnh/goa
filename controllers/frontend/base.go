@@ -5,6 +5,7 @@ import (
 	"github.com/Qsnh/goa/models"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
+	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
 	"html/template"
 	"os"
@@ -15,9 +16,21 @@ type Base struct {
 	FlashBag         *beego.FlashData
 	redirectUrl      string
 	CurrentLoginUser *models.Users
+	SettingData      map[string]string
 }
 
 func (Base *Base) Prepare() {
+	// 读取配置
+	settings := []models.Settings{}
+	if _, err := orm.NewOrm().QueryTable("settings").All(&settings); err != nil {
+		Base.ErrorHandler(err)
+	}
+	settingData := make(map[string]string)
+	for _, item := range settings {
+		settingData[item.Name] = item.Value
+	}
+	Base.SettingData = settingData
+
 	// 初始化读取Flash
 	beego.ReadFromRequest(&Base.Controller)
 
@@ -39,6 +52,7 @@ func (Base *Base) Prepare() {
 	}
 	Base.Data["IsLogin"] = isLogin
 	Base.Data["user"] = Base.CurrentLoginUser
+
 	// 是否激活
 	isActive := true
 	if isLogin {
@@ -53,7 +67,7 @@ func (Base *Base) Prepare() {
 	Base.Data["PageKeywords"] = ""
 	Base.Data["PageDescription"] = ""
 	Base.Data["AppName"] = os.Getenv("APP_NAME")
-	Base.Data["AppIcp"] = os.Getenv("APP_ICP")
+	Base.Data["AppIcp"] = Base.SettingData["ICP"]
 }
 
 // 保存成功的Flash信息
@@ -128,21 +142,21 @@ func (Base *Base) AjaxError(message string, code uint16) {
 
 // ajax成功返回
 func (Base *Base) AjaxSuccess(message string, data interface{}) {
-	res := goaio.SuccessResponseJson{message,0,data}
+	res := goaio.SuccessResponseJson{message, 0, data}
 	Base.Data["json"] = res
 	Base.ServeJSON()
 	Base.StopRun()
 }
 
 // 抛出500
-func (Base *Base) ErrorHandler(err error)  {
+func (Base *Base) ErrorHandler(err error) {
 	logs.Info(err)
 	Base.Abort("500")
 	Base.StopRun()
 }
 
 // 跳转到前一页
-func (Base *Base) Back()  {
+func (Base *Base) Back() {
 	Base.RedirectTo(Base.Ctx.Request.Referer())
 	Base.StopRun()
 }

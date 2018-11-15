@@ -13,7 +13,7 @@ type DashboardController struct {
 }
 
 // @router /user/:user_id [get]
-func(this *DashboardController) MemberQuestions() {
+func (this *DashboardController) MemberQuestions() {
 	this.Layout = "layout/app.tpl"
 	userIdString := this.Ctx.Input.Param(":user_id")
 	userId, _ := strconv.Atoi(userIdString)
@@ -46,11 +46,11 @@ func(this *DashboardController) MemberQuestions() {
 	this.Data["Questions"] = questions
 	this.Data["Indexurl"] = IndexUrl
 	this.Data["User"] = user
-	this.Data["PageTitle"] = user.Nickname+"的主页"
+	this.Data["PageTitle"] = user.Nickname + "的主页"
 }
 
 // @router /user/:user_id/answers [get]
-func(this *DashboardController) MemberAnswers() {
+func (this *DashboardController) MemberAnswers() {
 	this.Layout = "layout/app.tpl"
 	userIdString := this.Ctx.Input.Param(":user_id")
 	userId, _ := strconv.Atoi(userIdString)
@@ -83,5 +83,5 @@ func(this *DashboardController) MemberAnswers() {
 	this.Data["Answers"] = answers
 	this.Data["Indexurl"] = IndexUrl
 	this.Data["User"] = user
-	this.Data["PageTitle"] = user.Nickname+"的回答"
+	this.Data["PageTitle"] = user.Nickname + "的回答"
 }

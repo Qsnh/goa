@@ -63,14 +63,15 @@ func UserEmailExists(email string) bool {
 	}
 }
 
-func CreateUser(nickname string, email string, password string) (int64, error) {
+func CreateUser(nickname string, email string, password string, lock string, avatar string) (int64, error) {
 	db := orm.NewOrm()
 
-	isLock, _ := strconv.Atoi(os.Getenv("USER_REGISTER_LOCK_STATUS"))
+	isLock, _ := strconv.Atoi(lock)
 
 	user := Users{
 		Nickname:  nickname,
 		Email:     email,
+		Avatar:    avatar,
 		Password:  utils.SHA256Encode(password),
 		IsLock:    isLock,
 		CreatedAt: time.Now(),

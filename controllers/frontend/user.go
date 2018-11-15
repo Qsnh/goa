@@ -7,7 +7,6 @@ import (
 	"github.com/Qsnh/goa/validations/fronted"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	"os"
 	template2 "text/template"
 )
 
@@ -22,8 +21,8 @@ func (this *UserController) Login() {
 	}
 	this.Layout = "layout/app.tpl"
 	this.Data["PageTitle"] = "登录"
-	this.Data["PageKeywords"] = os.Getenv("SEO_INDEX_KEYWORDS")
-	this.Data["PageDescription"] = os.Getenv("SEO_INDEX_DESCRIPTION")
+	this.Data["PageKeywords"] = this.SettingData["SEO_INDEX_KEYWORDS"]
+	this.Data["PageDescription"] = this.SettingData["SEO_INDEX_DESCRIPTION"]
 }
 
 // @router /login [post]
@@ -56,8 +55,8 @@ func (this *UserController) Logout() {
 func (this *UserController) Register() {
 	this.Layout = "layout/app.tpl"
 	this.Data["PageTitle"] = "注册"
-	this.Data["PageKeywords"] = os.Getenv("SEO_INDEX_KEYWORDS")
-	this.Data["PageDescription"] = os.Getenv("SEO_INDEX_DESCRIPTION")
+	this.Data["PageKeywords"] = this.SettingData["SEO_INDEX_KEYWORDS"]
+	this.Data["PageDescription"] = this.SettingData["SEO_INDEX_DESCRIPTION"]
 }
 
 // @router /register [post]
@@ -66,7 +65,12 @@ func (this *UserController) RegisterHandler() {
 	userData := fronted.UserRegisterValidation{}
 	this.ValidatorAuto(&userData)
 
-	_, err := models.CreateUser(userData.Nickname, userData.Email, userData.Password)
+	_, err := models.CreateUser(
+		userData.Nickname,
+		userData.Email,
+		userData.Password,
+		this.SettingData["MEMBER_DEFAULT_IS_LOCK"],
+		this.SettingData["MEMBER_DEFAULT_AVATAR"])
 	if err != nil {
 		this.FlashError("注册失败")
 		this.RedirectTo(this.redirectUrl)
@@ -83,8 +87,8 @@ func (this *UserController) FindPassword() {
 	}
 	this.Layout = "layout/app.tpl"
 	this.Data["PageTitle"] = "找回密码"
-	this.Data["PageKeywords"] = os.Getenv("SEO_INDEX_KEYWORDS")
-	this.Data["PageDescription"] = os.Getenv("SEO_INDEX_DESCRIPTION")
+	this.Data["PageKeywords"] = this.SettingData["SEO_INDEX_KEYWORDS"]
+	this.Data["PageDescription"] = this.SettingData["SEO_INDEX_DESCRIPTION"]
 }
 
 // @router /password/find [post]

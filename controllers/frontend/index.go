@@ -1,8 +1,6 @@
 package frontend
 
 import (
-	"os"
-
 	"github.com/Qsnh/goa/models"
 	"github.com/Qsnh/goa/utils"
 	"github.com/astaxie/beego"
@@ -58,9 +56,9 @@ func (this *IndexController) Index() {
 	this.Data["Keywords"] = keywords
 	this.Data["Category"] = category
 	this.Data["Baseurl"] = baseUrl
-	this.Data["PageTitle"] = os.Getenv("SEO_INDEX_TITLE")
-	this.Data["PageKeywords"] = os.Getenv("SEO_INDEX_KEYWORDS")
-	this.Data["PageDescription"] = os.Getenv("SEO_INDEX_DESCRIPTION")
+	this.Data["PageTitle"] = this.SettingData["SEO_INDEX_TITLE"]
+	this.Data["PageKeywords"] = this.SettingData["SEO_INDEX_KEYWORDS"]
+	this.Data["PageDescription"] = this.SettingData["SEO_INDEX_DESCRIPTION"]
 	this.Layout = "layout/app.tpl"
 }
 

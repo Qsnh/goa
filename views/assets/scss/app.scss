@@ -88,8 +88,13 @@ footer {
 
 /** 问题详情界面 */
 .question-description {
+    font-size: 1rem;
+    line-height: 2rem;
     img {
         max-width: 100%; margin: 5px;
+    }
+    h1,h2,h3,h4,h5,h6 {
+        margin-bottom: 15px;
     }
 }
 

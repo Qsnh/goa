@@ -6401,9 +6401,14 @@ footer .footer {
     line-height: 40px; }
 
 /** 问题详情界面 */
-.question-description img {
-  max-width: 100%;
-  margin: 5px; }
+.question-description {
+  font-size: 1rem;
+  line-height: 2rem; }
+  .question-description img {
+    max-width: 100%;
+    margin: 5px; }
+  .question-description h1, .question-description h2, .question-description h3, .question-description h4, .question-description h5, .question-description h6 {
+    margin-bottom: 15px; }
 
 .answer-content-box img {
   max-width: 100%;

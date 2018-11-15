@@ -2,7 +2,6 @@ package backend
 
 import (
 	"github.com/Qsnh/goa/models"
-	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 )
 
@@ -38,8 +37,7 @@ func (this *QuestionController) Index()  {
 
 	count, err := db.Count()
 	if err != nil {
-		logs.Info(err)
-		this.StopRun()
+		this.errorHandler(err)
 	}
 	_, _ = db.OrderBy("-updated_at", "-id").RelatedSel().Limit(pageSize, startPos).All(&questions)
 

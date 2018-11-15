@@ -11,5 +11,6 @@ export default [
   },
   { path: '/questions', title: '问题', icon: 'envelope' },
   { path: '/answers', title: '回答', icon: 'comment' },
-  { path: '/member/index', title: '会员', icon: 'users' }
+  { path: '/member/index', title: '会员', icon: 'users' },
+  { path: '/settings', title: '系统配置', icon: 'cogs' }
 ]

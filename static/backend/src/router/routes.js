@@ -53,6 +53,12 @@ const frameIn = [
         name: 'answers',
         meta: {meta, title: "回答列表"},
         component: () => import('@/pages/answer/index')
+      },
+      {
+        path: 'settings',
+        name: 'settings',
+        meta: {meta, title: "系统配置"},
+        component: () => import('@/pages/setting/index')
       }
     ]
   },

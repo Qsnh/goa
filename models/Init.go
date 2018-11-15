@@ -22,7 +22,7 @@ func Init()  {
 	}
 
 	orm.RegisterDataBase("default", "mysql", dsn)
-	orm.RegisterModel(new(Categories), new(Users), new(Answers), new(Questions))
+	orm.RegisterModel(new(Categories), new(Users), new(Answers), new(Questions), new(Settings))
 
 	if os.Getenv("APP_DEBUG") == "dev" {
 		orm.Debug = true

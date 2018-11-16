@@ -126,7 +126,7 @@ func (this *QuestionController) Show() {
 	this.Data["Paginator"] = paginator.Render()
 	this.Data["PageTitle"] = question.Title
 	this.Data["PageKeywords"] = question.Title
-	this.Data["PageDescription"] = question.Description
+	this.Data["PageDescription"] = question.Title
 	this.Layout = "layout/app.tpl"
 }
 

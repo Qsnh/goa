@@ -8,4 +8,5 @@ type SettingValidation struct {
 	SEO_INDEX_DESCRIPTION  string `json:"SEO_INDEX_DESCRIPTION"`
 	SEO_INDEX_KEYWORDS     string `json:"SEO_INDEX_KEYWORDS"`
 	SEO_INDEX_TITLE        string `json:"SEO_INDEX_TITLE"`
+	APP_NAME               string `json:"APP_NAME"`
 }

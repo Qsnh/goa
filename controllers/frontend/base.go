@@ -9,7 +9,6 @@ import (
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
 	"html/template"
-	"os"
 	"strconv"
 )
 
@@ -69,7 +68,7 @@ func (Base *Base) Prepare() {
 	Base.Data["PageTitle"] = ""
 	Base.Data["PageKeywords"] = ""
 	Base.Data["PageDescription"] = ""
-	Base.Data["AppName"] = os.Getenv("APP_NAME")
+	Base.Data["AppName"] = Base.SettingData["APP_NAME"]
 	Base.Data["AppIcp"] = Base.SettingData["ICP"]
 }
 

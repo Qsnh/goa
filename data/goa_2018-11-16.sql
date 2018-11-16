@@ -85,6 +85,7 @@ INSERT INTO `settings` VALUES ('4', 'SEO_INDEX_KEYWORDS', 'goa,go,beego,npm,vuej
 INSERT INTO `settings` VALUES ('5', 'SEO_INDEX_DESCRIPTION', 'goa是基于beego开发的在线问答系统');
 INSERT INTO `settings` VALUES ('6', 'ICP', '暂无');
 INSERT INTO `settings` VALUES ('7', 'CORS_ORIGINAL', 'http://127.0.0.1:8080');
+INSERT INTO `settings` VALUES ('8', 'APP_NAME', 'GOA');
 
 -- ----------------------------
 -- Table structure for users

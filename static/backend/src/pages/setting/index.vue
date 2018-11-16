@@ -3,6 +3,9 @@
 		<el-form ref="form" :model="category" label-width="150px">
 			<el-tabs v-model="activeName" @tab-click="handleClick">
 			    <el-tab-pane label="系统配置" name="system">
+			    	<el-form-item label="网站名">
+					    <el-input v-model="setting.APP_NAME" placeholder="网站名"></el-input>
+					</el-form-item>
 			    	<el-form-item label="备案信息">
 					    <el-input v-model="setting.ICP" placeholder="备案信息"></el-input>
 					</el-form-item>
@@ -47,6 +50,7 @@ export default {
 		return {
 			activeName: 'system',
 			setting: {
+				"APP_NAME": "",
 				"CORS_ORIGINAL": "",
 				"ICP": "",
 				"MEMBER_DEFAULT_AVATAR": "",

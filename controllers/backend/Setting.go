@@ -25,6 +25,7 @@ func (this *SettingController) SaveHandler() {
 	_, _ = db.Raw("UPDATE settings set value = ? where name = ? limit 1", settingValidation.SEO_INDEX_DESCRIPTION, "SEO_INDEX_DESCRIPTION").Exec()
 	_, _ = db.Raw("UPDATE settings set value = ? where name = ? limit 1", settingValidation.SEO_INDEX_KEYWORDS, "SEO_INDEX_KEYWORDS").Exec()
 	_, _ = db.Raw("UPDATE settings set value = ? where name = ? limit 1", settingValidation.SEO_INDEX_TITLE, "SEO_INDEX_TITLE").Exec()
+	_, _ = db.Raw("UPDATE settings set value = ? where name = ? limit 1", settingValidation.APP_NAME, "APP_NAME").Exec()
 
 	this.successResponse()
 	this.StopRun()

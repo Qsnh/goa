@@ -7,7 +7,7 @@
     <meta name="author" content="GOA">
     <meta name="description" content="{{.PageDescription}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="https://lib.baomitu.com/highlight.js/9.13.1/styles/atelier-dune-dark.min.css" rel="stylesheet">
+    <link crossorigin="anonymous" integrity="sha384-nyXucUVWQWGGNq3mSgG/FGxW4Jmsv+0uCbHZ0VpHRsGZt/PlUT31hz9sUek822eI" href="https://lib.baomitu.com/highlight.js/9.13.1/styles/atom-one-dark.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/assets/main.css">
     <title>{{.PageTitle}} - {{.AppName}}</title>
 </head>

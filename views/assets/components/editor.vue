@@ -1,6 +1,7 @@
 <template>
     <div>
-        <mavon-editor ref="md" @imgAdd="imgUpload" :boxShadow="false" :subfield="false" v-model="contents"></mavon-editor>
+        <mavon-editor ref="md" :externalLink="false" :ishljs="false" @imgAdd="imgUpload" :boxShadow="false" :subfield="false" v-model="contents">
+        </mavon-editor>
         <div style="display: none">
             <textarea name="description" v-model="contents"></textarea>
         </div>

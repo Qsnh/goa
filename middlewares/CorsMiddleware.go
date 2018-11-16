@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func CorsHandler()  {
+func CorsHandler() {
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
 		AllowOrigins:     []string{os.Getenv("CORS_ORIGINAL")},
 		AllowMethods:     []string{"GET", "POST", "DELETE", "HEAD", "PUT"},

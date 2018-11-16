@@ -3,12 +3,14 @@ package frontend
 import (
 	"github.com/Qsnh/goa/goaio"
 	"github.com/Qsnh/goa/models"
+	"github.com/Qsnh/goa/utils"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
 	"html/template"
 	"os"
+	"strconv"
 )
 
 type Base struct {
@@ -42,13 +44,14 @@ func (Base *Base) Prepare() {
 
 	// 自动读取当前登陆用户
 	isLogin := false
-	loginUserId := Base.GetSession("login_user_id")
-	if loginUserId != nil {
-		user, err := models.FindUserById(loginUserId.(int))
-		if err == nil {
+	loginUserId, _ := strconv.Atoi(Base.Ctx.GetCookie("login_user_id"))
+	loginUserSign := Base.Ctx.GetCookie("login_user_sign")
+	if loginUserId > 0 {
+		user, err := models.FindUserById(loginUserId)
+		if err == nil && utils.AuthSignCheck(user.Id, user.Email, user.Password, loginUserSign) == true {
 			Base.CurrentLoginUser = user
+			isLogin = true
 		}
-		isLogin = true
 	}
 	Base.Data["IsLogin"] = isLogin
 	Base.Data["user"] = Base.CurrentLoginUser

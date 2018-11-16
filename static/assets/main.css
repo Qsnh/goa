@@ -6361,6 +6361,10 @@ a:hover {
 .list-group-item.active a:hover {
   color: #ecf0f1; }
 
+.alert p {
+  margin: 0px;
+  padding: 0px; }
+
 /** 全局头部 */
 header.header-navbar {
   border-bottom: 2px solid #ecf0f1;

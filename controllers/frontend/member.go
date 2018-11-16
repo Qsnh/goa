@@ -77,7 +77,9 @@ func (this *MemberController) ChangeAvatarHandler() {
 
 // @router /member/logout [get]
 func (this *MemberController) Logout() {
-	this.SetSession("login_user_id", 0)
+	this.CurrentLoginUser = nil
+	this.Ctx.SetCookie("login_user_id", "", -3600)
+	this.Ctx.SetCookie("login_user_sign", "", -3600)
 	this.FlashSuccess("已安全退出")
 	this.RedirectTo("/")
 }

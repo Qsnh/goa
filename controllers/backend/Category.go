@@ -12,7 +12,7 @@ type CategoryController struct {
 }
 
 // @router /backend/categories [get]
-func (this *CategoryController) Index()  {
+func (this *CategoryController) Index() {
 	var categories []models.Categories
 	if _, err := orm.NewOrm().QueryTable("categories").All(&categories); err != nil {
 		this.errorHandler(err)
@@ -37,7 +37,7 @@ func (this *CategoryController) Store() {
 }
 
 // @router /backend/category/:id [get]
-func (this *CategoryController) Detail()  {
+func (this *CategoryController) Detail() {
 	categoryId := this.Ctx.Input.Param(":id")
 	category := models.Categories{}
 	if err := orm.NewOrm().QueryTable("categories").Filter("id", categoryId).One(&category); err != nil {
@@ -69,7 +69,7 @@ func (this *CategoryController) Update() {
 }
 
 // @router /backend/category/:id [delete]
-func (this *CategoryController) Destroy()  {
+func (this *CategoryController) Destroy() {
 	categoryId := this.Ctx.Input.Param(":id")
 	category := models.Categories{}
 	if err := orm.NewOrm().QueryTable("categories").Filter("id", categoryId).One(&category); err != nil {

@@ -16,6 +16,9 @@
                                 <input type="password" name="password" class="form-control form-control-sm" placeholder="密码" required>
                             </div>
                             <div class="form-group">
+                                <label><input type="checkbox" name="remember_me" value="remember_me"> 记住我</label>
+                            </div>
+                            <div class="form-group">
                                 <button class="btn btn-outline-light btn-block btn-sm" type="submit">登录</button>
                             </div>
                         </div>

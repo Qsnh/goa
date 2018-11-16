@@ -6,19 +6,19 @@ import (
 )
 
 type BootstrapPaginator struct {
-	Total int64
+	Total       int64
 	CurrentPage int64
-	Url string
-	PerPage int64
-	TotalPage int64
-	Appends map[string]string
+	Url         string
+	PerPage     int64
+	TotalPage   int64
+	Appends     map[string]string
 }
 
 func (bp *BootstrapPaginator) ComputeTotalPage() {
 	if mod := bp.Total % bp.PerPage; mod == 0 {
-		bp.TotalPage  = bp.Total / bp.PerPage
+		bp.TotalPage = bp.Total / bp.PerPage
 	} else {
-		bp.TotalPage = bp.Total / bp.PerPage + 1
+		bp.TotalPage = bp.Total/bp.PerPage + 1
 	}
 }
 
@@ -30,9 +30,9 @@ func (bp *BootstrapPaginator) BuildUrl(Page int64) string {
 	isContainerMark := strings.Contains(bp.Url, "?")
 	query := ""
 	if isContainerMark {
-		query = fmt.Sprintf(bp.Url + "&page=%d", Page)
+		query = fmt.Sprintf(bp.Url+"&page=%d", Page)
 	} else {
-		query = fmt.Sprintf(bp.Url + "?page=%d", Page)
+		query = fmt.Sprintf(bp.Url+"?page=%d", Page)
 	}
 	for index, item := range bp.Appends {
 		query += "&" + index + "=" + item

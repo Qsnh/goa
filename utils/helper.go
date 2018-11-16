@@ -45,7 +45,7 @@ func ToString(i interface{}) string {
 	return ""
 }
 
-func TimeDiffForHumans(t time.Time) string  {
+func TimeDiffForHumans(t time.Time) string {
 	unix := t.Unix()
 	now := time.Now().Unix()
 	b := now - unix

@@ -31,7 +31,7 @@ func (this *SettingController) SaveHandler() {
 }
 
 // @router /backend/setting/data [get]
-func (this *SettingController) SettingData()  {
+func (this *SettingController) SettingData() {
 	settingRecords := []models.Settings{}
 	if _, err := orm.NewOrm().QueryTable("settings").All(&settingRecords); err != nil {
 		this.errorHandler(err)

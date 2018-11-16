@@ -52,14 +52,14 @@ func (this *Base) ValidatorAuto(frontendData interface{}) {
 	}
 }
 
-func (this *Base) errorHandler(err error)  {
+func (this *Base) errorHandler(err error) {
 	logs.Info(err)
 	data := make(map[string]string)
 	data["message"] = "系统出错"
 	this.responseJson("9", data)
 }
 
-func (this *Base) successResponse()  {
+func (this *Base) successResponse() {
 	data := make(map[string]string)
 	data["message"] = ""
 	this.responseJson("0", data)
@@ -71,13 +71,13 @@ func (this *Base) warningResponse(message string) {
 	this.responseJson("5", data)
 }
 
-func (this *Base) responseJson(code string, data map[string]string)  {
+func (this *Base) responseJson(code string, data map[string]string) {
 	data["code"] = code
 	this.Data["json"] = data
 	this.ServeJSON()
 	this.StopRun()
 }
 
-func (this *Base) Prepare()  {
+func (this *Base) Prepare() {
 	this.EnableXSRF = false
 }

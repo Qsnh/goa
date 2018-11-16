@@ -10,8 +10,8 @@ import (
 	"time"
 )
 
-var BACKUP_EXCLUDE  = map[string]bool{
-	".git": true,
+var BACKUP_EXCLUDE = map[string]bool{
+	".git":         true,
 	"node_modules": true,
 }
 

@@ -10,7 +10,7 @@ type DashboardController struct {
 }
 
 // @router /backend/dashboard [get]
-func (this *DashboardController) Index()  {
+func (this *DashboardController) Index() {
 	today := time.Now().Format("2006-01-01")
 	// 今日注册
 	registerCount, err := orm.NewOrm().QueryTable("users").Filter("created_at__gte", today).Count()

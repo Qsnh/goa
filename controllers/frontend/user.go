@@ -37,17 +37,15 @@ func (this *UserController) LoginHandler() {
 		this.RedirectTo(this.redirectUrl)
 	}
 
-	this.SetSession("login_user_id", user.Id)
+	if this.GetString("remember_me") != "" {
+		this.Ctx.SetCookie("login_user_id", utils.ToString(user.Id), 3600*24*7)
+		this.Ctx.SetCookie("login_user_sign", utils.AuthSign(user.Id, user.Email, user.Password), 3600*24*7)
+	} else {
+		this.Ctx.SetCookie("login_user_id", utils.ToString(user.Id), 3600)
+		this.Ctx.SetCookie("login_user_sign", utils.AuthSign(user.Id, user.Email, user.Password), 3600)
+	}
 
 	this.FlashSuccess("登陆成功")
-	this.RedirectTo("/")
-}
-
-// @router /logout [get]
-func (this *UserController) Logout() {
-	this.SetSession("login_user_id", 0)
-	this.CurrentLoginUser = nil
-	this.FlashSuccess("已安全退出")
 	this.RedirectTo("/")
 }
 
@@ -166,8 +164,7 @@ func (this *UserController) PasswordResetHandler() {
 
 	user.Password = utils.SHA256Encode(passwordResetData.Password)
 	if _, err := orm.NewOrm().Update(user); err != nil {
-		this.FlashError("系统错误")
-		this.Back()
+		this.ErrorHandler(err)
 	}
 	this.FlashSuccess("修改成功，请重新登录")
 	this.RedirectTo(beego.URLFor("UserController.Login"))

@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func Init()  {
+func Init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 
 	dbHost := os.Getenv("DATABASE_HOST")

@@ -8,7 +8,7 @@ import (
 
 func init() {
 	beego.Include(&frontend.IndexController{})
-    beego.Include(&frontend.UserController{})
+	beego.Include(&frontend.UserController{})
 	beego.Include(&frontend.MemberController{})
 	beego.Include(&frontend.QuestionController{})
 	beego.Include(&frontend.UploadController{})

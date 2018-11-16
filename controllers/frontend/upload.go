@@ -51,6 +51,6 @@ func (this *UploadController) Image() {
 	this.AjaxSuccess("上传成功", res)
 }
 
-func (this *UploadController) Prepare()  {
+func (this *UploadController) Prepare() {
 	this.EnableXSRF = false
 }

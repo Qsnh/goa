@@ -10,7 +10,7 @@ type QuestionController struct {
 }
 
 // @router /backend/questions [get]
-func (this *QuestionController) Index()  {
+func (this *QuestionController) Index() {
 	// 过滤
 	categoryId, _ := this.GetInt64("category_id")
 	keywords := this.GetString("keywords")
@@ -53,7 +53,7 @@ func (this *QuestionController) Index()  {
 }
 
 // @router /backend/question/:id [delete]
-func (this *QuestionController) Destroy()  {
+func (this *QuestionController) Destroy() {
 	questionId := this.Ctx.Input.Param(":id")
 	question := models.Questions{}
 	if err := orm.NewOrm().QueryTable("questions").Filter("id", questionId).One(&question); err != nil {

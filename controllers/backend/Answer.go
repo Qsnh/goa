@@ -11,7 +11,7 @@ type AnswerContoller struct {
 }
 
 // @router /backend/answers [get]
-func (this *AnswerContoller) Index()  {
+func (this *AnswerContoller) Index() {
 	// 过滤
 	questionId := this.GetString("question_id")
 	page, _ := this.GetInt64("page")
@@ -46,7 +46,7 @@ func (this *AnswerContoller) Index()  {
 }
 
 // @router /backend/answer/:id [delete]
-func (this *AnswerContoller) Destroy()  {
+func (this *AnswerContoller) Destroy() {
 	answerId := this.Ctx.Input.Param(":id")
 	answer := models.Answers{}
 	if err := orm.NewOrm().QueryTable("answers").Filter("id", answerId).One(&answer); err != nil {

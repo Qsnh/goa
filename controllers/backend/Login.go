@@ -12,7 +12,7 @@ type LoginController struct {
 }
 
 // @router /backend/login [post]
-func (this *LoginController) LoginHandler()  {
+func (this *LoginController) LoginHandler() {
 	loginRequest := backend.LoginValidation{}
 	if err := json.Unmarshal(this.Ctx.Input.RequestBody, &loginRequest); err != nil {
 		this.errorHandler(err)

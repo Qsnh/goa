@@ -1,6 +1,4 @@
 *.pprof
-routers/commentsRouter_controllers_backend.go
-routers/commentsRouter_controllers_frontend.go
 goa.exe~
 lastupdate.tmp
 goa.exe

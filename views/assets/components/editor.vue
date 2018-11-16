@@ -9,6 +9,15 @@
 
 <script>
     export default {
+        mounted() {
+            this.$nextTick(() => {
+                const mdEl = document.getElementsByClassName('auto-textarea-input');
+                if (mdEl[0]) {
+                    mdEl[0].blur();
+                }
+                window.scroll(0,0);
+            });
+        },
         created() {
             if (typeof window.text != 'undefined') {
                 this.contents = window.text;

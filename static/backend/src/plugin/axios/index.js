@@ -45,7 +45,7 @@ service.interceptors.request.use(
       const token = util.cookies.get('token')
       if (token && token !== 'undefined') {
         // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
-        config.headers['token'] = token
+        config.headers['Token'] = token
       }
     }
     return config

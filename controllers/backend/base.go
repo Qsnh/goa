@@ -12,11 +12,9 @@ type Base struct {
 }
 
 func (this *Base) ValidatorAuto(frontendData interface{}) {
-
 	if err := json.Unmarshal(this.Ctx.Input.RequestBody, &frontendData); err != nil {
 		this.errorHandler(err)
 	}
-
 	defaultMessage := map[string]string{
 		"Required":     "不能为空",
 		"Min":          "不能小于%d",

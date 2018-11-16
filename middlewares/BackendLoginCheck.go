@@ -8,7 +8,10 @@ import (
 )
 
 var BackendLoginCheckFilter = func(ctx *context.Context) {
-	tokenHeader := ctx.Request.Header["token"]
+	if ctx.Request.URL.Path == "/backend/login" {
+		return
+	}
+	tokenHeader := ctx.Request.Header["Token"]
 	if len(tokenHeader) <= 0 {
 		ctx.Abort(403, "NO AUTH")
 	}

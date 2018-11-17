@@ -7,3 +7,4 @@ goa
 node_modules/
 .DS_Store
 .env
+main.exe

@@ -10,6 +10,7 @@ import (
 	"github.com/astaxie/beego/validation"
 	"html/template"
 	"strconv"
+	"time"
 )
 
 type Base struct {
@@ -18,6 +19,13 @@ type Base struct {
 	redirectUrl      string
 	CurrentLoginUser *models.Users
 	SettingData      map[string]string
+	StartTime        int64
+	HandlerSeconds   float64
+}
+
+func (Base *Base) Finish() {
+	handlerSecond := float64(time.Now().UnixNano()-Base.StartTime) / float64(1e9)
+	Base.HandlerSeconds = handlerSecond
 }
 
 func (Base *Base) Prepare() {
@@ -31,6 +39,9 @@ func (Base *Base) Prepare() {
 		settingData[item.Name] = item.Value
 	}
 	Base.SettingData = settingData
+
+	// 启动时间
+	Base.StartTime = time.Now().UnixNano()
 
 	// 初始化读取Flash
 	beego.ReadFromRequest(&Base.Controller)
@@ -70,6 +81,9 @@ func (Base *Base) Prepare() {
 	Base.Data["PageDescription"] = ""
 	Base.Data["AppName"] = Base.SettingData["APP_NAME"]
 	Base.Data["AppIcp"] = Base.SettingData["ICP"]
+
+	// 额外信息
+	Base.Data["StartTime"] = Base.StartTime
 }
 
 // 保存成功的Flash信息

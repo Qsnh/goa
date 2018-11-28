@@ -45,6 +45,7 @@ func ToString(i interface{}) string {
 	return ""
 }
 
+// 将时间转换为人类可阅读的格式
 func TimeDiffForHumans(t time.Time) string {
 	unix := t.Unix()
 	now := time.Now().Unix()
@@ -83,6 +84,12 @@ func TimeDiffForHumans(t time.Time) string {
 	return fmt.Sprintf("%d年钱", b)
 }
 
+// 获取当前工作目录
 func Pwd() string {
 	return filepath.Dir(os.Args[0])
+}
+
+// 传入开始时间，计算结束时间
+func ComputedHandlerSeconds(startTime int64) float64 {
+	return float64(time.Now().UnixNano()-startTime) / 1e9
 }

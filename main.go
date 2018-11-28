@@ -32,6 +32,7 @@ func main() {
 	// 模板函数注册
 	beego.AddFuncMap("urlquery", utils.Url)
 	beego.AddFuncMap("timeforhumnas", utils.TimeDiffForHumans)
+	beego.AddFuncMap("chls", utils.ComputedHandlerSeconds)
 
 	// 定时任务
 	backupTask := toolbox.NewTask("backup_task", "0 0 05 * * *", tasks.WebBackupTask)
